@@ -4,107 +4,136 @@
 using namespace std;
 
 
-void addDocgia(Reader x[20], int &j)
+void addDocgia(Reader x[20], int &j, FILE* docgia)
 {
 
 	j++;
-	x[j - 1].code = MaDocGia();
-	cout << "Ho va ten: ";
-	scanf_s("\n");
-	fgets(x[j - 1].ho_ten, sizeof(x[j - 1].ho_ten), stdin);
-	x[j - 1].ho_ten[strlen(x[j - 1].ho_ten) - 1] = '\0';
-	cout << "CMND/CCCD: ";
 
-	fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
-	x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
-
-	while (checkCCCD(x[j - 1].cccd) == false)
+	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r+");
+	if (docgia != NULL)
 	{
-		cout << "CMND/CCCD: ";
+		fprintf(docgia, "%d\n", j);
+		fclose(docgia);
+	}
+
+	errno_t docgia3 = fopen_s(&docgia, "docgia.txt", "a");
+	if (docgia != NULL)
+	{
+		x[j - 1].code = MaDocGia();
+		fprintf(docgia, "%d,", x[j - 1].code);
+
+
+		cout << "Ho va ten: ";
 		scanf_s("\n");
+		fgets(x[j - 1].ho_ten, sizeof(x[j - 1].ho_ten), stdin);
+		x[j - 1].ho_ten[strlen(x[j - 1].ho_ten) - 1] = '\0';
+		fprintf(docgia, "%s,", x[j - 1].ho_ten);
+
+
+		cout << "CMND/CCCD: ";
+
 		fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
 		x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
-	}
 
-	cout << "Ngay thang nam sinh (dd/mm/yyyy): ";
+		while (checkCCCD(x[j - 1].cccd) == false)
+		{
+			cout << "CMND/CCCD: ";
+			scanf_s("\n");
+			fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
+			x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
+		}
 
-	fgets(x[j - 1].ngay_sinh, sizeof(x[j - 1].ngay_sinh), stdin);
-	x[j - 1].ngay_sinh[strlen(x[j - 1].ngay_sinh) - 1] = '\0';
+		fprintf(docgia, "%s,", x[j - 1].cccd);
 
-	while (checkFormatDate(x[j - 1].ngay_sinh) == false)
-	{ //Kiem tra xem ngay thang nhap co dung dinh dang (dd/mm/yyyy) neu khac thi nhap lai
 		cout << "Ngay thang nam sinh (dd/mm/yyyy): ";
+
 		fgets(x[j - 1].ngay_sinh, sizeof(x[j - 1].ngay_sinh), stdin);
 		x[j - 1].ngay_sinh[strlen(x[j - 1].ngay_sinh) - 1] = '\0';
-	}
 
-	cout << "Gioi tinh (Nam/Nu): ";
-	fgets(x[j - 1].gioi_tinh, sizeof(x[j - 1].gioi_tinh), stdin);
-	x[j - 1].gioi_tinh[strlen(x[j - 1].gioi_tinh) - 1] = '\0';
+		while (checkFormatDate(x[j - 1].ngay_sinh) == false)
+		{ //Kiem tra xem ngay thang nhap co dung dinh dang (dd/mm/yyyy) neu khac thi nhap lai
+			cout << "Ngay thang nam sinh (dd/mm/yyyy): ";
+			fgets(x[j - 1].ngay_sinh, sizeof(x[j - 1].ngay_sinh), stdin);
+			x[j - 1].ngay_sinh[strlen(x[j - 1].ngay_sinh) - 1] = '\0';
+		}
 
-	while (checkGender(x[j - 1].gioi_tinh) == false)		//Kiem tra xem gioi tinh co phai Nam hay nu neu khac thì nhap lai
-	{
+		fprintf(docgia, "%s,", x[j - 1].ngay_sinh);
+
 		cout << "Gioi tinh (Nam/Nu): ";
-		scanf_s("\n");
 		fgets(x[j - 1].gioi_tinh, sizeof(x[j - 1].gioi_tinh), stdin);
 		x[j - 1].gioi_tinh[strlen(x[j - 1].gioi_tinh) - 1] = '\0';
-	}
 
+		while (checkGender(x[j - 1].gioi_tinh) == false)		//Kiem tra xem gioi tinh co phai Nam hay nu neu khac thì nhap lai
+		{
+			cout << "Gioi tinh (Nam/Nu): ";
+			scanf_s("\n");
+			fgets(x[j - 1].gioi_tinh, sizeof(x[j - 1].gioi_tinh), stdin);
+			x[j - 1].gioi_tinh[strlen(x[j - 1].gioi_tinh) - 1] = '\0';
+		}
 
-	cout << "Email: ";
+		fprintf(docgia, "%s,", x[j - 1].gioi_tinh);
 
-	fgets(x[j - 1].email, sizeof(x[j - 1].email), stdin);
-	x[j - 1].email[strlen(x[j - 1].email) - 1] = '\0';
-
-	while (checkEmail(x[j - 1].email) == false)
-	{
 		cout << "Email: ";
-		scanf_s("\n");
+
 		fgets(x[j - 1].email, sizeof(x[j - 1].email), stdin);
 		x[j - 1].email[strlen(x[j - 1].email) - 1] = '\0';
-	}
 
-	cout << "Dia chi: ";
-	scanf_s("\n");
-	fgets(x[j - 1].dia_chi, sizeof(x[j - 1].dia_chi), stdin);
-	x[j - 1].dia_chi[strlen(x[j - 1].dia_chi) - 1] = '\0';
-	cout << "Ngay lap the: ";
+		while (checkEmail(x[j - 1].email) == false)
+		{
+			cout << "Email: ";
+			scanf_s("\n");
+			fgets(x[j - 1].email, sizeof(x[j - 1].email), stdin);
+			x[j - 1].email[strlen(x[j - 1].email) - 1] = '\0';
+		}
 
-	fgets(x[j - 1].ngay_lap_the, sizeof(x[j - 1].ngay_lap_the), stdin);
-	x[j - 1].ngay_lap_the[strlen(x[j - 1].ngay_lap_the) - 1] = '\0';
-	while (checkFormatDate(x[j - 1].ngay_lap_the) == false)
-	{
-		cout << "Ngay lap the: ";
+		fprintf(docgia, "%s,", x[j - 1].email);
+
+		cout << "Dia chi: ";
 		scanf_s("\n");
+		fgets(x[j - 1].dia_chi, sizeof(x[j - 1].dia_chi), stdin);
+		x[j - 1].dia_chi[strlen(x[j - 1].dia_chi) - 1] = '\0';
+
+		fprintf(docgia, "%s,", x[j - 1].dia_chi);
+
+		cout << "Ngay lap the: ";
+
 		fgets(x[j - 1].ngay_lap_the, sizeof(x[j - 1].ngay_lap_the), stdin);
 		x[j - 1].ngay_lap_the[strlen(x[j - 1].ngay_lap_the) - 1] = '\0';
+		while (checkFormatDate(x[j - 1].ngay_lap_the) == false)
+		{
+			cout << "Ngay lap the: ";
+			scanf_s("\n");
+			fgets(x[j - 1].ngay_lap_the, sizeof(x[j - 1].ngay_lap_the), stdin);
+			x[j - 1].ngay_lap_the[strlen(x[j - 1].ngay_lap_the) - 1] = '\0';
+		}
+
+		fprintf(docgia, "%s,", x[j - 1].ngay_lap_the);
+
+
+		strcpy_s(x[j - 1].ngay_het_han, x[j - 1].ngay_lap_the);
+
+
+		int year = 0;
+		char num;
+		char num2;
+		for (int i = 6; i < 10; i++)
+		{
+			num = x[j - 1].ngay_het_han[i];
+			year = year * 10 + (static_cast<int>(num) - 48);
+		}
+		year += 4;
+		for (int i = 9; i > 5; i--)
+		{
+			num2 = static_cast<char>((year % 10) + 48);
+			year /= 10;
+			x[j - 1].ngay_het_han[i] = num2;
+		}
+
+		fprintf(docgia, "%s\n", x[j - 1].ngay_het_han);
+		cout << "Ngay het han cua the: " << x[j - 1].ngay_het_han << endl;
+
+		fclose(docgia);
 	}
-
-
-	strcpy_s(x[j - 1].ngay_het_han, x[j - 1].ngay_lap_the);
-
-
-	int year = 0;
-	char num;
-	char num2;
-	for (int i = 6; i < 10; i++)
-	{
-		num = x[j - 1].ngay_het_han[i];
-		year = year * 10 + (static_cast<int>(num) - 48);
-	}
-	year += 4;
-	for (int i = 9; i > 5; i--)
-	{
-		num2 = static_cast<char>((year % 10) + 48);
-		year /= 10;
-		x[j - 1].ngay_het_han[i] = num2;
-	}
-
-
-	cout << "Ngay het han cua the: " << x[j - 1].ngay_het_han << endl;
-
-
-
 	cout << "\nThong tin doc gia da duoc them!" << endl;
 }
 
@@ -141,7 +170,7 @@ void searchDocgia(Reader x[20], int j)
 
 }
 
-void editDocgia(Reader x[20], int j)
+void editDocgia(Reader x[20], int j, FILE* docgia)
 {
 	char cmnd[14];
 	cout << "\nNhap CCCD/CMND cua doc gia ma ban muon chinh sua ";
@@ -246,9 +275,40 @@ void editDocgia(Reader x[20], int j)
 				cout << "\nLua chon khong hop le. Vui long nhap lai!" << endl;
 
 			}
-
 		}
 
+	}
+
+	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "w");
+
+	if (docgia != NULL)
+	{
+		fprintf(docgia, "%d\n", j);
+		for (int i = 0; i < j; i++)
+		{
+			fprintf(docgia, "%d,", x[i].code);
+
+			fprintf(docgia, "%s,", x[i].ho_ten);
+
+			fprintf(docgia, "%s,", x[i].cccd);
+
+			fprintf(docgia, "%s,", x[i].ngay_sinh);
+
+			fprintf(docgia, "%s,", x[i].gioi_tinh);
+
+			fprintf(docgia, "%s,", x[i].email);
+
+			fprintf(docgia, "%s,", x[i].dia_chi);
+
+			fprintf(docgia, "%s,", x[i].ngay_lap_the);
+
+			fprintf(docgia, "%s\n", x[i].ngay_het_han);
+
+		}
+		fclose(docgia);
+	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
 	}
 
 	cout << "\nThong tin da duoc chinh sua!" << endl;
@@ -286,7 +346,7 @@ int MaDocGia()
 	return random;
 }
 
-void deleteDocgia(Reader x[20], int& total)
+void deleteDocgia(Reader x[20], int& total, FILE* docgia)
 {
 	int choose;
 	cout << "0. Thoat " << endl;
@@ -314,14 +374,14 @@ void deleteDocgia(Reader x[20], int& total)
 		scanf_s("\n");
 		fgets(cmnd, sizeof(cmnd), stdin);
 		cmnd[strlen(cmnd) - 1] = '\0';
-		/*while (nameInList(cmnd, total, x) == false)
+		while (cccdInList(cmnd, total, x) == false)
 		{
 			cout << "CCCD/CMND khong the duoc tim thay. Vui long nhap lai!" << endl;
 			cout << "\nNhap CCCD/CMND cua doc gia ma ban muon xoa ";
 			scanf_s("\n");
 			fgets(cmnd, sizeof(cmnd), stdin);
 			cmnd[strlen(cmnd) - 1] = '\0';
-		}*/
+		}
 		for (int i = 0; i < total; i++)
 		{
 			if (strcmp(cmnd, x[i].cccd) == 0)
@@ -346,6 +406,37 @@ void deleteDocgia(Reader x[20], int& total)
 
 	}
 
+	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "w");
+
+	if (docgia != NULL)
+	{
+		fprintf(docgia, "%d\n", total);
+		for (int i = 0; i < total; i++)
+		{
+			fprintf(docgia, "%d,", x[i].code);
+
+			fprintf(docgia, "%s,", x[i].ho_ten);
+
+			fprintf(docgia, "%s,", x[i].cccd);
+
+			fprintf(docgia, "%s,", x[i].ngay_sinh);
+
+			fprintf(docgia, "%s,", x[i].gioi_tinh);
+
+			fprintf(docgia, "%s,", x[i].email);
+
+			fprintf(docgia, "%s,", x[i].dia_chi);
+
+			fprintf(docgia, "%s,", x[i].ngay_lap_the);
+
+			fprintf(docgia, "%s\n", x[i].ngay_het_han);
+
+		}
+		fclose(docgia);
+	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
+	}
 
 	cout << "\nThong tin doc gia da bi xoa" << endl;
 }

@@ -8,11 +8,18 @@
 #include <cctype>
 using namespace std;
 
+void ReadFileDocGia(FILE* docgia, Reader x[20], int &total);
+
+void ReadFileSach(FILE* sach, Book y[20], int& quantity);
+
+void ReadFilePhieu(FILE* phieu, Ticket z[20], int& so_Phieu);
+
+
 //Xuat ra man hinh console giao dien menu
 int show_menu();
 
 //Them thong tin doc gia moi
-void addDocgia(Reader x[20], int& j);
+void addDocgia(Reader x[20], int& j, FILE* docgia);
 
 //Xuat ra man hinh console danh sach doc gia
 void printDocgia(Reader x[20], int j);
@@ -21,13 +28,13 @@ void printDocgia(Reader x[20], int j);
 void searchDocgia(Reader x[20], int j);
 
 //Chinh sua thong tin doc gia
-void editDocgia(Reader x[20], int j);
+void editDocgia(Reader x[20], int j, FILE* docgia);
 
 //Tim kiem thong tin doc gia bang ho va ten
 void searchTenDocGia(Reader x[20], int j);
 
 //Xoa thong tin doc gia thong qua cccd
-void deleteDocgia(Reader x[20], int& j);
+void deleteDocgia(Reader x[20], int& j, FILE* docgia);
 
 //Random ma so doc gia
 int MaDocGia();
@@ -42,22 +49,22 @@ void printSach(Book y[20], int quantity);
 void searchISBNSach(Book y[20], int quantity);
 
 //Chinh sua thong tin sach qua ma ISBN
-void editSach(Book y[20], int quantity);
+void editSach(Book y[20], int quantity, FILE* sach);
 
 //Tim kiem thong tin sach thong qua ten sach
 void searchTenSach(Book y[20], int quantity);
 
 //Xoa thong tin sach thong qua ma ISBN
-void deleteSach(Book y[20], int& quantity);
+void deleteSach(Book y[20], int& quantity, FILE* sach);
 
 //Random ma sach ISBN
 int MaISBN();
 
 //Lap phieu muon sach
-void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, char daynow[20]);
+void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, char daynow[20], FILE* phieu);
 
 //Lap phieu tra sach
-void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20]);
+void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* phieu);
 
 //In ra man hinh console phieu muon gom co thoi gian muon va tra
 void InPhieuMuonTra(Ticket z[20], int n);
@@ -89,7 +96,7 @@ void statistic_quantity_borrow(Book y[20], int quantity);
 void statistic_listReaders_late(Ticket z[20], int n);
 
 //Nhap lua chon sau khi xuat ra man hinh console menu
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, FILE* sach);
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, FILE* sach, FILE* docgia);
 
 //Kiem tra dinh dang cua ngay thang nam theo (dd/mm/yyyy)
 bool checkFormatDate(char date[20]);
@@ -104,7 +111,7 @@ bool checkEmail(char email[50]);
 bool checkGender(char gender[10]);
 
 //Kiem tra CCD/CMND cua doc gia hay ten sach cua sach co trong danh sach doc gia hay trong danh sach cua sach trong thu vien khong
-//bool nameInList(char n[100], int j, char name[20][50]);
+bool cccdInList(char n[100], int j, Reader x[20]);
 bool nameInListBook(char n[100], int j, Book y[20]);
 
 //In ra man hinh console cac lua chon chuc nang trong muc quan li doc gia
@@ -117,9 +124,9 @@ void BookManager();
 void BasicStatistic();
 
 //Tinh khoang cach giua ngay tra thuc te va ngay tra du kien de tinh tien phat
-//int Distance2Date(char expectPayDate, char actualPayDate);
+
 int Distance2Date(char expectPayDate2[20], char actualPayDate2[20]);
 
 
 //Kiem tra xem khi nhap vao sach mat thi ma ISBN sach mat co nam trong danh sach muon ko
-bool checkDsMuon(int n, int j, int code[20], int start);
+bool checkDsMuon(int n, int code[20]);

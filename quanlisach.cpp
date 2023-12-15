@@ -7,49 +7,66 @@ using namespace std;
 void addSach(Book y[20], int &quantity, FILE* sach)
 {
 	quantity++;
-	errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
-	y[quantity - 1].ISBN = MaISBN();
-	fprintf(sach, "%d", y[quantity - 1].ISBN);
-
-	cout << "Ten sach: ";
-	cin.ignore();
-	fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
-	y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
-	fprintf(sach, "%s", y[quantity - 1].ten_sach);
-
-	cout << "Tac gia: ";
-	fgets(y[quantity - 1].tac_gia, sizeof(y[quantity - 1].tac_gia), stdin);
-	y[quantity - 1].tac_gia[strlen(y[quantity - 1].tac_gia) - 1] = '\0';
-	fprintf(sach, "%s", y[quantity - 1].tac_gia);
-
-	cout << "Nha xuat ban: ";
-	fgets(y[quantity - 1].nha_xuat_ban, sizeof(y[quantity - 1].nha_xuat_ban), stdin);
-	y[quantity - 1].nha_xuat_ban[strlen(y[quantity - 1].nha_xuat_ban) - 1] = '\0';
-	fprintf(sach, "%s", y[quantity - 1].nha_xuat_ban);
-
-	cout << "Nam xuat ban: ";
-	cin >> y[quantity - 1].nam_xuat_ban;
-	if (y[quantity - 1].nam_xuat_ban > 3000)
+	
+	errno_t sach2 = fopen_s(&sach, "sach.txt", "r+");
+	if (sach != NULL)
 	{
-		cin >> y[quantity - 1].nam_xuat_ban;
+		fprintf(sach, "%d", quantity);
+		fclose(sach);
 	}
-	fprintf(sach, "%d", y[quantity - 1].nam_xuat_ban);
 
-	cout << "The loai: ";
-	cin.ignore();
-	fgets(y[quantity - 1].the_loai, sizeof(y[quantity - 1].the_loai), stdin);
-	y[quantity - 1].the_loai[strlen(y[quantity - 1].the_loai) - 1] = '\0';
-	fprintf(sach, "%s", y[quantity - 1].the_loai);
+	errno_t sach3 = fopen_s(&sach, "sach.txt", "a");
 
-	cout << "Gia tien: ";
-	cin >> y[quantity - 1].gia_tien;
-	fprintf(sach, "%d", y[quantity - 1].gia_tien);
+	y[quantity - 1].ISBN = MaISBN();
+	if (sach != NULL)
+	{
 
-	cout << "So luong: ";
-	cin >> y[quantity - 1].so_luong;
-	fprintf(sach, "%d", y[quantity - 1].so_luong);
+		
+		fprintf(sach, "%d,", y[quantity - 1].ISBN);
 
-	fclose(sach);
+		cout << "Ten sach: ";
+		cin.ignore();
+		fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
+		y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
+		fprintf(sach, "%s,", y[quantity - 1].ten_sach);
+
+		cout << "Tac gia: ";
+		fgets(y[quantity - 1].tac_gia, sizeof(y[quantity - 1].tac_gia), stdin);
+		y[quantity - 1].tac_gia[strlen(y[quantity - 1].tac_gia) - 1] = '\0';
+		fprintf(sach, "%s,", y[quantity - 1].tac_gia);
+
+		cout << "Nha xuat ban: ";
+		fgets(y[quantity - 1].nha_xuat_ban, sizeof(y[quantity - 1].nha_xuat_ban), stdin);
+		y[quantity - 1].nha_xuat_ban[strlen(y[quantity - 1].nha_xuat_ban) - 1] = '\0';
+		fprintf(sach, "%s,", y[quantity - 1].nha_xuat_ban);
+
+		cout << "Nam xuat ban: ";
+		cin >> y[quantity - 1].nam_xuat_ban;
+		while (y[quantity - 1].nam_xuat_ban > 3000)
+		{
+			cin >> y[quantity - 1].nam_xuat_ban;
+		}
+		fprintf(sach, "%d,", y[quantity - 1].nam_xuat_ban);
+
+		cout << "The loai: ";
+		cin.ignore();
+		fgets(y[quantity - 1].the_loai, sizeof(y[quantity - 1].the_loai), stdin);
+		y[quantity - 1].the_loai[strlen(y[quantity - 1].the_loai) - 1] = '\0';
+		fprintf(sach, "%s,", y[quantity - 1].the_loai);
+
+		cout << "Gia tien: ";
+		cin >> y[quantity - 1].gia_tien;
+		fprintf(sach, "%d,", y[quantity - 1].gia_tien);
+
+		cout << "So luong: ";
+		cin >> y[quantity - 1].so_luong;
+		fprintf(sach, "%d,", y[quantity - 1].so_luong);
+
+		y[quantity - 1].BookIsBorrowing = 0;
+		fprintf(sach, "%d\n", y[quantity - 1].BookIsBorrowing);
+
+		fclose(sach);
+	}
 
 	cout << "\nThong tin sach da duoc them!" << endl;
 }
@@ -97,7 +114,7 @@ void searchISBNSach(Book y[20], int quantity)
 }
 
 
-void editSach(Book y[20], int quantity)
+void editSach(Book y[20], int quantity, FILE* sach)
 {
 	int code;
 	cout << "\nNhap ISBN cua sach ma ban muon chinh sua ";
@@ -183,6 +200,38 @@ void editSach(Book y[20], int quantity)
 			cout << "\nThong tin da duoc chinh sua!" << endl;
 		}
 	}
+
+	errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
+
+	if (sach != NULL)
+	{
+		fprintf(sach, "%d\n", quantity);
+		for (int i = 0; i < quantity; i++)
+		{
+			fprintf(sach, "%d,", y[i].ISBN);
+
+			fprintf(sach, "%s,", y[i].ten_sach);
+
+			fprintf(sach, "%s,", y[i].tac_gia);
+
+			fprintf(sach, "%s,", y[i].nha_xuat_ban);
+
+			fprintf(sach, "%d,", y[i].nam_xuat_ban);
+
+			fprintf(sach, "%s,", y[i].the_loai);
+
+			fprintf(sach, "%d,", y[i].gia_tien);
+
+			fprintf(sach, "%d,", y[i].so_luong);
+
+			fprintf(sach, "%d\n", y[i].BookIsBorrowing);
+
+		}
+		fclose(sach);
+	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
+	}
 }
 
 
@@ -216,7 +265,7 @@ void searchTenSach(Book y[20], int quantity)
 }
 
 
-void deleteSach(Book y[20], int& quantity)
+void deleteSach(Book y[20], int& quantity, FILE* sach)
 {
 	int choose;
 	cout << "0. Thoat " << endl;
@@ -241,16 +290,19 @@ void deleteSach(Book y[20], int& quantity)
 		{
 			if (code == y[i].ISBN)
 			{
-				for (int i = 0; i < quantity; i++)
+				for (int j = quantity - 1; j > 0; j--)
 				{
-					y[i].ISBN = y[i+1].ISBN;
-					strcpy_s(y[i].ten_sach, y[i+1].ten_sach);
-					strcpy_s(y[i].tac_gia, y[i+1].tac_gia);
-					strcpy_s(y[i].nha_xuat_ban, y[i+1].nha_xuat_ban);
-					y[i].nam_xuat_ban = y[i+1].nam_xuat_ban;
-					strcpy_s(y[i].the_loai, y[i+1].the_loai);
-					y[i].gia_tien = y[i+1].gia_tien;
-					y[i].so_luong = y[i+1].so_luong;
+					for (int a = i; a < j; a++)
+					{
+						y[a].ISBN = y[a + 1].ISBN;
+						strcpy_s(y[a].ten_sach, y[a + 1].ten_sach);
+						strcpy_s(y[a].tac_gia, y[a + 1].tac_gia);
+						strcpy_s(y[a].nha_xuat_ban, y[a + 1].nha_xuat_ban);
+						y[a].nam_xuat_ban = y[a + 1].nam_xuat_ban;
+						strcpy_s(y[a].the_loai, y[a + 1].the_loai);
+						y[a].gia_tien = y[a + 1].gia_tien;
+						y[a].so_luong = y[a + 1].so_luong;
+					}
 				}
 			}
 		}
@@ -258,6 +310,39 @@ void deleteSach(Book y[20], int& quantity)
 		break;
 
 	}
+
+	errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
+
+	if (sach != NULL)
+	{
+		fprintf(sach, "%d\n", quantity);
+		for (int i = 0; i < quantity; i++)
+		{
+			fprintf(sach, "%d,", y[i].ISBN);
+
+			fprintf(sach, "%s,", y[i].ten_sach);
+
+			fprintf(sach, "%s,", y[i].tac_gia);
+
+			fprintf(sach, "%s,", y[i].nha_xuat_ban);
+
+			fprintf(sach, "%d,", y[i].nam_xuat_ban);
+
+			fprintf(sach, "%s,", y[i].the_loai);
+
+			fprintf(sach, "%d,", y[i].gia_tien);
+
+			fprintf(sach, "%d,", y[i].so_luong);
+
+			fprintf(sach, "%d\n", y[i].BookIsBorrowing);
+
+		}
+		fclose(sach);
+	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
+	}
+
 	cout << "\nThong tin sach da bi xoa" << endl;
 }
 

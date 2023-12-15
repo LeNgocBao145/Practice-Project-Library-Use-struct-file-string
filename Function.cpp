@@ -1,6 +1,250 @@
 #include "function.h"
 #include <iostream>
 #include "Struct.h"
+
+
+void ReadFileDocGia(FILE* docgia, Reader x[20], int &total)
+{
+	char buffer[2000];
+	char* data;
+	char* temp;
+
+	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r");
+
+	if (docgia != NULL) {
+		fscanf_s(docgia, "%d\n", &total);
+
+		for (int i = 0; i < total; i++) {
+
+			fgets(buffer, sizeof(buffer), docgia);
+
+			data = strtok_s(buffer, ",", &temp);
+
+
+			x[i].code = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(x[i].ho_ten, data);
+			//x[i].ho_ten[strlen(x[i].ho_ten) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(x[i].cccd, data);
+			//x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(x[i].ngay_sinh, data);
+			//x[i].ngay_sinh[strlen(x[i].ngay_sinh) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(x[i].gioi_tinh, data);
+			//x[i].gioi_tinh[strlen(x[i].gioi_tinh) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(x[i].email, data);
+			//x[i].email[strlen(x[i].email) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(x[i].dia_chi, data);
+			//x[i].dia_chi[strlen(x[i].dia_chi) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(x[i].ngay_lap_the, data);
+			//x[i].ngay_lap_the[strlen(x[i].ngay_lap_the) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(x[i].ngay_het_han, data);
+			x[i].ngay_het_han[strlen(x[i].ngay_het_han) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+		}
+		fclose(docgia);
+	}
+	else
+	{
+		cout << "Khong mo duoc file" << endl;
+		return;
+	}
+}
+
+void ReadFileSach(FILE* sach, Book y[20], int &quantity)
+{
+	char buffer[2000];
+	char* data;
+	char* temp;
+
+	errno_t sach2 = fopen_s(&sach, "sach.txt", "r");
+
+	if (sach != NULL) {
+		fscanf_s(sach, "%d\n", &quantity);
+		for (int i = 0; i < quantity; i++) {
+
+			fgets(buffer, sizeof(buffer), sach);
+
+			data = strtok_s(buffer, ",", &temp);
+
+
+			y[i].ISBN = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(y[i].ten_sach, data);
+			//x[i].ho_ten[strlen(x[i].ho_ten) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(y[i].tac_gia, data);
+			//x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(y[i].nha_xuat_ban, data);
+			//x[i].ngay_sinh[strlen(x[i].ngay_sinh) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+			y[i].nam_xuat_ban = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+			strcpy_s(y[i].the_loai, data);
+			//x[i].gioi_tinh[strlen(x[i].gioi_tinh) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+			y[i].gia_tien = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+			y[i].so_luong = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+			y[i].BookIsBorrowing = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+		}
+		fclose(sach);
+	}
+	else
+	{
+		cout << "Khong mo duoc file" << endl;
+		return;
+	}
+}
+
+void ReadFilePhieu(FILE* phieu, Ticket z[20], int &so_Phieu)
+{
+
+	char buffer[2000];
+	char* data;
+	char* temp;
+
+	errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "r");
+
+	if (phieu != NULL) {
+		fscanf_s(phieu, "%d\n", &so_Phieu);
+		for (int i = 0; i < so_Phieu; i++) {
+
+			fgets(buffer, sizeof(buffer), phieu);
+
+			data = strtok_s(buffer, ",", &temp);
+
+
+			z[i].MaPhieu = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+			z[i].codeDGMuon = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+			strcpy_s(z[i].borrowDate, data);
+			//x[i].ho_ten[strlen(x[i].ho_ten) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(z[i].expectPayDate, data);
+			//x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+
+			strcpy_s(z[i].actualPayDate, data);
+			//x[i].ngay_sinh[strlen(x[i].ngay_sinh) - 1] = '\0';
+			data = strtok_s(NULL, ",", &temp);
+
+			z[i].SLmuon = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+			for (int h = 0; h < z[i].SLmuon; h++)
+			{
+				z[i].codeSachMuon[h] = atoi(data);
+				data = strtok_s(NULL, ",", &temp);
+			}
+
+
+			z[i].SLmat = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+			for (int h = 0; h < z[i].SLmat; h++)
+			{
+				z[i].codeSachMat[h] = atoi(data);
+				data = strtok_s(NULL, ",", &temp);
+			}
+
+
+			z[i].TongTienPhat = atoi(data);
+			data = strtok_s(NULL, ",", &temp);
+
+
+
+
+			/*fscanf_s(phieu, "%d%*[\n]", &z[i].MaPhieu);
+
+			fscanf_s(phieu, "%d%*[\n]", &z[i].codeDGMuon);
+
+			fgets(z[i].borrowDate, sizeof(z[i].borrowDate), phieu);
+			z[i].borrowDate[strlen(z[i].borrowDate) - 1] = '\0';
+
+			fgets(z[i].expectPayDate, sizeof(z[i].expectPayDate), phieu);
+			z[i].expectPayDate[strlen(z[i].expectPayDate) - 1] = '\0';
+
+			fgets(z[i].actualPayDate, sizeof(z[i].actualPayDate), phieu);
+			z[i].actualPayDate[strlen(z[i].actualPayDate) - 1] = '\0';
+
+
+			fscanf_s(phieu, "%d%*[\n]", &z[i].SLmuon);
+
+			for (int h = 0; h < z[i].SLmuon; h++)
+			{
+				fscanf_s(phieu, "%d", &z[i].codeSachMuon[h]);
+			}
+
+			fscanf_s(phieu, "%d%*[\n]", &z[i].SLmat);
+
+
+			for (int h = 0; h < z[i].SLmat; h++)
+			{
+				fscanf_s(phieu, "%d", &z[i].codeSachMat[h]);
+			}
+
+			fscanf_s(phieu, "%d%*[\n]", &z[i].TongTienPhat);*/
+		}
+		fclose(phieu);
+	}
+	else
+	{
+		cout << "Khong mo duoc file" << endl;
+		return;
+	}
+}
+
+
+
+
+
+
+
 void ReaderManager()
 {
 	cout << "a. Xem danh sach doc gia trong thu vien\n";
@@ -36,7 +280,7 @@ void BasicStatistic()
 
 
 //Ham dung de nhap lua chon a, b, c, d, e, f trong cac muc 1->6
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, FILE* sach)
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, FILE* sach, FILE* docgia)
 {
 	if (n == 1)
 	{
@@ -44,7 +288,7 @@ void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& to
 		if (choose == 'b')
 		{
 			system("cls");
-			addDocgia(x, total);
+			addDocgia(x, total, docgia);
 		}
 		if (choose == 'a')
 		{
@@ -54,12 +298,12 @@ void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& to
 		if (choose == 'c')
 		{
 			system("cls");
-			editDocgia(x, total);
+			editDocgia(x, total, docgia);
 		}
 		if (choose == 'd')
 		{
 			system("cls");
-			deleteDocgia(x, total);
+			deleteDocgia(x, total, docgia);
 		}
 		if (choose == 'e')
 		{
@@ -101,12 +345,12 @@ void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& to
 		if (choose == 'c')
 		{
 			system("cls");
-			editSach(y, quantity);
+			editSach(y, quantity, sach);
 		}
 		if (choose == 'd')
 		{
 			system("cls");
-			deleteSach(y, quantity);
+			deleteSach(y, quantity, sach);
 		}
 		if (choose == 'e')
 		{
@@ -275,6 +519,20 @@ bool nameInListBook(char n[100], int j, Book y[20])
 //	return check;
 //}
 
+bool cccdInList(char n[100], int j, Reader x[20])
+{
+	bool check = false;
+	for (int i = 0; i < j; i++)
+	{
+		if (strcmp(n, x[i].cccd) == 0)
+		{
+			check = true;
+			break;
+		}
+	}
+
+	return check;
+}
 
 
 bool checkCCCD(char cccd[50])
@@ -536,10 +794,10 @@ int Distance2Date(char expectPayDate[20], char actualPayDate[20])
 	return length;
 }
 
-bool checkDsMuon(int n, int j, int code[20], int start)
+bool checkDsMuon(int n, int code[20])
 {
 	bool check = false;
-	for (int i = start - j; i < start; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (n == code[i])
 		{
