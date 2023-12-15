@@ -26,37 +26,30 @@ void ReadFileDocGia(FILE* docgia, Reader x[20], int &total)
 
 
 			strcpy_s(x[i].ho_ten, data);
-			//x[i].ho_ten[strlen(x[i].ho_ten) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(x[i].cccd, data);
-			//x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(x[i].ngay_sinh, data);
-			//x[i].ngay_sinh[strlen(x[i].ngay_sinh) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(x[i].gioi_tinh, data);
-			//x[i].gioi_tinh[strlen(x[i].gioi_tinh) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(x[i].email, data);
-			//x[i].email[strlen(x[i].email) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(x[i].dia_chi, data);
-			//x[i].dia_chi[strlen(x[i].dia_chi) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(x[i].ngay_lap_the, data);
-			//x[i].ngay_lap_the[strlen(x[i].ngay_lap_the) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
@@ -96,24 +89,20 @@ void ReadFileSach(FILE* sach, Book y[20], int &quantity)
 
 
 			strcpy_s(y[i].ten_sach, data);
-			//x[i].ho_ten[strlen(x[i].ho_ten) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(y[i].tac_gia, data);
-			//x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(y[i].nha_xuat_ban, data);
-			//x[i].ngay_sinh[strlen(x[i].ngay_sinh) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 			y[i].nam_xuat_ban = atoi(data);
 			data = strtok_s(NULL, ",", &temp);
 
 			strcpy_s(y[i].the_loai, data);
-			//x[i].gioi_tinh[strlen(x[i].gioi_tinh) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 			y[i].gia_tien = atoi(data);
@@ -160,17 +149,14 @@ void ReadFilePhieu(FILE* phieu, Ticket z[20], int &so_Phieu)
 			data = strtok_s(NULL, ",", &temp);
 
 			strcpy_s(z[i].borrowDate, data);
-			//x[i].ho_ten[strlen(x[i].ho_ten) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(z[i].expectPayDate, data);
-			//x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 
 			strcpy_s(z[i].actualPayDate, data);
-			//x[i].ngay_sinh[strlen(x[i].ngay_sinh) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
 			z[i].SLmuon = atoi(data);
@@ -196,39 +182,6 @@ void ReadFilePhieu(FILE* phieu, Ticket z[20], int &so_Phieu)
 			z[i].TongTienPhat = atoi(data);
 			data = strtok_s(NULL, ",", &temp);
 
-
-
-
-			/*fscanf_s(phieu, "%d%*[\n]", &z[i].MaPhieu);
-
-			fscanf_s(phieu, "%d%*[\n]", &z[i].codeDGMuon);
-
-			fgets(z[i].borrowDate, sizeof(z[i].borrowDate), phieu);
-			z[i].borrowDate[strlen(z[i].borrowDate) - 1] = '\0';
-
-			fgets(z[i].expectPayDate, sizeof(z[i].expectPayDate), phieu);
-			z[i].expectPayDate[strlen(z[i].expectPayDate) - 1] = '\0';
-
-			fgets(z[i].actualPayDate, sizeof(z[i].actualPayDate), phieu);
-			z[i].actualPayDate[strlen(z[i].actualPayDate) - 1] = '\0';
-
-
-			fscanf_s(phieu, "%d%*[\n]", &z[i].SLmuon);
-
-			for (int h = 0; h < z[i].SLmuon; h++)
-			{
-				fscanf_s(phieu, "%d", &z[i].codeSachMuon[h]);
-			}
-
-			fscanf_s(phieu, "%d%*[\n]", &z[i].SLmat);
-
-
-			for (int h = 0; h < z[i].SLmat; h++)
-			{
-				fscanf_s(phieu, "%d", &z[i].codeSachMat[h]);
-			}
-
-			fscanf_s(phieu, "%d%*[\n]", &z[i].TongTienPhat);*/
 		}
 		fclose(phieu);
 	}
@@ -248,32 +201,32 @@ void ReadFilePhieu(FILE* phieu, Ticket z[20], int &so_Phieu)
 void ReaderManager()
 {
 	cout << "a. Xem danh sach doc gia trong thu vien\n";
-	cout << "b. Them doc gia\n";
-	cout << "c. Chinh sua thong tin mot doc gia\n";
-	cout << "d. Xoa thong tin mot doc gia\n";
-	cout << "e. Tim kiem doc gia theo CMND/CCCD\n";
-	cout << "f. Tim kiem sach theo ho ten\n";
-	cout << "g. Thoat\n";
+	cout << "\nb. Them doc gia\n";
+	cout << "\nc. Chinh sua thong tin mot doc gia\n";
+	cout << "\nd. Xoa thong tin doc gia\n";
+	cout << "\ne. Tim kiem doc gia theo CMND/CCCD\n";
+	cout << "\nf. Tim kiem thong tin doc gia theo ho ten\n";
+	cout << "\ng. Thoat\n";
 }
 void BookManager()
 {
 	cout << "a. Xem danh sach cac sach trong thu vien\n";
-	cout << "b. Them sach\n";
-	cout << "c. Chinh sua thong tin mot quyen sach\n";
-	cout << "d. Xoa thong tin sach\n";
-	cout << "e. Tim kiem sach theo ISBN\n";
-	cout << "f. Tim kiem sach theo ten sach\n";
-	cout << "g. Thoat\n";
+	cout << "\nb. Them sach\n";
+	cout << "\nc. Chinh sua thong tin mot quyen sach\n";
+	cout << "\nd. Xoa thong tin sach\n";
+	cout << "\ne. Tim kiem sach theo ISBN\n";
+	cout << "\nf. Tim kiem sach theo ten sach\n";
+	cout << "\ng. Thoat\n";
 }
 void BasicStatistic()
 {
 	cout << "a. Thong ke so luong sach trong thu vien\n";
-	cout << "b. Thong ke so luong sach theo the loai\n";
-	cout << "c. Thong ke so luong doc gia\n";
-	cout << "d. Thong ke so luong doc gia theo gioi tinh\n";
-	cout << "e. Thong ke so sach dang duoc muon\n";
-	cout << "f. Thong ke danh sach doc gia bi tre han\n";
-	cout << "g. Thoat\n";
+	cout << "\nb. Thong ke so luong sach theo the loai\n";
+	cout << "\nc. Thong ke so luong doc gia\n";
+	cout << "\nd. Thong ke so luong doc gia theo gioi tinh\n";
+	cout << "\ne. Thong ke so sach dang duoc muon\n";
+	cout << "\nf. Thong ke danh sach doc gia bi tre han\n";
+	cout << "\ng. Thoat\n";
 }
 
 

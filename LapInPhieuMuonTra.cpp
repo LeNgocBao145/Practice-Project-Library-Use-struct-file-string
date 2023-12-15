@@ -22,7 +22,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 	if (phieu != NULL)
 	{
 		z[n-1].MaPhieu = CodeTicket();
-		fprintf(phieu, "%d\n", z[n-1].MaPhieu);
+		fprintf(phieu, "%d,", z[n-1].MaPhieu);
 
 		system("cls");
 		cout << "========================================================================================================================================================================\n";
@@ -34,7 +34,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 		}
 		cout << "========================================================================================================================================================================\n" << endl;
 
-		cout << "\nNhap ma doc gia (4 so): ";
+		cout << "\nNhap ma doc gia: ";
 		cin >> z[n - 1].codeDGMuon;
 
 
@@ -42,23 +42,23 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 		{
 			cout << "\nKhong ton tai ma doc gia! " << endl;
 			cout << "\nXin ban vui long nhap lai " << endl;
-			cout << "\nNhap ma doc gia (4 so): ";
+			cout << "\nNhap ma doc gia: ";
 			cin >> z[n - 1].codeDGMuon;
 		}
 
-		fprintf(phieu, "%d\n", z[n - 1].codeDGMuon);
+		fprintf(phieu, "%d,", z[n - 1].codeDGMuon);
 
 		for (int i = n - 1; i < n; i++)
 		{
 			int day = 0;
 			int month = 0;
-			char date;
+			char date{};
 			char num;
 			char num2;
 			char num3;
 			strcpy_s(z[i].borrowDate, daynow);
 
-			fprintf(phieu, "%s\n", z[i].borrowDate);
+			fprintf(phieu, "%s,", z[i].borrowDate);
 
 			strcpy_s(z[i].expectPayDate, daynow);
 			for (int j = 0; j < 2; j++)
@@ -246,10 +246,10 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 
 			}
 
-			fprintf(phieu, "%s\n", z[i].expectPayDate);
+			fprintf(phieu, "%s,", z[i].expectPayDate);
 
 			strcpy_s(z[i].actualPayDate, " ");
-			fprintf(phieu, "%s\n", z[i].actualPayDate);
+			fprintf(phieu, "%s,", z[i].actualPayDate);
 
 		}
 
@@ -273,7 +273,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 			cin >> z[n - 1].SLmuon;
 		}
 
-		fprintf(phieu, "%d\n", z[n - 1].SLmuon);
+		fprintf(phieu, "%d,", z[n - 1].SLmuon);
 
 		for (int j = 0; j < n; j++)
 		{
@@ -295,7 +295,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 					}
 					dem++;
 
-					fprintf(phieu, "%d ", z[j].codeSachMuon[i]);
+					fprintf(phieu, "%d,", z[j].codeSachMuon[i]);
 
 					for (int k = 0; k < quantity; k++)
 					{
@@ -320,10 +320,10 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 		}
 
 		z[n - 1].SLmat = 0;
-		fprintf(phieu, "\n%d ", z[n - 1].SLmat);
+		fprintf(phieu, "%d,", z[n - 1].SLmat);
 
 		z[n - 1].codeSachMat[5 * (n - 1)] = 0;
-		fprintf(phieu, "\n%d\n", z[n - 1].codeSachMat[5*(n-1)]);
+		fprintf(phieu, "%d,", z[n - 1].codeSachMat[5*(n-1)]);
 
 		z[n - 1].TongTienPhat = 0;
 		fprintf(phieu, "%d\n", z[n - 1].TongTienPhat);
@@ -345,9 +345,6 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* 
 	int S2 = 0;
 	InPhieuMuonTra(z, n);
 
-	errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "r+");
-	if (phieu != NULL)
-	{
 
 		cout << "Ban vui long nhap ma phieu muon: ";
 		cin >> ma;
@@ -403,8 +400,6 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* 
 					cin >> z[i].SLmat;
 				}
 
-				fseek(phieu, 59*20-48, SEEK_SET);
-				fprintf(phieu, "%d\n", z[i].SLmat);
 
 				if (z[i].SLmat == 0)
 				{
@@ -424,8 +419,7 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* 
 				}
 
 				strcpy_s(z[i].actualPayDate, daynow);
-				fseek(phieu, 56*10, SEEK_SET);
-				fprintf(phieu, "%s\n", z[i].actualPayDate);
+				
 
 				if (Distance2Date(z[i].expectPayDate, z[i].actualPayDate) > 7)
 				{
@@ -457,8 +451,7 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* 
 								cin >> z[i].codeSachMat[h];
 							}
 
-							fseek(phieu, 60*20-18, SEEK_SET);
-							fprintf(phieu, "%d ", z[i].codeSachMat[h]);
+							
 
 							for (int b = 0; b < j; b++)
 							{
@@ -492,17 +485,51 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* 
 					}
 				}
 
-				fseek(phieu, 61*20, SEEK_SET);
-				fprintf(phieu, "\n%d\n", z[i].TongTienPhat);
 				cout << "\nTong tien phat: " << z[i].TongTienPhat << endl;
-
-
 
 			}
 
+		
 		}
-		fclose(phieu);
-	}
+
+		errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "w");
+
+		if (phieu != NULL)
+		{
+			fprintf(phieu, "%d\n", n);
+			for (int i = 0; i < n; i++)
+			{
+				fprintf(phieu, "%d,", z[i].MaPhieu);
+
+				fprintf(phieu, "%d,", z[i].codeDGMuon);
+
+				fprintf(phieu, "%s,", z[i].borrowDate);
+
+				fprintf(phieu, "%s,", z[i].expectPayDate);
+
+				fprintf(phieu, "%s,", z[i].actualPayDate);
+
+				fprintf(phieu, "%d,", z[i].SLmuon);
+
+				for (int j = 0; j < z[i].SLmuon; j++)
+				{
+					fprintf(phieu, "%d,", z[i].codeSachMuon[j]);
+				}
+
+				fprintf(phieu, "%d,", z[i].SLmat);
+
+				for (int j = 0; j < z[i].SLmat; j++)
+				{
+					fprintf(phieu, "%d,", z[i].codeSachMat[j]);
+				}
+
+				fprintf(phieu, "%d\n", z[i].TongTienPhat);
+			}
+			fclose(phieu);
+		}
+		else {
+			cout << "Khong the mo tep tin." << endl;
+		}
 
 
 }

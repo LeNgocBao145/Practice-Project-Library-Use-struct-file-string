@@ -146,7 +146,7 @@ void editSach(Book y[20], int quantity, FILE* sach)
 			cout << "6. Chinh sua gia tien \n";
 			cout << "7. Chinh sua so luong \n";
 			cout << "0. Khong chinh sua \n";
-			cout << "\nNhap lua chon (0->6) ";
+			cout << "\nNhap lua chon (0->7) ";
 			cin >> choose;
 
 
