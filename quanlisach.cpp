@@ -11,7 +11,7 @@ void addSach(Book y[20], int &quantity, FILE* sach)
 
 
 	y[quantity - 1].ISBN = MaISBN();
-		cout << "Ten sach: ";
+		cout << "Ten sach (toi da 39 ki tu): ";
 		cin.ignore();
 		fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
 		y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
@@ -44,28 +44,30 @@ void addSach(Book y[20], int &quantity, FILE* sach)
 
 		}
 
+		upperName(y[quantity - 1].ten_sach);
 
-		cout << "Tac gia: ";
+		cout << "Tac gia (toi da 27 ki tu): ";
 		fgets(y[quantity - 1].tac_gia, sizeof(y[quantity - 1].tac_gia), stdin);
 		y[quantity - 1].tac_gia[strlen(y[quantity - 1].tac_gia) - 1] = '\0';
 		
 		upperAllName(y[quantity - 1].tac_gia);
 
-		cout << "Nha xuat ban: ";
+		cout << "Nha xuat ban (toi da 27 ki tu): ";
 		fgets(y[quantity - 1].nha_xuat_ban, sizeof(y[quantity - 1].nha_xuat_ban), stdin);
 		y[quantity - 1].nha_xuat_ban[strlen(y[quantity - 1].nha_xuat_ban) - 1] = '\0';
 		
 		upperAllName(y[quantity - 1].nha_xuat_ban);
 
-		cout << "Nam xuat ban: ";
+		cout << "Nam xuat ban (4 so): ";
 		cin >> y[quantity - 1].nam_xuat_ban;
 		while (y[quantity - 1].nam_xuat_ban > 3000 || y[quantity - 1].nam_xuat_ban < 2000)
 		{
+			cout << "Nam xuat ban (4 so): ";
 			cin >> y[quantity - 1].nam_xuat_ban;
 		}
 		
 
-		cout << "The loai: ";
+		cout << "The loai (toi da 24 ki tu): ";
 		cin.ignore();
 		fgets(y[quantity - 1].the_loai, sizeof(y[quantity - 1].the_loai), stdin);
 		y[quantity - 1].the_loai[strlen(y[quantity - 1].the_loai) - 1] = '\0';
@@ -170,6 +172,7 @@ void searchISBNSach(Book y[20], int quantity)
 	{
 		if (code == y[i].ISBN)
 		{
+			system("cls");
 			cout << "========================================================================================================================================================================\n";
 			cout << "|ISBN  |" << setw(39) << left << "Ten Sach" << setw(28) << left << "|Tac gia" << setw(28) << left << "|Nha xuat ban" << setw(12) << left << "|Nam xuat ban" << setw(25) << left << "|The loai" << setw(15) << left << "|Gia tien" << setw(9) << left << "|So luong" << endl;
 			cout << "|" << setw(6) << "______" << "|" << setw(39) << "_______________________________________" << "|" << setw(27) << "___________________________" << "|" << setw(27) << "___________________________" << "|" << setw(12) << "____________" << "|" << setw(23) << "________________________" << "|" << setw(14) << "______________" << "|" << setw(9) << "___________" << endl;
@@ -246,32 +249,41 @@ void editSach(Book y[20], int quantity, FILE* sach)
 			case 0:
 				break;
 			case 1:
-				cout << "Nhap ten sach: ";
+				cout << "Nhap ten sach (toi da 39 ki tu): ";
 				cin.ignore();
 				fgets(y[i].ten_sach, sizeof(y[i].ten_sach), stdin);
 				y[i].ten_sach[strlen(y[i].ten_sach) - 1] = '\0';
+				upperName(y[i].ten_sach);
 				break;
 			case 2:
-				cout << "Nhap ten tac gia: ";
+				cout << "Nhap ten tac gia (toi da 27 ki tu): ";
 				cin.ignore();
 				fgets(y[i].tac_gia, sizeof(y[i].tac_gia), stdin);
 				y[i].tac_gia[strlen(y[i].tac_gia) - 1] = '\0';
+				upperAllName(y[i].tac_gia);
 				break;
 			case 3:
-				cout << "Nhap ten nha xuat ban: ";
+				cout << "Nhap ten nha xuat ban (toi da 27 ki tu): ";
 				cin.ignore();
 				fgets(y[i].nha_xuat_ban, sizeof(y[i].nha_xuat_ban), stdin);
 				y[i].nha_xuat_ban[strlen(y[i].nha_xuat_ban) - 1] = '\0';
+				upperAllName(y[i].nha_xuat_ban);
 				break;
 			case 4:
-				cout << "Nhap nam xuat ban: ";
+				cout << "Nhap nam xuat ban (4 so): ";
 				cin >> y[i].nam_xuat_ban;
+				while (y[i].nam_xuat_ban > 3000 || y[i].nam_xuat_ban < 2000)
+				{
+					cout << "Nam xuat ban (4 so): ";
+					cin >> y[i].nam_xuat_ban;
+				}
 				break;
 			case 5:
-				cout << "Nhap the loai: ";
+				cout << "Nhap the loai (toi da 24 ki tu): ";
 				cin.ignore();
 				fgets(y[i].the_loai, sizeof(y[i].the_loai), stdin);
 				y[i].the_loai[strlen(y[i].the_loai) - 1] = '\0';
+				upperAllName(y[i].the_loai);
 				break;
 			case 6:
 				cout << "Nhap gia tien: ";
@@ -361,6 +373,7 @@ void searchTenSach(Book y[20], int quantity)
 	{
 		if (strcmp(name, y[i].ten_sach) == 0)
 		{
+			system("cls");
 			cout << "========================================================================================================================================================================\n";
 			cout << "|ISBN  |" << setw(39) << left << "Ten Sach" << setw(28) << left << "|Tac gia" << setw(28) << left << "|Nha xuat ban" << setw(12) << left << "|Nam xuat ban" << setw(25) << left << "|The loai" << setw(15) << left << "|Gia tien" << setw(9) << left << "|So luong" << endl;
 			cout << "|" << setw(6) << "______" << "|" << setw(39) << "_______________________________________" << "|" << setw(27) << "___________________________" << "|" << setw(27) << "___________________________" << "|" << setw(12) << "____________" << "|" << setw(23) << "________________________" << "|" << setw(14) << "______________" << "|" << setw(9) << "___________" << endl;

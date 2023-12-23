@@ -13,21 +13,21 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 
 		x[j - 1].code = MaDocGia();
 
-		cout << "\nHo va ten: ";
+		cout << "\nHo va ten (toi da 24 ki tu): ";
 		scanf_s("\n");
 		fgets(x[j - 1].ho_ten, sizeof(x[j - 1].ho_ten), stdin);
 		x[j - 1].ho_ten[strlen(x[j - 1].ho_ten) - 1] = '\0';
 		
 		upperName(x[j - 1].ho_ten);
 
-		cout << "CMND/CCCD: ";
+		cout << "CMND/CCCD (12 so): ";
 
 		fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
 		x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
 
 		while (checkCCCD(x[j - 1].cccd) == false)
 		{
-			cout << "CMND/CCCD: ";
+			cout << "CMND/CCCD (12 so): ";
 			scanf_s("\n");
 			fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
 			x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
@@ -96,14 +96,14 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 
 		
 
-		cout << "Email: ";
+		cout << "Email (toi da 26 ki tu): ";
 
 		fgets(x[j - 1].email, sizeof(x[j - 1].email), stdin);
 		x[j - 1].email[strlen(x[j - 1].email) - 1] = '\0';
 
 		while (checkEmail(x[j - 1].email) == false)
 		{
-			cout << "Email: ";
+			cout << "Email (toi da 26 ki tu): ";
 			scanf_s("\n");
 			fgets(x[j - 1].email, sizeof(x[j - 1].email), stdin);
 			x[j - 1].email[strlen(x[j - 1].email) - 1] = '\0';
@@ -111,20 +111,20 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 
 		
 
-		cout << "Dia chi: ";
+		cout << "Dia chi (toi da 44 ki tu): ";
 		scanf_s("\n");
 		fgets(x[j - 1].dia_chi, sizeof(x[j - 1].dia_chi), stdin);
 		x[j - 1].dia_chi[strlen(x[j - 1].dia_chi) - 1] = '\0';
 
 		
 
-		cout << "Ngay lap the: ";
+		cout << "Ngay lap the (dd/mm/yyyy): ";
 
 		fgets(x[j - 1].ngay_lap_the, sizeof(x[j - 1].ngay_lap_the), stdin);
 		x[j - 1].ngay_lap_the[strlen(x[j - 1].ngay_lap_the) - 1] = '\0';
 		while (checkFormatDate(x[j - 1].ngay_lap_the) == false)
 		{
-			cout << "Ngay lap the: ";
+			cout << "Ngay lap the (dd/mm/yyyy): ";
 			scanf_s("\n");
 			fgets(x[j - 1].ngay_lap_the, sizeof(x[j - 1].ngay_lap_the), stdin);
 			x[j - 1].ngay_lap_the[strlen(x[j - 1].ngay_lap_the) - 1] = '\0';
@@ -243,6 +243,7 @@ void searchDocgia(Reader x[20], int j)
 	{
 		if (strcmp(cmnd, x[i].cccd) == 0)
 		{
+			system("cls");
 			cout << "========================================================================================================================================================================\n";
 			cout << "|Ma   |" << setw(24) << left << "Ho va Ten" << setw(14) << left << "|CMND/CCCD" << setw(12) << left << "|Ngay sinh" << setw(11) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(45) << left << "|Dia chi" << setw(14) << left << "|Ngay lap the" << setw(10) << left << "|Ngay het han" << endl;
 			cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
@@ -320,37 +321,37 @@ void editDocgia(Reader x[20], int j, FILE* docgia)
 			case 0:
 				break;
 			case 1:
-				cout << "Nhap ho ten: ";
+				cout << "Nhap ho va ten (toi da 24 ki tu): ";
 				cin.ignore();
 				fgets(x[i].ho_ten, sizeof(x[i].ho_ten), stdin);
 				x[i].ho_ten[strlen(x[i].ho_ten) - 1] = '\0';
 				break;
 			case 2:
-				cout << "Nhap CCCD/CMND: ";
+				cout << "Nhap CMND/CCCD(12 so): ";
 				cin.ignore();
 				fgets(x[i].cccd, sizeof(x[i].cccd), stdin);
 				x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
 				while (checkCCCD(x[i].cccd) == false) {
-					cout << "CMND/CCCD: ";
+					cout << "CMND/CCCD (12 so): ";
 					scanf_s("\n");
 					fgets(x[i].cccd, sizeof(x[i].cccd), stdin);
 					x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
 				}
 				break;
 			case 3:
-				cout << "Nhap ngay thang nam sinh: ";
+				cout << "Nhap ngay thang nam sinh (dd/mm/yyyy): ";
 				cin.ignore();
 				fgets(x[i].ngay_sinh, sizeof(x[i].ngay_sinh), stdin);
 				x[i].ngay_sinh[strlen(x[i].ngay_sinh) - 1] = '\0';
 				while (checkFormatDate(x[i].ngay_sinh) == false)
 				{ //Kiem tra xem ngay thang nhap co dung dinh dang (dd/mm/yyyy) neu khac thi nhap lai
-					cout << "Ngay thang nam sinh: ";
+					cout << "Ngay thang nam sinh (dd/mm/yyyy): ";
 					fgets(x[i].ngay_sinh, sizeof(x[i].ngay_sinh), stdin);
 					x[i].ngay_sinh[strlen(x[i].ngay_sinh) - 1] = '\0';
 				}
 				break;
 			case 4:
-				cout << "Nhap gioi tinh: ";
+				cout << "Nhap gioi tinh (Nam/Nu): ";
 				cin.ignore();
 				fgets(x[i].gioi_tinh, sizeof(x[i].gioi_tinh), stdin);
 				x[i].gioi_tinh[strlen(x[i].gioi_tinh) - 1] = '\0';
@@ -363,20 +364,20 @@ void editDocgia(Reader x[20], int j, FILE* docgia)
 				}
 				break;
 			case 5:
-				cout << "Nhap email: ";
+				cout << "Nhap email (toi da 26 ki tu): ";
 				cin.ignore();
 				fgets(x[i].email, sizeof(x[i].email), stdin);
 				x[i].email[strlen(x[i].email) - 1] = '\0';
 				while (checkEmail(x[i].email) == false)
 				{
-					cout << "Email: ";
+					cout << "Email (toi da 26 ki tu): ";
 					scanf_s("\n");
 					fgets(x[i].email, sizeof(x[i].email), stdin);
 					x[i].email[strlen(x[i].email) - 1] = '\0';
 				}
 				break;
 			case 6:
-				cout << "Nhap dia chi: ";
+				cout << "Nhap dia chi (toi da 44 ki tu): ";
 				cin.ignore();
 				fgets(x[i].dia_chi, sizeof(x[i].dia_chi), stdin);
 				x[i].dia_chi[strlen(x[i].dia_chi) - 1] = '\0';
@@ -462,6 +463,7 @@ void searchTenDocGia(Reader x[20], int j)
 	{
 		if (strcmp(name, x[i].ho_ten) == 0)
 		{
+			system("cls");
 			cout << "========================================================================================================================================================================\n";
 			cout << "|Ma   |" << setw(24) << left << "Ho va Ten" << setw(14) << left << "|CMND/CCCD" << setw(12) << left << "|Ngay sinh" << setw(11) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(45) << left << "|Dia chi" << setw(14) << left << "|Ngay lap the" << setw(10) << left << "|Ngay het han" << endl;
 			cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;

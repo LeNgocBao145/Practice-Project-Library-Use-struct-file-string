@@ -284,11 +284,11 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				for (int i = 0; i < z[n - 1].SLmuon; i++)
 				{
 
-					cout << "\nNhap ma ISBN cua sach " << dem << " (4 so): ";
+					cout << "\nNhap ma ISBN cua sach " << dem << ": ";
 					cin >> z[j].codeSachMuon[i];
 					while (codeInListSachMuon(z[j].codeSachMuon[i], quantity, y) == false)
 					{
-						cout << "\nNhap ma ISBN cua sach " << dem << " (4 so): ";
+						cout << "\nNhap ma ISBN cua sach " << dem << ": ";
 						cin >> z[j].codeSachMuon[i];
 					}
 					dem++;

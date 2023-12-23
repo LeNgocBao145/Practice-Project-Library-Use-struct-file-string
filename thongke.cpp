@@ -38,7 +38,7 @@ void statsitic_quantity_category(Book y[20], int quantity)
 		for (int j = 0; j < i; j++)
 		{
 
-			if (y[i].the_loai == y[j].the_loai)
+			if (strcmp(y[i].the_loai, y[j].the_loai) == 0)
 			{
 				chuaXuatHien = false;
 				break;
@@ -53,7 +53,7 @@ void statsitic_quantity_category(Book y[20], int quantity)
 			for (int k = i + 1; k < quantity; k++)
 			{
 
-				if (y[k].the_loai == y[i].the_loai)
+				if (strcmp(y[k].the_loai, y[i].the_loai) == 0)
 				{
 					S += y[k].so_luong;
 
@@ -126,13 +126,13 @@ void statistic_quantity_borrow(Book y[20], int quantity)
 	cout << "========================================================================" << endl;
 }
 
-void statistic_listReaders_late(Ticket z[20], int n)
+void statistic_listReaders_late(Ticket z[20], Reader x[20], int n, int total)
 {
 	cout << "<<THONG KE DANH SACH DOC GIA DANG BI TRE HAN>>" << endl;
 
-	cout << "==============================================" << endl;
-	cout << "|" << setw(7) << left << "Ma DG" << "|" << setw(15) << left << "So ngay tre han" << "|" << endl;
-	cout << "|" << setw(7) << "_______" << "|" << setw(15) << "_______________" << "|" << endl;
+	cout << "=======================================================" << endl;
+	cout << "|" << setw(7) << left << "Ma DG" << "|" << setw(29) << left << "Ho va ten" << "|" << setw(15) << left << "So ngay tre han" << "|" << endl;
+	cout << "|" << setw(7) << "_______" << "|" << setw(29) << "_____________________________" << "|" << setw(15) << "_______________" << "|" << endl;
 	for (int i = 0; i < n; i++)
 	{
 		if (strlen(z[i].actualPayDate) != 0 && checkFormatDate(z[i].actualPayDate) == true)
@@ -140,12 +140,19 @@ void statistic_listReaders_late(Ticket z[20], int n)
 
 			if (Distance2Date(z[i].expectPayDate, z[i].actualPayDate) > 7)
 			{
-				cout << "|" << setw(7) << left << z[i].codeDGMuon << "|" << setw(15) << right << Distance2Date(z[i].expectPayDate, z[i].actualPayDate) << "|" << endl;
-				cout << "|" << setw(7) << "_______" << "|" << setw(15) << "_______________" << "|" << endl;
+				for (int j = 0; j < total; j++)
+				{
+					if (z[i].codeDGMuon == x[j].code)
+					{
+						cout << "|" << setw(7) << left << z[i].codeDGMuon << "|" << setw(29) << left << x[j].ho_ten << "|" << setw(15) << right << Distance2Date(z[i].expectPayDate, z[i].actualPayDate) << "|" << endl;
+						cout << "|" << setw(7) << "_______" << "|" << setw(24) << "_____________________________" << "|" << setw(15) << "_______________" << "|" << endl;
+						break;
+					}
+				}
 			}
 		}
 	}
-	cout << "==============================================" << endl;
+	cout << "=======================================================" << endl;
 
 
 }

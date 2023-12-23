@@ -102,7 +102,7 @@ void statistic_quantity_gender(Reader x[20], int total);
 void statistic_quantity_borrow(Book y[20], int quantity);
 
 //Thong ke danh sach doc gia dang tre han
-void statistic_listReaders_late(Ticket z[20], int n);
+void statistic_listReaders_late(Ticket z[20], Reader x[20], int n, int total);
 
 //Nhap lua chon sau khi xuat ra man hinh console menu
 void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, FILE* sach, FILE* docgia);

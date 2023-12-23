@@ -382,7 +382,7 @@ void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& to
 		if (choose == 'f')
 		{
 			system("cls");
-			statistic_listReaders_late(z, n);
+			statistic_listReaders_late(z, x, n, total);
 		}
 		if (choose == 'g')
 		{
