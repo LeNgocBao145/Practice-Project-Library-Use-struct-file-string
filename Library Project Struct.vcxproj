@@ -140,6 +140,7 @@
     <ClInclude Include="Struct.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Account.txt" />
     <Text Include="docgia.txt" />
     <Text Include="phieu.txt" />
     <Text Include="sach.txt" />

@@ -55,5 +55,8 @@
     <Text Include="phieu.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="Account.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

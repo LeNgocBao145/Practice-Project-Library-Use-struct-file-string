@@ -14,6 +14,7 @@ void ReadFileSach(FILE* sach, Book y[20], int& quantity);
 
 void ReadFilePhieu(FILE* phieu, Ticket z[20], int& so_Phieu);
 
+void InputDayNow(char daynow[20]);
 
 //Xuat ra man hinh console giao dien menu
 int show_menu();
@@ -61,10 +62,10 @@ void deleteSach(Book y[20], int& quantity, FILE* sach);
 int MaISBN();
 
 //Lap phieu muon sach
-void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, char daynow[20], FILE* phieu);
+void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, char daynow[20], FILE* phieu, FILE* sach);
 
 //Lap phieu tra sach
-void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* phieu);
+void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* phieu, FILE* sach);
 
 //In ra man hinh console phieu muon gom co thoi gian muon va tra
 void InPhieuMuonTra(Ticket z[20], int n);
@@ -111,8 +112,17 @@ bool checkEmail(char email[50]);
 bool checkGender(char gender[10]);
 
 //Kiem tra CCD/CMND cua doc gia hay ten sach cua sach co trong danh sach doc gia hay trong danh sach cua sach trong thu vien khong
-bool cccdInList(char n[100], int j, Reader x[20]);
+bool cccdInListReader(char n[100], int j, Reader x[20]);
+
+
+bool nameInListReader(char n[100], int j, Reader x[20]);
+
+
 bool nameInListBook(char n[100], int j, Book y[20]);
+
+
+bool codeInListBook(int code, int j, Book y[20]);
+
 
 //In ra man hinh console cac lua chon chuc nang trong muc quan li doc gia
 void ReaderManager();
@@ -124,9 +134,23 @@ void BookManager();
 void BasicStatistic();
 
 //Tinh khoang cach giua ngay tra thuc te va ngay tra du kien de tinh tien phat
-
 int Distance2Date(char expectPayDate2[20], char actualPayDate2[20]);
-
 
 //Kiem tra xem khi nhap vao sach mat thi ma ISBN sach mat co nam trong danh sach muon ko
 bool checkDsMuon(int n, int code[20]);
+
+//Kiem tra xem phieu muon hay tra da ton tai hay chua
+bool checkIsExistTicket(int ma, int n, Ticket z[20]);
+
+//Kiem tra xem CCCD/CMND cua doc gia da ton tai hay chua
+bool checkIsExistCCCD(char cmnd[50], int n, Reader x[20]);
+
+//Kiem tra xem ten sach da ton tai hay chua
+bool checkIsExistBook(char book[50], int n, Book y[20]);
+
+
+void upperName(char s[50]);
+
+void upperAllName(char s[50]);
+
+bool Login(char tendangnhap[100], char matkhau[100], FILE* Account);

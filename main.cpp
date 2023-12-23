@@ -9,7 +9,13 @@ using namespace std;
 
 int main()
 {
+
+	char tendangnhap[100]{};
+	char matkhau[100]{};
+
 	char choose{};
+
+	char daynow[20];
 	
 	int total;
 	int quantity;
@@ -19,23 +25,46 @@ int main()
 	Book y[20];
 	Ticket z[20];
 
+	FILE* Account{};
+
 	FILE* docgia{};
-	ReadFileDocGia(docgia, x, total);
 
 	FILE* sach{};
-	ReadFileSach(sach, y, quantity);
 
 	FILE* phieu{};
+
+	while (Login(tendangnhap, matkhau, Account) == false)
+	{
+		Login(tendangnhap, matkhau, Account);
+	}
+
+	
+	system("cls");
+
+	ReadFileDocGia(docgia, x, total);
+
+	ReadFileSach(sach, y, quantity);
+
 	ReadFilePhieu(phieu, z, so_Phieu);
 
-
-	char daynow[20];
-	cout << "Truoc khi bat dau chuong trinh. Xin ban vui long nhap ngay thang nam hien tai (dd/mm/yyyy): ";
-	cin >> daynow;
-	while (checkFormatDate(daynow) == false)
+	cout << "\nDANG NHAP TAI KHOAN ADMIN THANH CONG!" << endl;
+	
+	char is_continue2;
+	cout << "\nMoi ban vui long nhap lua chon de tiep tuc (y/n)" << endl;
+	cin >> is_continue2;
+	while (is_continue2 != 'y' && is_continue2 != 'n')
 	{
-		cout << "Ngay thang nam (dd/mm/yyyy) khong hop le. Xin ban vui long nhap lai!!: ";
-		cin >> daynow;
+		cout << "\nLua chon khong hop le. Vui long nhap lai!" << endl;
+		cout << "\nBan co muon lua chon tiep khong (y/n)" << endl;
+		cin >> is_continue2;
+	}
+	if (is_continue2 == 'n')
+	{
+		cout << "Xin chao tam biet. Hen gap lai lan sau";
+		return 0;
+	}
+	else {
+		InputDayNow(daynow);
 	}
 
 	while (true)
@@ -57,10 +86,10 @@ int main()
 			break;
 
 		case  3:
-			LapPhieuMuon(x, y, z, so_Phieu, total, quantity, daynow, phieu);
+			LapPhieuMuon(x, y, z, so_Phieu, total, quantity, daynow, phieu, sach);
 			break;
 		case  4:
-			LapPhieuTra(y,z, so_Phieu, quantity, daynow, phieu);
+			LapPhieuTra(y,z, so_Phieu, quantity, daynow, phieu, sach);
 			break;
 
 		case  5:

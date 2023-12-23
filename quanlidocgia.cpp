@@ -6,29 +6,19 @@ using namespace std;
 
 void addDocgia(Reader x[20], int &j, FILE* docgia)
 {
+	cout << "<<==============================THEM THONG TIN DOC GIA==============================>>"<<endl;
 
 	j++;
 
-	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r+");
-	if (docgia != NULL)
-	{
-		fprintf(docgia, "%d\n", j);
-		fclose(docgia);
-	}
 
-	errno_t docgia3 = fopen_s(&docgia, "docgia.txt", "a");
-	if (docgia != NULL)
-	{
 		x[j - 1].code = MaDocGia();
-		fprintf(docgia, "%d,", x[j - 1].code);
 
-
-		cout << "Ho va ten: ";
+		cout << "\nHo va ten: ";
 		scanf_s("\n");
 		fgets(x[j - 1].ho_ten, sizeof(x[j - 1].ho_ten), stdin);
 		x[j - 1].ho_ten[strlen(x[j - 1].ho_ten) - 1] = '\0';
-		fprintf(docgia, "%s,", x[j - 1].ho_ten);
-
+		
+		upperName(x[j - 1].ho_ten);
 
 		cout << "CMND/CCCD: ";
 
@@ -43,7 +33,40 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 			x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
 		}
 
-		fprintf(docgia, "%s,", x[j - 1].cccd);
+		while (checkIsExistCCCD(x[j - 1].cccd, j, x) == false)
+		{
+
+			cout << "\nMa CMND/CCCD da ton tai. Xin vui long nhap lai!" << endl;
+
+			int choose;
+			cout << "1. Nhap lai CCCD/CMND" << endl;
+			cout << "2. Thoat" << endl;
+			cout << "\nNhap lua chon: ";
+			cin >> choose;
+			switch (choose)
+			{
+			case 1:
+				cout << "Ban vui long nhap CMND/CCCD: ";
+				cin.ignore();
+				fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
+				x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
+				while (checkCCCD(x[j - 1].cccd) == false)
+				{
+					cout << "CMND/CCCD (12 so): ";
+					scanf_s("\n");
+					fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
+					x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
+				}
+				break;
+
+			case 2:
+				j--;
+				return;
+			}
+
+		}
+
+		
 
 		cout << "Ngay thang nam sinh (dd/mm/yyyy): ";
 
@@ -57,7 +80,7 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 			x[j - 1].ngay_sinh[strlen(x[j - 1].ngay_sinh) - 1] = '\0';
 		}
 
-		fprintf(docgia, "%s,", x[j - 1].ngay_sinh);
+		
 
 		cout << "Gioi tinh (Nam/Nu): ";
 		fgets(x[j - 1].gioi_tinh, sizeof(x[j - 1].gioi_tinh), stdin);
@@ -71,7 +94,7 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 			x[j - 1].gioi_tinh[strlen(x[j - 1].gioi_tinh) - 1] = '\0';
 		}
 
-		fprintf(docgia, "%s,", x[j - 1].gioi_tinh);
+		
 
 		cout << "Email: ";
 
@@ -86,14 +109,14 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 			x[j - 1].email[strlen(x[j - 1].email) - 1] = '\0';
 		}
 
-		fprintf(docgia, "%s,", x[j - 1].email);
+		
 
 		cout << "Dia chi: ";
 		scanf_s("\n");
 		fgets(x[j - 1].dia_chi, sizeof(x[j - 1].dia_chi), stdin);
 		x[j - 1].dia_chi[strlen(x[j - 1].dia_chi) - 1] = '\0';
 
-		fprintf(docgia, "%s,", x[j - 1].dia_chi);
+		
 
 		cout << "Ngay lap the: ";
 
@@ -107,7 +130,7 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 			x[j - 1].ngay_lap_the[strlen(x[j - 1].ngay_lap_the) - 1] = '\0';
 		}
 
-		fprintf(docgia, "%s,", x[j - 1].ngay_lap_the);
+		
 
 
 		strcpy_s(x[j - 1].ngay_het_han, x[j - 1].ngay_lap_the);
@@ -129,22 +152,59 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 			x[j - 1].ngay_het_han[i] = num2;
 		}
 
-		fprintf(docgia, "%s\n", x[j - 1].ngay_het_han);
+		
 		cout << "Ngay het han cua the: " << x[j - 1].ngay_het_han << endl;
 
+		
+
+	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r+");
+	if (docgia != NULL)
+	{
+		fprintf(docgia, "%d\n", j);
 		fclose(docgia);
 	}
+
+	errno_t docgia3 = fopen_s(&docgia, "docgia.txt", "a");
+	if (docgia != NULL)
+	{
+		fprintf(docgia, "%d,", x[j - 1].code);
+
+		fprintf(docgia, "%s,", x[j - 1].ho_ten);
+
+		fprintf(docgia, "%s,", x[j - 1].cccd);
+
+		fprintf(docgia, "%s,", x[j - 1].ngay_sinh);
+
+		fprintf(docgia, "%s,", x[j - 1].gioi_tinh);
+
+		fprintf(docgia, "%s,", x[j - 1].email);
+
+		fprintf(docgia, "%s,", x[j - 1].dia_chi);
+
+		fprintf(docgia, "%s,", x[j - 1].ngay_lap_the);
+
+		fprintf(docgia, "%s\n", x[j - 1].ngay_het_han);
+
+		fclose(docgia);
+
+		cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
+	}
+
 	cout << "\nThong tin doc gia da duoc them!" << endl;
 }
 
 void printDocgia(Reader x[20], int j)
 {
+	cout << "<<==================================================================DANH SACH THONG TIN DOC GIA=======================================================================>>" << endl;
+
+
 	cout << "========================================================================================================================================================================\n";
-	cout << "|Ma    |" << setw(18) << left << "Ho va Ten" << setw(16) << left << "|CMND/CCCD" << setw(13) << left << "|Ngay sinh" << setw(12) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(44) << left << "|Dia chi" << setw(16) << left << "|Ngay lap the" << setw(10) << left << "|Ngay het han" << endl;
-	cout << "|" << setw(6) << "______" << "|" << setw(18) << "__________________" << "|" << setw(15) << "_______________" << "|" << setw(12) << "____________" << "|" << setw(11) << "___________" << "|" << setw(22) << "__________________________" << "|" << setw(43) << "___________________________________________" << "|" << setw(15) << "_______________" << "|" << setw(12) << "_____________" << endl;
+	cout << "|Ma   |" << setw(24) << left << "Ho va Ten" << setw(14) << left << "|CMND/CCCD" << setw(12) << left << "|Ngay sinh" << setw(11) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(45) << left << "|Dia chi" << setw(14) << left << "|Ngay lap the" << setw(10) << left << "|Ngay het han" << endl;
+	cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
 	for (int i = 0; i < j; i++) {
-		cout << "|" << setw(6) << left << x[i].code << "|" << setw(18) << left << x[i].ho_ten << "|" << setw(15) << left << x[i].cccd << "|" << setw(12) << left << x[i].ngay_sinh << "|" << setw(11) << left << x[i].gioi_tinh << "|" << setw(26) << left << x[i].email << "|" << setw(43) << left << x[i].dia_chi << "|" << setw(15) << left << x[i].ngay_lap_the << "|" << setw(13) << left << x[i].ngay_het_han << endl;
-		cout << "|" << setw(6) << "______" << "|" << setw(18) << "__________________" << "|" << setw(15) << "_______________" << "|" << setw(12) << "____________" << "|" << setw(11) << "___________" << "|" << setw(22) << "__________________________" << "|" << setw(43) << "___________________________________________" << "|" << setw(15) << "_______________" << "|" << setw(12) << "_____________" << endl;
+
+		cout << "|" << setw(5) << left << x[i].code << "|" << setw(24) << left << x[i].ho_ten << "|" << setw(13) << left << x[i].cccd << "|" << setw(11) << left << x[i].ngay_sinh << "|" << setw(10) << left << x[i].gioi_tinh << "|" << setw(26) << left << x[i].email << "|" << setw(44) << left << x[i].dia_chi << "|" << setw(13) << left << x[i].ngay_lap_the << "|" << setw(13) << left << x[i].ngay_het_han << endl;
+		cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
 	}
 	cout << "========================================================================================================================================================================\n";
 }
@@ -156,14 +216,38 @@ void searchDocgia(Reader x[20], int j)
 	scanf_s("\n");
 	fgets(cmnd, sizeof(cmnd), stdin);
 	cmnd[strlen(cmnd) - 1] = '\0';
+	while (cccdInListReader(cmnd, j, x) == false)
+	{
+		cout << "\nKhong tim thay CCCD/CMND cua doc gia.Ban vui long nhap lai!" << endl;
+
+		int choose;
+		cout << "1. Nhap lai CCCD/CMND doc gia" << endl;
+		cout << "2. Thoat" << endl;
+		cout << "\nNhap lua chon: ";
+		cin >> choose;
+		switch (choose)
+		{
+		case 1:
+			cout << "Nhap CCCD/CMND doc gia ma ban muon tim kiem: ";
+			scanf_s("\n");
+			fgets(cmnd, sizeof(cmnd), stdin);
+			cmnd[strlen(cmnd) - 1] = '\0';
+			break;
+
+		case 2:
+			return;
+		}
+
+	}
 	for (int i = 0; i < j; i++)
 	{
 		if (strcmp(cmnd, x[i].cccd) == 0)
 		{
 			cout << "========================================================================================================================================================================\n";
-			cout << "|Ma    |" << setw(18) << left << "Ho va Ten" << setw(16) << left << "|CMND/CCCD" << setw(13) << left << "|Ngay sinh" << setw(12) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(44) << left << "|Dia chi" << setw(16) << left << "|Ngay lap the" << setw(12) << left << "|Ngay het han" << endl;
-			cout << "|" << setw(6) << left << x[i].code << "|" << setw(18) << left << x[i].ho_ten << "|" << setw(15) << left << x[i].cccd << "|" << setw(12) << left << x[i].ngay_sinh << "|" << setw(11) << left << x[i].gioi_tinh << "|" << setw(26) << left << x[i].email << "|" << setw(43) << left << x[i].dia_chi << "|" << setw(15) << left << x[i].ngay_lap_the << "|" << setw(13) << left << x[i].ngay_het_han << endl;
-			cout << "|" << setw(6) << "______" << "|" << setw(18) << "__________________" << "|" << setw(15) << "_______________" << "|" << setw(12) << "____________" << "|" << setw(11) << "___________" << "|" << setw(22) << "__________________________" << "|" << setw(43) << "___________________________________________" << "|" << setw(15) << "_______________" << "|" << setw(14) << "_____________" << endl;
+			cout << "|Ma   |" << setw(24) << left << "Ho va Ten" << setw(14) << left << "|CMND/CCCD" << setw(12) << left << "|Ngay sinh" << setw(11) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(45) << left << "|Dia chi" << setw(14) << left << "|Ngay lap the" << setw(10) << left << "|Ngay het han" << endl;
+			cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
+			cout << "|" << setw(5) << left << x[i].code << "|" << setw(24) << left << x[i].ho_ten << "|" << setw(13) << left << x[i].cccd << "|" << setw(11) << left << x[i].ngay_sinh << "|" << setw(10) << left << x[i].gioi_tinh << "|" << setw(26) << left << x[i].email << "|" << setw(44) << left << x[i].dia_chi << "|" << setw(13) << left << x[i].ngay_lap_the << "|" << setw(13) << left << x[i].ngay_het_han << endl;
+			cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
 			cout << "========================================================================================================================================================================\n";
 		}
 	}
@@ -178,6 +262,29 @@ void editDocgia(Reader x[20], int j, FILE* docgia)
 	fgets(cmnd, sizeof(cmnd), stdin);
 	cmnd[strlen(cmnd) - 1] = '\0';
 
+	while (cccdInListReader(cmnd, j, x) == false)
+	{
+		cout << "\nKhong tim thay CCCD/CMND cua doc gia.Ban vui long nhap lai!" << endl;
+
+		int choose;
+		cout << "1. Nhap lai CCCD/CMND doc gia" << endl;
+		cout << "2. Thoat" << endl;
+		cout << "\nNhap lua chon: ";
+		cin >> choose;
+		switch (choose)
+		{
+		case 1:
+			cout << "Nhap CCCD/CMND doc gia ma ban muon chinh sua: ";
+			scanf_s("\n");
+			fgets(cmnd, sizeof(cmnd), stdin);
+			cmnd[strlen(cmnd) - 1] = '\0';
+			break;
+
+		case 2:
+			return;
+		}
+	}
+
 	int choose;
 
 
@@ -187,12 +294,15 @@ void editDocgia(Reader x[20], int j, FILE* docgia)
 		if (strcmp(cmnd, x[i].cccd) == 0)
 		{
 			system("cls");
-			cout << "========================================================================================================================================================================\n";
-			cout << "|Ma    |" << setw(18) << left << "Ho va Ten" << setw(16) << left << "|CMND/CCCD" << setw(13) << left << "|Ngay sinh" << setw(12) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(44) << left << "|Dia chi" << setw(16) << left << "|Ngay lap the" << setw(12) << left << "|Ngay het han" << endl;
-			cout << "|" << setw(6) << left << x[i].code << "|" << setw(18) << left << x[i].ho_ten << "|" << setw(15) << left << x[i].cccd << "|" << setw(12) << left << x[i].ngay_sinh << "|" << setw(11) << left << x[i].gioi_tinh << "|" << setw(26) << left << x[i].email << "|" << setw(43) << left << x[i].dia_chi << "|" << setw(15) << left << x[i].ngay_lap_the << "|" << setw(13) << left << x[i].ngay_het_han << endl;
-			cout << "|" << setw(6) << "______" << "|" << setw(18) << "__________________" << "|" << setw(15) << "_______________" << "|" << setw(12) << "____________" << "|" << setw(11) << "___________" << "|" << setw(22) << "__________________________" << "|" << setw(43) << "___________________________________________" << "|" << setw(15) << "_______________" << "|" << setw(14) << "_____________" << endl;
-			cout << "========================================================================================================================================================================\n";
+			cout << "<<=====================================================================CHINH SUA THONG TIN DOC GIA====================================================================>>" << endl;
 
+
+			cout << "========================================================================================================================================================================\n";
+			cout << "|Ma   |" << setw(24) << left << "Ho va Ten" << setw(14) << left << "|CMND/CCCD" << setw(12) << left << "|Ngay sinh" << setw(11) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(45) << left << "|Dia chi" << setw(14) << left << "|Ngay lap the" << setw(10) << left << "|Ngay het han" << endl;
+			cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
+			cout << "|" << setw(5) << left << x[i].code << "|" << setw(24) << left << x[i].ho_ten << "|" << setw(13) << left << x[i].cccd << "|" << setw(11) << left << x[i].ngay_sinh << "|" << setw(10) << left << x[i].gioi_tinh << "|" << setw(26) << left << x[i].email << "|" << setw(44) << left << x[i].dia_chi << "|" << setw(13) << left << x[i].ngay_lap_the << "|" << setw(13) << left << x[i].ngay_het_han << endl;
+			cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
+			cout << "========================================================================================================================================================================\n";
 
 			cout << "1. Chinh sua ho ten \n";
 			cout << "2. Chinh sua CCCD/CMND \n";
@@ -306,6 +416,7 @@ void editDocgia(Reader x[20], int j, FILE* docgia)
 
 		}
 		fclose(docgia);
+		cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
 	}
 	else {
 		cout << "Khong the mo tep tin." << endl;
@@ -321,15 +432,41 @@ void searchTenDocGia(Reader x[20], int j)
 	scanf_s("\n");
 	fgets(name, sizeof(name), stdin);
 	name[strlen(name) - 1] = '\0';
+
+	while (nameInListReader(name, j, x) == false)
+	{
+
+		cout << "\nKhong tim thay ten cua doc gia.Ban vui long nhap lai!" << endl;
+
+		int choose;
+		cout << "1. Nhap lai ho va ten doc gia" << endl;
+		cout << "2. Thoat" << endl;
+		cout << "\nNhap lua chon: ";
+		cin >> choose;
+		switch (choose)
+		{
+		case 1:
+			cout << "Nhap ho va ten doc gia ma ban muon tim kiem: ";
+			scanf_s("\n");
+			fgets(name, sizeof(name), stdin);
+			name[strlen(name) - 1] = '\0';
+			break;
+
+		case 2:
+			return;
+		}
+
+	}
+
 	for (int i = 0; i < j; i++)
 	{
 		if (strcmp(name, x[i].ho_ten) == 0)
 		{
 			cout << "========================================================================================================================================================================\n";
-			cout << "|Ma    |" << setw(18) << left << "Ho va Ten" << setw(16) << left << "|CMND/CCCD" << setw(13) << left << "|Ngay sinh" << setw(12) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(44) << left << "|Dia chi" << setw(16) << left << "|Ngay lap the" << setw(12) << left << "|Ngay het han" << endl;
-			cout << "|" << setw(6) << "______" << "|" << setw(18) << "__________________" << "|" << setw(15) << "_______________" << "|" << setw(12) << "____________" << "|" << setw(11) << "___________" << "|" << setw(22) << "__________________________" << "|" << setw(43) << "___________________________________________" << "|" << setw(15) << "_______________" << "|" << setw(14) << "_____________" << endl;
-			cout << "|" << setw(6) << left << x[i].code << "|" << setw(18) << left << x[i].ho_ten << "|" << setw(15) << left << x[i].cccd << "|" << setw(12) << left << x[i].ngay_sinh << "|" << setw(11) << left << x[i].gioi_tinh << "|" << setw(26) << left << x[i].email << "|" << setw(43) << left << x[i].dia_chi << "|" << setw(15) << left << x[i].ngay_lap_the << "|" << setw(13) << left << x[i].ngay_het_han << endl;
-			cout << "|" << setw(6) << "______" << "|" << setw(18) << "__________________" << "|" << setw(15) << "_______________" << "|" << setw(12) << "____________" << "|" << setw(11) << "___________" << "|" << setw(22) << "__________________________" << "|" << setw(43) << "___________________________________________" << "|" << setw(15) << "_______________" << "|" << setw(14) << "_____________" << endl;
+			cout << "|Ma   |" << setw(24) << left << "Ho va Ten" << setw(14) << left << "|CMND/CCCD" << setw(12) << left << "|Ngay sinh" << setw(11) << left << "|Gioi tinh" << setw(27) << left << "|Email" << setw(45) << left << "|Dia chi" << setw(14) << left << "|Ngay lap the" << setw(10) << left << "|Ngay het han" << endl;
+			cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
+			cout << "|" << setw(5) << left << x[i].code << "|" << setw(24) << left << x[i].ho_ten << "|" << setw(13) << left << x[i].cccd << "|" << setw(11) << left << x[i].ngay_sinh << "|" << setw(10) << left << x[i].gioi_tinh << "|" << setw(26) << left << x[i].email << "|" << setw(44) << left << x[i].dia_chi << "|" << setw(13) << left << x[i].ngay_lap_the << "|" << setw(13) << left << x[i].ngay_het_han << endl;
+			cout << "|" << setw(5) << "_____" << "|" << setw(24) << "________________________" << "|" << setw(12) << "_____________" << "|" << setw(11) << "___________" << "|" << setw(10) << "__________" << "|" << setw(22) << "__________________________" << "|" << setw(44) << "____________________________________________" << "|" << setw(11) << "_____________" << "|" << setw(12) << "_____________" << endl;
 			cout << "========================================================================================================================================================================\n";
 		}
 	}
@@ -374,13 +511,26 @@ void deleteDocgia(Reader x[20], int& total, FILE* docgia)
 		scanf_s("\n");
 		fgets(cmnd, sizeof(cmnd), stdin);
 		cmnd[strlen(cmnd) - 1] = '\0';
-		while (cccdInList(cmnd, total, x) == false)
+		while (cccdInListReader(cmnd, total, x) == false)
 		{
 			cout << "CCCD/CMND khong the duoc tim thay. Vui long nhap lai!" << endl;
-			cout << "\nNhap CCCD/CMND cua doc gia ma ban muon xoa ";
-			scanf_s("\n");
-			fgets(cmnd, sizeof(cmnd), stdin);
-			cmnd[strlen(cmnd) - 1] = '\0';
+			int choose;
+			cout << "1. Nhap lai CCCD/CMND doc gia" << endl;
+			cout << "2. Thoat" << endl;
+			cout << "\nNhap lua chon: ";
+			cin >> choose;
+			switch (choose)
+			{
+			case 1:
+				cout << "Nhap CCCD/CMND doc gia ma ban muon xoa: ";
+				scanf_s("\n");
+				fgets(cmnd, sizeof(cmnd), stdin);
+				cmnd[strlen(cmnd) - 1] = '\0';
+				break;
+
+			case 2:
+				return;
+			}
 		}
 		for (int i = 0; i < total; i++)
 		{
@@ -433,6 +583,7 @@ void deleteDocgia(Reader x[20], int& total, FILE* docgia)
 
 		}
 		fclose(docgia);
+		cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
 	}
 	else {
 		cout << "Khong the mo tep tin." << endl;

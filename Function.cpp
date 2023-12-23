@@ -59,6 +59,8 @@ void ReadFileDocGia(FILE* docgia, Reader x[20], int &total)
 
 		}
 		fclose(docgia);
+
+		cout << "\nDU LIEU DOC GIA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
 	else
 	{
@@ -116,6 +118,7 @@ void ReadFileSach(FILE* sach, Book y[20], int &quantity)
 
 		}
 		fclose(sach);
+		cout << "\nDU LIEU SACH DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
 	else
 	{
@@ -184,6 +187,7 @@ void ReadFilePhieu(FILE* phieu, Ticket z[20], int &so_Phieu)
 
 		}
 		fclose(phieu);
+		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
 	else
 	{
@@ -230,7 +234,17 @@ void BasicStatistic()
 }
 
 
-
+void InputDayNow(char daynow[20])
+{
+	system("cls");
+	cout << "Truoc khi bat dau chuong trinh. Xin ban vui long nhap ngay thang nam hien tai (dd/mm/yyyy): ";
+	cin >> daynow;
+	while (checkFormatDate(daynow) == false)
+	{
+		cout << "Ngay thang nam (dd/mm/yyyy) khong hop le. Xin ban vui long nhap lai!!: ";
+		cin >> daynow;
+	}
+}
 
 //Ham dung de nhap lua chon a, b, c, d, e, f trong cac muc 1->6
 void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, FILE* sach, FILE* docgia)
@@ -457,6 +471,21 @@ bool nameInListBook(char n[100], int j, Book y[20])
 	return check;
 }
 
+bool codeInListBook(int code, int j, Book y[20])
+{
+	bool check = false;
+	for (int i = 0; i < j; i++)
+	{
+		if (code == y[i].ISBN)
+		{
+			check = true;
+			break;
+		}
+	}
+
+	return check;
+}
+
 //bool nameInList(char n[100], int j, char name[20][50])
 //{
 //	bool check = false;
@@ -472,7 +501,7 @@ bool nameInListBook(char n[100], int j, Book y[20])
 //	return check;
 //}
 
-bool cccdInList(char n[100], int j, Reader x[20])
+bool cccdInListReader(char n[100], int j, Reader x[20])
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -486,6 +515,22 @@ bool cccdInList(char n[100], int j, Reader x[20])
 
 	return check;
 }
+
+bool nameInListReader(char n[100], int j, Reader x[20])
+{
+	bool check = false;
+	for (int i = 0; i < j; i++)
+	{
+		if (strcmp(n, x[i].ho_ten) == 0)
+		{
+			check = true;
+			break;
+		}
+	}
+
+	return check;
+}
+
 
 
 bool checkCCCD(char cccd[50])
@@ -762,5 +807,129 @@ bool checkDsMuon(int n, int code[20])
 	return check;
 }
 
+bool checkIsExistTicket(int ma, int n, Ticket z[20])
+{
+	bool check = false;
+	for (int i = 0; i < n; i++)
+	{
+		if (ma == z[i].MaPhieu)
+		{
+			if (strlen(z[i].actualPayDate) != 0 && checkFormatDate(z[i].actualPayDate) == true)
+			{
+				check = true;
+				break;
+			}
+		}
+	}
+	return check;
+}
+
+bool checkIsExistCCCD(char cmnd[50], int n, Reader x[20])
+{
+	bool check = true;
+	for (int i = 0; i < n - 1; i++)
+	{
+		if (strcmp(cmnd, x[i].cccd) == 0)
+		{
+			check = false;
+			break;
+		}
+	}
+	return check;
+}
+
+bool checkIsExistBook(char book[50], int n, Book y[20])
+{
+	bool check = true;
+	for (int i = 0; i < n - 1; i++)
+	{
+		if (strcmp(book, y[i].ten_sach) == 0)
+		{
+			check = false;
+			break;
+		}
+	}
+	return check;
+}
+
+void upperName(char s[50])
+{
+	if (s[0] > 'Z')
+	{
+		s[0] = toupper(s[0]);
+	}
 
 
+	for (int i = 0; i < strlen(s); i++)
+	{
+		if (s[i] == ' ' && s[i + 1] != ' ')
+		{
+			s[i + 1] = toupper(s[i + 1]);
+		}
+	}
+}
+
+void upperAllName(char s[50])
+{
+	
+	for (int i = 0; i < strlen(s); i++)
+	{
+		
+			s[i] = toupper(s[i]);
+	}
+}
+
+bool Login(char tendangnhap[100], char matkhau[100], FILE* Account) {
+	bool check = true;
+
+	char buffer[100]{};
+	char* data{};
+	char* temp{};
+
+	char Username[100]{};
+	char Password[100]{};
+
+	errno_t account = fopen_s(&Account, "Account.txt", "r");
+	if (Account != NULL)
+	{
+		fgets(buffer, sizeof(buffer), Account);
+
+		data = strtok_s(buffer, ",", &temp);
+
+		strcpy_s(Username, data);
+		data = strtok_s(NULL, " ", &temp);
+		strcpy_s(Password, data);
+
+		fclose(Account);
+	}
+
+
+	cout << "<<==========DANG NHAP=========>>" << endl;
+	cout << "\nTen Dang Nhap: ";
+	fgets(tendangnhap, sizeof(tendangnhap), stdin);
+	tendangnhap[strlen(tendangnhap) - 1] = '\0';
+	cout << "Mat Khau: ";
+	fgets(matkhau, sizeof(matkhau), stdin);
+	matkhau[strlen(matkhau) - 1] = '\0';
+
+	while (strcmp(tendangnhap, Username) != 0 || strcmp(matkhau, Password) != 0)
+	{
+		system("cls");
+		cout << "Ten dang nhap hay mat khau khong hop le" << endl;
+		cout << "Vui long dang nhap lai!" << endl;
+		cout << "<<==========DANG NHAP=========>>" << endl;
+		cout << "\nTen Dang Nhap: ";
+		fgets(tendangnhap, sizeof(tendangnhap), stdin);
+		tendangnhap[strlen(tendangnhap) - 1] = '\0';
+		cout << "Mat Khau: ";
+		fgets(matkhau, sizeof(matkhau), stdin);
+		matkhau[strlen(matkhau) - 1] = '\0';
+	}
+
+	if (strcmp(tendangnhap, Username) != 0 || strcmp(matkhau, Password) != 0)
+	{
+		check = false;
+	}
+
+	return check;
+}

@@ -7,7 +7,83 @@ using namespace std;
 void addSach(Book y[20], int &quantity, FILE* sach)
 {
 	quantity++;
-	
+
+
+
+	y[quantity - 1].ISBN = MaISBN();
+		cout << "Ten sach: ";
+		cin.ignore();
+		fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
+		y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
+		
+		upperName(y[quantity - 1].ten_sach);
+
+		while (checkIsExistBook(y[quantity - 1].ten_sach, quantity, y) == false)
+		{
+
+			cout << "Sach da ton tai trong thu vien. Xin vui long nhap lai!" << endl;
+
+			int choose;
+			cout << "1. Nhap lai ten sach" << endl;
+			cout << "2. Thoat" << endl;
+			cout << "\nNhap lua chon: ";
+			cin >> choose;
+			switch (choose)
+			{
+			case 1:
+				cout << "Ban vui long nhap ten sach (toi da 39 ki tu): ";
+				cin.ignore();
+				fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
+				y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
+				break;
+
+			case 2:
+				quantity--;
+				return;
+			}
+
+		}
+
+
+		cout << "Tac gia: ";
+		fgets(y[quantity - 1].tac_gia, sizeof(y[quantity - 1].tac_gia), stdin);
+		y[quantity - 1].tac_gia[strlen(y[quantity - 1].tac_gia) - 1] = '\0';
+		
+		upperAllName(y[quantity - 1].tac_gia);
+
+		cout << "Nha xuat ban: ";
+		fgets(y[quantity - 1].nha_xuat_ban, sizeof(y[quantity - 1].nha_xuat_ban), stdin);
+		y[quantity - 1].nha_xuat_ban[strlen(y[quantity - 1].nha_xuat_ban) - 1] = '\0';
+		
+		upperAllName(y[quantity - 1].nha_xuat_ban);
+
+		cout << "Nam xuat ban: ";
+		cin >> y[quantity - 1].nam_xuat_ban;
+		while (y[quantity - 1].nam_xuat_ban > 3000 || y[quantity - 1].nam_xuat_ban < 2000)
+		{
+			cin >> y[quantity - 1].nam_xuat_ban;
+		}
+		
+
+		cout << "The loai: ";
+		cin.ignore();
+		fgets(y[quantity - 1].the_loai, sizeof(y[quantity - 1].the_loai), stdin);
+		y[quantity - 1].the_loai[strlen(y[quantity - 1].the_loai) - 1] = '\0';
+		
+		upperAllName(y[quantity - 1].the_loai);
+
+		cout << "Gia tien: ";
+		cin >> y[quantity - 1].gia_tien;
+		
+
+		cout << "So luong: ";
+		cin >> y[quantity - 1].so_luong;
+		
+
+		y[quantity - 1].BookIsBorrowing = 0;
+		
+
+
 	errno_t sach2 = fopen_s(&sach, "sach.txt", "r+");
 	if (sach != NULL)
 	{
@@ -17,55 +93,29 @@ void addSach(Book y[20], int &quantity, FILE* sach)
 
 	errno_t sach3 = fopen_s(&sach, "sach.txt", "a");
 
-	y[quantity - 1].ISBN = MaISBN();
 	if (sach != NULL)
 	{
-
-		
 		fprintf(sach, "%d,", y[quantity - 1].ISBN);
 
-		cout << "Ten sach: ";
-		cin.ignore();
-		fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
-		y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
 		fprintf(sach, "%s,", y[quantity - 1].ten_sach);
 
-		cout << "Tac gia: ";
-		fgets(y[quantity - 1].tac_gia, sizeof(y[quantity - 1].tac_gia), stdin);
-		y[quantity - 1].tac_gia[strlen(y[quantity - 1].tac_gia) - 1] = '\0';
 		fprintf(sach, "%s,", y[quantity - 1].tac_gia);
 
-		cout << "Nha xuat ban: ";
-		fgets(y[quantity - 1].nha_xuat_ban, sizeof(y[quantity - 1].nha_xuat_ban), stdin);
-		y[quantity - 1].nha_xuat_ban[strlen(y[quantity - 1].nha_xuat_ban) - 1] = '\0';
 		fprintf(sach, "%s,", y[quantity - 1].nha_xuat_ban);
 
-		cout << "Nam xuat ban: ";
-		cin >> y[quantity - 1].nam_xuat_ban;
-		while (y[quantity - 1].nam_xuat_ban > 3000)
-		{
-			cin >> y[quantity - 1].nam_xuat_ban;
-		}
 		fprintf(sach, "%d,", y[quantity - 1].nam_xuat_ban);
 
-		cout << "The loai: ";
-		cin.ignore();
-		fgets(y[quantity - 1].the_loai, sizeof(y[quantity - 1].the_loai), stdin);
-		y[quantity - 1].the_loai[strlen(y[quantity - 1].the_loai) - 1] = '\0';
 		fprintf(sach, "%s,", y[quantity - 1].the_loai);
 
-		cout << "Gia tien: ";
-		cin >> y[quantity - 1].gia_tien;
 		fprintf(sach, "%d,", y[quantity - 1].gia_tien);
 
-		cout << "So luong: ";
-		cin >> y[quantity - 1].so_luong;
 		fprintf(sach, "%d,", y[quantity - 1].so_luong);
 
-		y[quantity - 1].BookIsBorrowing = 0;
 		fprintf(sach, "%d\n", y[quantity - 1].BookIsBorrowing);
 
 		fclose(sach);
+
+		cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
 	}
 
 	cout << "\nThong tin sach da duoc them!" << endl;
@@ -74,6 +124,8 @@ void addSach(Book y[20], int &quantity, FILE* sach)
 
 void printSach(Book y[20], int quantity)
 {
+	cout << "<<==========================================================DANH SACH THONG TIN CUA SACH TRONG THU VIEN===============================================================>>" << endl;
+
 	cout << "========================================================================================================================================================================\n";
 	cout << "|ISBN  |" << setw(39) << left << "Ten Sach" << setw(28) << left << "|Tac gia" << setw(28) << left << "|Nha xuat ban" << setw(12) << left << "|Nam xuat ban" << setw(25) << left << "|The loai" << setw(15) << left << "|Gia tien" << setw(9) << left << "|So luong" << endl;
 	cout << "|" << setw(6) << "______" << "|" << setw(39) << "_______________________________________" << "|" << setw(27) << "___________________________" << "|" << setw(27) << "___________________________" << "|" << setw(12) << "____________" << "|" << setw(23) << "________________________" << "|" << setw(14) << "______________" << "|" << setw(9) << "___________" << endl;
@@ -91,11 +143,27 @@ void searchISBNSach(Book y[20], int quantity)
 	cout << "\nNhap ISBN cua sach ma ban muon tim kiem: ";
 	cin >> code;
 
-	while (codeInListSachMuon(code, quantity, y) == false)
+	while (cin.fail() || (codeInListBook(code, quantity, y) == false))
 	{
+		cin.clear();
+		cin.ignore(50, '\n');
 		cout << "Ma ISBN khong tim thay. Vui long nhap lai!" << endl;
-		cout << "\nNhap ISBN cua sach ma ban muon tim kiem: ";
-		cin >> code;
+		int choose;
+		cout << "1. Nhap lai ma ISBN" << endl;
+		cout << "2. Thoat" << endl;
+		cout << "\nNhap lua chon: ";
+		cin >> choose;
+		switch (choose)
+		{
+		case 1:
+			cout << "\nNhap ISBN cua sach ma ban muon tim kiem: ";
+			cin >> code;
+			break;
+
+		case 2:
+			return;
+		}
+
 	}
 
 	for (int i = 0; i < quantity; i++)
@@ -116,10 +184,31 @@ void searchISBNSach(Book y[20], int quantity)
 
 void editSach(Book y[20], int quantity, FILE* sach)
 {
+
 	int code;
 	cout << "\nNhap ISBN cua sach ma ban muon chinh sua ";
 	cin >> code;
+	while (cin.fail() || (codeInListBook(code, quantity, y) == false))
+	{
+		cin.clear();
+		cin.ignore(50, '\n');
+		cout << "Ma ISBN khong tim thay. Vui long nhap lai!" << endl;
+		int choose;
+		cout << "1. Nhap lai ma ISBN" << endl;
+		cout << "2. Thoat" << endl;
+		cout << "\nNhap lua chon: ";
+		cin >> choose;
+		switch (choose)
+		{
+		case 1:
+			cout << "\nNhap ISBN cua sach ma ban muon chinh sua: ";
+			cin >> code;
+			break;
 
+		case 2:
+			return;
+		}
+	}
 
 	int choose;
 
@@ -130,6 +219,8 @@ void editSach(Book y[20], int quantity, FILE* sach)
 		if (code == y[i].ISBN)
 		{
 			system("cls");
+			cout << "<<=======================================================================CHINH SUA THONG TIN SACH=====================================================================>>" << endl;
+
 			cout << "========================================================================================================================================================================\n";
 			cout << "|ISBN  |" << setw(39) << left << "Ten Sach" << setw(28) << left << "|Tac gia" << setw(28) << left << "|Nha xuat ban" << setw(12) << left << "|Nam xuat ban" << setw(25) << left << "|The loai" << setw(15) << left << "|Gia tien" << setw(9) << left << "|So luong" << endl;
 			cout << "|" << setw(6) << "______" << "|" << setw(39) << "_______________________________________" << "|" << setw(27) << "___________________________" << "|" << setw(27) << "___________________________" << "|" << setw(12) << "____________" << "|" << setw(23) << "________________________" << "|" << setw(14) << "______________" << "|" << setw(9) << "___________" << endl;
@@ -228,6 +319,8 @@ void editSach(Book y[20], int quantity, FILE* sach)
 
 		}
 		fclose(sach);
+
+		cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
 	}
 	else {
 		cout << "Khong the mo tep tin." << endl;
@@ -245,9 +338,23 @@ void searchTenSach(Book y[20], int quantity)
 	while (nameInListBook(name, quantity, y) == false)
 	{
 		cout << "Ten sach khong the duoc tim thay. Vui long nhap lai!" << endl;
-		cout << "\nNhap ten sach ma ban muon tim kiem: ";
-		fgets(name, sizeof(name), stdin);
-		name[strlen(name) - 1] = '\0';
+		int choose;
+		cout << "1. Nhap lai ten sach" << endl;
+		cout << "2. Thoat" << endl;
+		cout << "\nNhap lua chon: ";
+		cin >> choose;
+		switch (choose)
+		{
+		case 1:
+			cin.ignore();
+			cout << "\nNhap ten sach ma ban muon tim kiem: ";
+			fgets(name, sizeof(name), stdin);
+			name[strlen(name) - 1] = '\0';
+			break;
+
+		case 2:
+			return;
+		}
 	}
 
 	for (int i = 0; i < quantity; i++)
@@ -286,6 +393,29 @@ void deleteSach(Book y[20], int& quantity, FILE* sach)
 		int code;
 		cout << "\nNhap ma ISBN cua sach ma ban muon xoa ";
 		cin >> code;
+
+		while (cin.fail() || (codeInListBook(code, quantity, y) == false))
+		{
+			cin.clear();
+			cin.ignore(50, '\n');
+			cout << "Ma ISBN khong tim thay. Vui long nhap lai!" << endl;
+			int choose;
+			cout << "1. Nhap lai ma ISBN" << endl;
+			cout << "2. Thoat" << endl;
+			cout << "\nNhap lua chon: ";
+			cin >> choose;
+			switch (choose)
+			{
+			case 1:
+				cout << "\nNhap ISBN cua sach ma ban muon xoa: ";
+				cin >> code;
+				break;
+
+			case 2:
+				return;
+			}
+		}
+
 		for (int i = 0; i < quantity; i++)
 		{
 			if (code == y[i].ISBN)
@@ -338,6 +468,7 @@ void deleteSach(Book y[20], int& quantity, FILE* sach)
 
 		}
 		fclose(sach);
+		cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
 	}
 	else {
 		cout << "Khong the mo tep tin." << endl;
