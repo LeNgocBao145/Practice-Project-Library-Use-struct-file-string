@@ -8,12 +8,16 @@
 #include <cctype>
 using namespace std;
 
+//Doc du lieu tu file docgia.txt va luu vao bien chua cac thong tin cua doc gia 
 void ReadFileDocGia(FILE* docgia, Reader x[20], int &total);
 
+//Doc du lieu tu file sach.txt va luu vao bien chua cac thong tin cua sach trong thu vien 
 void ReadFileSach(FILE* sach, Book y[20], int& quantity);
 
+//Doc du lieu tu file phieu.txt va luu vao bien chua cac thong tin cua phieu muon tra 
 void ReadFilePhieu(FILE* phieu, Ticket z[20], int& so_Phieu);
 
+//Ham de nhap ngay thang nam hien tai luc chay chuong trinh
 void InputDayNow(char daynow[20]);
 
 //Xuat ra man hinh console giao dien menu
@@ -75,7 +79,11 @@ int CodeTicket();
 
 //Kiem tra ma doc gia hay ma ISBN cua sach co trong danh sach doc gia hay trong danh sach cua sach trong thu vien khong
 bool codeInListMaPhieu(int n, int j, Ticket z[20]);
+
+//Ham kiem tra xem du lieu ma doc gia nhap vao co ton tai hay nam trong danh sach doc gia hay khong 
 bool codeInListDGMuon(int n, int j, Reader x[20]);
+
+//Ham kiem tra xem du lieu ma sach ISBN nhap vao co ton tai hay nam trong danh sach cac sach trong thu vien hay khong
 bool codeInListSachMuon(int n, int j, Book y[20]);
 
 //Thong ke so luong sach trong thu vien
@@ -111,18 +119,17 @@ bool checkEmail(char email[50]);
 //Kiem tra xem gioi tinh co khac tu Nam va Nu hay khong
 bool checkGender(char gender[10]);
 
-//Kiem tra CCD/CMND cua doc gia hay ten sach cua sach co trong danh sach doc gia hay trong danh sach cua sach trong thu vien khong
+//Kiem tra CCCD/CMND cua doc gia hay ten sach cua sach co trong danh sach doc gia hay trong danh sach cua sach trong thu vien khong
 bool cccdInListReader(char n[100], int j, Reader x[20]);
 
-
+//Ham kiem tra xem du lieu ten doc gia nhap vao co ton tai hay nam trong danh sach doc gia trong thu vien hay khong
 bool nameInListReader(char n[100], int j, Reader x[20]);
 
-
+//Ham kiem tra xem du lieu ten sach nhap vao co ton tai hay nam trong danh sach cac sach trong thu vien hay khong
 bool nameInListBook(char n[100], int j, Book y[20]);
 
-
+//Ham kiem tra xem du lieu ma sach ISBN nhap vao co ton tai hay nam trong danh sach cac sach trong thu vien hay khong
 bool codeInListBook(int code, int j, Book y[20]);
-
 
 //In ra man hinh console cac lua chon chuc nang trong muc quan li doc gia
 void ReaderManager();
@@ -148,9 +155,11 @@ bool checkIsExistCCCD(char cmnd[50], int n, Reader x[20]);
 //Kiem tra xem ten sach da ton tai hay chua
 bool checkIsExistBook(char book[50], int n, Book y[20]);
 
-
+//Ham in hoa cac chu cai dau cua ho ten doc gia hay ten sach
 void upperName(char s[50]);
 
+//Ham in hoa tat ca cac chu cai cua ten tac gia, ten nha xuat ban, ten the loai
 void upperAllName(char s[50]);
 
+//Ham kiem tra xem thong tin ten dang nhap va mat khau co khop voi tai khoan Admin quan li thu vien hay khong
 bool Login(char tendangnhap[100], char matkhau[100], FILE* Account);
