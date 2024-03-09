@@ -10,12 +10,12 @@ using namespace std;
 int main()
 {
 
-	string tendangnhap[100]{};
-	string matkhau[100]{};
+	string tendangnhap;
+	string matkhau;
 
-	string choose{};
+	char choose;
 
-	string daynow[20];
+	string daynow;
 	
 	int total;
 	int quantity;
@@ -49,7 +49,7 @@ int main()
 
 	cout << "\nDANG NHAP TAI KHOAN ADMIN THANH CONG!" << endl;
 	
-	string is_continue2;
+	char is_continue2;
 	cout << "\nMoi ban vui long nhap lua chon de tiep tuc (y/n)" << endl;
 	cin >> is_continue2;
 	while (is_continue2 != 'y' && is_continue2 != 'n')
