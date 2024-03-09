@@ -5,9 +5,9 @@
 
 void ReadFileDocGia(FILE* docgia, Reader x[20], int &total)
 {
-	char buffer[2000];
-	char* data;
-	char* temp;
+	string buffer[2000];
+	string* data;
+	string* temp;
 
 	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r");
 
@@ -71,9 +71,9 @@ void ReadFileDocGia(FILE* docgia, Reader x[20], int &total)
 
 void ReadFileSach(FILE* sach, Book y[20], int &quantity)
 {
-	char buffer[2000];
-	char* data;
-	char* temp;
+	string buffer[2000];
+	string* data;
+	string* temp;
 
 	errno_t sach2 = fopen_s(&sach, "sach.txt", "r");
 
@@ -130,9 +130,9 @@ void ReadFileSach(FILE* sach, Book y[20], int &quantity)
 void ReadFilePhieu(FILE* phieu, Ticket z[20], int &so_Phieu)
 {
 
-	char buffer[2000];
-	char* data;
-	char* temp;
+	string buffer[2000];
+	string* data;
+	string* temp;
 
 	errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "r");
 
@@ -234,7 +234,7 @@ void BasicStatistic()
 }
 
 
-void InputDayNow(char daynow[20])
+void InputDayNow(string daynow[20])
 {
 	system("cls");
 	cout << "Truoc khi bat dau chuong trinh. Xin ban vui long nhap ngay thang nam hien tai (dd/mm/yyyy): ";
@@ -247,7 +247,7 @@ void InputDayNow(char daynow[20])
 }
 
 //Ham dung de nhap lua chon a, b, c, d, e, f trong cac muc 1->6
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, FILE* sach, FILE* docgia)
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, string choose, int& total, int& quantity, FILE* sach, FILE* docgia)
 {
 	if (n == 1)
 	{
@@ -400,7 +400,7 @@ void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& to
 }
 
 
-bool checkFormatDate(char date[20])
+bool checkFormatDate(string date[20])
 {
 	bool check = true;
 	if (strlen(date) != 10 || date[2] != '/' || date[5] != '/')
@@ -456,7 +456,7 @@ bool codeInListSachMuon(int n, int j, Book y[20])
 }
 
 
-bool nameInListBook(char n[100], int j, Book y[20])
+bool nameInListBook(string n[100], int j, Book y[20])
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -486,7 +486,7 @@ bool codeInListBook(int code, int j, Book y[20])
 	return check;
 }
 
-//bool nameInList(char n[100], int j, char name[20][50])
+//bool nameInList(string n[100], int j, string name[20][50])
 //{
 //	bool check = false;
 //	for (int i = 0; i < j; i++)
@@ -501,7 +501,7 @@ bool codeInListBook(int code, int j, Book y[20])
 //	return check;
 //}
 
-bool cccdInListReader(char n[100], int j, Reader x[20])
+bool cccdInListReader(string n[100], int j, Reader x[20])
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -516,7 +516,7 @@ bool cccdInListReader(char n[100], int j, Reader x[20])
 	return check;
 }
 
-bool nameInListReader(char n[100], int j, Reader x[20])
+bool nameInListReader(string n[100], int j, Reader x[20])
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -533,7 +533,7 @@ bool nameInListReader(char n[100], int j, Reader x[20])
 
 
 
-bool checkCCCD(char cccd[50])
+bool checkCCCD(string cccd[50])
 {
 	bool check = true;
 	if (strlen(cccd) != 12)
@@ -543,7 +543,7 @@ bool checkCCCD(char cccd[50])
 	return check;
 }
 
-bool checkEmail(char email[50]) //Kiem tra email co ki tu @ hay khong neu khong thi nhap lai
+bool checkEmail(string email[50]) //Kiem tra email co ki tu @ hay khong neu khong thi nhap lai
 {
 	bool check = false;
 
@@ -559,7 +559,7 @@ bool checkEmail(char email[50]) //Kiem tra email co ki tu @ hay khong neu khong 
 	return check;
 }
 
-bool checkGender(char gender[10])
+bool checkGender(string gender[10])
 {
 	bool check = true;
 	if (strcmp(gender, "Nam") != 0 && strcmp(gender, "Nu") != 0)
@@ -570,7 +570,7 @@ bool checkGender(char gender[10])
 }
 
 
-int Distance2Date(char expectPayDate[20], char actualPayDate[20])
+int Distance2Date(string expectPayDate[20], string actualPayDate[20])
 {
 	int length = 0;
 
@@ -583,7 +583,7 @@ int Distance2Date(char expectPayDate[20], char actualPayDate[20])
 	int year2 = 0;
 	
 
-	char num;
+	string num;
 
 	for (int j = 0; j < 2; j++)
 	{
@@ -824,7 +824,7 @@ bool checkIsExistTicket(int ma, int n, Ticket z[20])
 	return check;
 }
 
-bool checkIsExistCCCD(char cmnd[50], int n, Reader x[20])
+bool checkIsExistCCCD(string cmnd[50], int n, Reader x[20])
 {
 	bool check = true;
 	for (int i = 0; i < n - 1; i++)
@@ -838,7 +838,7 @@ bool checkIsExistCCCD(char cmnd[50], int n, Reader x[20])
 	return check;
 }
 
-bool checkIsExistBook(char book[50], int n, Book y[20])
+bool checkIsExistBook(string book[50], int n, Book y[20])
 {
 	bool check = true;
 	for (int i = 0; i < n - 1; i++)
@@ -852,7 +852,7 @@ bool checkIsExistBook(char book[50], int n, Book y[20])
 	return check;
 }
 
-void upperName(char s[50])
+void upperName(string s[50])
 {
 	if (s[0] > 'Z')
 	{
@@ -869,7 +869,7 @@ void upperName(char s[50])
 	}
 }
 
-void upperAllName(char s[50])
+void upperAllName(string s[50])
 {
 	
 	for (int i = 0; i < strlen(s); i++)
@@ -879,15 +879,15 @@ void upperAllName(char s[50])
 	}
 }
 
-bool Login(char tendangnhap[100], char matkhau[100], FILE* Account) {
+bool Login(string tendangnhap[100], string matkhau[100], FILE* Account) {
 	bool check = true;
 
-	char buffer[100]{};
-	char* data{};
-	char* temp{};
+	string buffer[100]{};
+	string* data{};
+	string* temp{};
 
-	char Username[100]{};
-	char Password[100]{};
+	string Username[100]{};
+	string Password[100]{};
 
 	errno_t account = fopen_s(&Account, "Account.txt", "r");
 	if (Account != NULL)

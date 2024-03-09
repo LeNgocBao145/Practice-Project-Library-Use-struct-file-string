@@ -342,7 +342,7 @@ void editSach(Book y[20], int quantity, FILE* sach)
 
 void searchTenSach(Book y[20], int quantity)
 {
-	char name[100];
+	string name[100];
 	cout << "\nNhap ten sach ma ban muon tim kiem: ";
 	cin.ignore();
 	fgets(name, sizeof(name), stdin);

@@ -6,7 +6,7 @@
 using namespace std;
 
 
-void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int quantity, char daynow[20], FILE* phieu, FILE* sach)
+void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int quantity, string daynow[20], FILE* phieu, FILE* sach)
 {
 	n++;
 	int S = 0;
@@ -54,10 +54,10 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 		{
 			int day = 0;
 			int month = 0;
-			char date{};
-			char num;
-			char num2;
-			char num3;
+			string date{};
+			string num;
+			string num2;
+			string num3;
 			strcpy_s(z[i].borrowDate, daynow);
 
 			strcpy_s(z[i].expectPayDate, daynow);
@@ -78,7 +78,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 31;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -91,7 +91,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 31;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -104,7 +104,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 31;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -118,7 +118,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 30;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -131,7 +131,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 31;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -144,7 +144,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 30;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -157,7 +157,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 31;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -171,7 +171,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 31;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -185,7 +185,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 30;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -199,7 +199,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 31;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -213,7 +213,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 30;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -226,7 +226,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 				int g = day - 31;
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((g % 10) + 48);
+					num3 = static_cast<string>((g % 10) + 48);
 					g /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -238,7 +238,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 			{
 				for (int h = 1; h >= 0; h--)
 				{
-					num3 = static_cast<char>((day % 10) + 48);
+					num3 = static_cast<string>((day % 10) + 48);
 					day /= 10;
 					z[i].expectPayDate[h] = num3;
 				}
@@ -397,7 +397,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 	cout << "\nLap phieu muon thanh cong!" << endl;
 }
 
-void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* phieu, FILE* sach)
+void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow[20], FILE* phieu, FILE* sach)
 {
 	system("cls");
 	int ma;

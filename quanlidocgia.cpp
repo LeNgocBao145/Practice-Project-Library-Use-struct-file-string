@@ -86,7 +86,7 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 		fgets(x[j - 1].gioi_tinh, sizeof(x[j - 1].gioi_tinh), stdin);
 		x[j - 1].gioi_tinh[strlen(x[j - 1].gioi_tinh) - 1] = '\0';
 
-		while (checkGender(x[j - 1].gioi_tinh) == false)		//Kiem tra xem gioi tinh co phai Nam hay nu neu khac thì nhap lai
+		while (checkGender(x[j - 1].gioi_tinh) == false)		//Kiem tra xem gioi tinh co phai Nam hay nu neu khac thï¿½ nhap lai
 		{
 			cout << "Gioi tinh (Nam/Nu): ";
 			scanf_s("\n");
@@ -137,8 +137,8 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 
 
 		int year = 0;
-		char num;
-		char num2;
+		string num;
+		string num2;
 		for (int i = 6; i < 10; i++)
 		{
 			num = x[j - 1].ngay_het_han[i];
@@ -147,7 +147,7 @@ void addDocgia(Reader x[20], int &j, FILE* docgia)
 		year += 4;
 		for (int i = 9; i > 5; i--)
 		{
-			num2 = static_cast<char>((year % 10) + 48);
+			num2 = static_cast<string>((year % 10) + 48);
 			year /= 10;
 			x[j - 1].ngay_het_han[i] = num2;
 		}
@@ -211,7 +211,7 @@ void printDocgia(Reader x[20], int j)
 
 void searchDocgia(Reader x[20], int j)
 {
-	char cmnd[14];
+	string cmnd[14];
 	cout << "\nNhap CCCD/CMND doc gia ma ban muon tim kiem: ";
 	scanf_s("\n");
 	fgets(cmnd, sizeof(cmnd), stdin);
@@ -257,7 +257,7 @@ void searchDocgia(Reader x[20], int j)
 
 void editDocgia(Reader x[20], int j, FILE* docgia)
 {
-	char cmnd[14];
+	string cmnd[14];
 	cout << "\nNhap CCCD/CMND cua doc gia ma ban muon chinh sua ";
 	scanf_s("\n");
 	fgets(cmnd, sizeof(cmnd), stdin);
@@ -355,7 +355,7 @@ void editDocgia(Reader x[20], int j, FILE* docgia)
 				cin.ignore();
 				fgets(x[i].gioi_tinh, sizeof(x[i].gioi_tinh), stdin);
 				x[i].gioi_tinh[strlen(x[i].gioi_tinh) - 1] = '\0';
-				while (checkGender(x[i].gioi_tinh)==false) 		//Kiem tra xem gioi tinh co phai Nam hay nu neu khac thì nhap lai
+				while (checkGender(x[i].gioi_tinh)==false) 		//Kiem tra xem gioi tinh co phai Nam hay nu neu khac thï¿½ nhap lai
 				{
 					cout << "Gioi tinh (Nam/Nu): ";
 					scanf_s("\n");
@@ -428,7 +428,7 @@ void editDocgia(Reader x[20], int j, FILE* docgia)
 
 void searchTenDocGia(Reader x[20], int j)
 {
-	char name[100];
+	string name[100];
 	cout << "\nNhap ho va ten doc gia ma ban muon tim kiem: ";
 	scanf_s("\n");
 	fgets(name, sizeof(name), stdin);
@@ -508,7 +508,7 @@ void deleteDocgia(Reader x[20], int& total, FILE* docgia)
 		total = 0;
 		break;
 	case 2:
-		char cmnd[20];
+		string cmnd[20];
 		cout << "\nNhap CCCD/CMND cua doc gia ma ban muon xoa ";
 		scanf_s("\n");
 		fgets(cmnd, sizeof(cmnd), stdin);

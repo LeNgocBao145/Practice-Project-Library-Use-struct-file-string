@@ -10,12 +10,12 @@ using namespace std;
 int main()
 {
 
-	char tendangnhap[100]{};
-	char matkhau[100]{};
+	string tendangnhap[100]{};
+	string matkhau[100]{};
 
-	char choose{};
+	string choose{};
 
-	char daynow[20];
+	string daynow[20];
 	
 	int total;
 	int quantity;
@@ -49,7 +49,7 @@ int main()
 
 	cout << "\nDANG NHAP TAI KHOAN ADMIN THANH CONG!" << endl;
 	
-	char is_continue2;
+	string is_continue2;
 	cout << "\nMoi ban vui long nhap lua chon de tiep tuc (y/n)" << endl;
 	cin >> is_continue2;
 	while (is_continue2 != 'y' && is_continue2 != 'n')
@@ -121,7 +121,7 @@ int main()
 		Luachon(x, y, z, n, choose, total, quantity, sach, docgia);
 
 
-		char is_continue;
+		string is_continue;
 		cout << "\nBan co muon lua chon tiep khong (y/n)" << endl;
 		cin >> is_continue;
 		while (is_continue != 'y' && is_continue != 'n')

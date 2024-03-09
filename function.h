@@ -18,7 +18,7 @@ void ReadFileSach(FILE* sach, Book y[20], int& quantity);
 void ReadFilePhieu(FILE* phieu, Ticket z[20], int& so_Phieu);
 
 //Ham de nhap ngay thang nam hien tai luc chay chuong trinh
-void InputDayNow(char daynow[20]);
+void InputDayNow(string daynow[20]);
 
 //Xuat ra man hinh console giao dien menu
 int show_menu();
@@ -66,10 +66,10 @@ void deleteSach(Book y[20], int& quantity, FILE* sach);
 int MaISBN();
 
 //Lap phieu muon sach
-void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, char daynow[20], FILE* phieu, FILE* sach);
+void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, string daynow[20], FILE* phieu, FILE* sach);
 
 //Lap phieu tra sach
-void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, char daynow[20], FILE* phieu, FILE* sach);
+void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow[20], FILE* phieu, FILE* sach);
 
 //In ra man hinh console phieu muon gom co thoi gian muon va tra
 void InPhieuMuonTra(Ticket z[20], int n);
@@ -105,28 +105,28 @@ void statistic_quantity_borrow(Book y[20], int quantity);
 void statistic_listReaders_late(Ticket z[20], Reader x[20], int n, int total);
 
 //Nhap lua chon sau khi xuat ra man hinh console menu
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, FILE* sach, FILE* docgia);
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, string choose, int& total, int& quantity, FILE* sach, FILE* docgia);
 
 //Kiem tra dinh dang cua ngay thang nam theo (dd/mm/yyyy)
-bool checkFormatDate(char date[20]);
+bool checkFormatDate(string date[20]);
 
 //Kiem tra so cccd/cmnd co du 12 so hay khong
-bool checkCCCD(char cccd[50]);
+bool checkCCCD(string cccd[50]);
 
 //Kiem tra xem email co ki tu @ hay khong
-bool checkEmail(char email[50]);
+bool checkEmail(string email[50]);
 
 //Kiem tra xem gioi tinh co khac tu Nam va Nu hay khong
-bool checkGender(char gender[10]);
+bool checkGender(string gender[10]);
 
 //Kiem tra CCCD/CMND cua doc gia hay ten sach cua sach co trong danh sach doc gia hay trong danh sach cua sach trong thu vien khong
-bool cccdInListReader(char n[100], int j, Reader x[20]);
+bool cccdInListReader(string n[100], int j, Reader x[20]);
 
 //Ham kiem tra xem du lieu ten doc gia nhap vao co ton tai hay nam trong danh sach doc gia trong thu vien hay khong
-bool nameInListReader(char n[100], int j, Reader x[20]);
+bool nameInListReader(string n[100], int j, Reader x[20]);
 
 //Ham kiem tra xem du lieu ten sach nhap vao co ton tai hay nam trong danh sach cac sach trong thu vien hay khong
-bool nameInListBook(char n[100], int j, Book y[20]);
+bool nameInListBook(string n[100], int j, Book y[20]);
 
 //Ham kiem tra xem du lieu ma sach ISBN nhap vao co ton tai hay nam trong danh sach cac sach trong thu vien hay khong
 bool codeInListBook(int code, int j, Book y[20]);
@@ -141,7 +141,7 @@ void BookManager();
 void BasicStatistic();
 
 //Tinh khoang cach giua ngay tra thuc te va ngay tra du kien de tinh tien phat
-int Distance2Date(char expectPayDate2[20], char actualPayDate2[20]);
+int Distance2Date(string expectPayDate2[20], string actualPayDate2[20]);
 
 //Kiem tra xem khi nhap vao sach mat thi ma ISBN sach mat co nam trong danh sach muon ko
 bool checkDsMuon(int n, int code[20]);
@@ -150,16 +150,16 @@ bool checkDsMuon(int n, int code[20]);
 bool checkIsExistTicket(int ma, int n, Ticket z[20]);
 
 //Kiem tra xem CCCD/CMND cua doc gia da ton tai hay chua
-bool checkIsExistCCCD(char cmnd[50], int n, Reader x[20]);
+bool checkIsExistCCCD(string cmnd[50], int n, Reader x[20]);
 
 //Kiem tra xem ten sach da ton tai hay chua
-bool checkIsExistBook(char book[50], int n, Book y[20]);
+bool checkIsExistBook(string book[50], int n, Book y[20]);
 
 //Ham in hoa cac chu cai dau cua ho ten doc gia hay ten sach
-void upperName(char s[50]);
+void upperName(string s[50]);
 
 //Ham in hoa tat ca cac chu cai cua ten tac gia, ten nha xuat ban, ten the loai
-void upperAllName(char s[50]);
+void upperAllName(string s[50]);
 
 //Ham kiem tra xem thong tin ten dang nhap va mat khau co khop voi tai khoan Admin quan li thu vien hay khong
-bool Login(char tendangnhap[100], char matkhau[100], FILE* Account);
+bool Login(string tendangnhap[100], string matkhau[100], FILE* Account);
