@@ -6,7 +6,7 @@
 using namespace std;
 
 
-void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int quantity, string daynow[20], fstream phieu, fstream sach)
+void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int quantity, string daynow, fstream phieu, fstream sach)
 {
 	n++;
 	int S = 0;
@@ -50,207 +50,207 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 		}
 
 
-		for (int i = n - 1; i < n; i++)
-		{
-			int day = 0;
-			int month = 0;
-			string date{};
-			string num;
-			string num2;
-			string num3;
-			strcpy_s(z[i].borrowDate, daynow);
+		// for (int i = n - 1; i < n; i++)
+		// {
+		// 	int day = 0;
+		// 	int month = 0;
+		// 	string date{};
+		// 	string num;
+		// 	string num2;
+		// 	string num3;
+		// 	z[i].borrowDate = daynow;
 
-			strcpy_s(z[i].expectPayDate, daynow);
-			for (int j = 0; j < 2; j++)
-			{
-				num = z[i].expectPayDate[j];
-				day = day * 10 + (static_cast<int>(num) - 48);
-			}
-			for (int k = 3; k < 5; k++)
-			{
-				num2 = z[i].expectPayDate[k];
-				month = month * 10 + (static_cast<int>(num2) - 48);
-			}
+		// 	z[i].expectPayDate = daynow;
+		// 	for (int j = 0; j < 2; j++)
+		// 	{
+		// 		num = z[i].expectPayDate[j];
+		// 		day = day * 10 + (static_cast<int>(num) - 48);
+		// 	}
+		// 	for (int k = 3; k < 5; k++)
+		// 	{
+		// 		num2 = z[i].expectPayDate[k];
+		// 		month = month * 10 + (static_cast<int>(num2) - 48);
+		// 	}
 
-			day += 7;
-			if (day > 31 && month == 1)
-			{
-				int g = day - 31;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '2';
+		// 	day += 7;
+		// 	if (day > 31 && month == 1)
+		// 	{
+		// 		int g = day - 31;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '2';
 
-			}
-			else if (day > 31 && month == 2)
-			{
-				int g = day - 31;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '3';
+		// 	}
+		// 	else if (day > 31 && month == 2)
+		// 	{
+		// 		int g = day - 31;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '3';
 
-			}
-			else if (day > 31 && month == 3)
-			{
-				int g = day - 31;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '4';
-
-
-			}
-			else if (day > 30 && month == 4)
-			{
-				int g = day - 30;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '5';
-
-			}
-			else if (day > 31 && month == 5)
-			{
-				int g = day - 31;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '6';
-
-			}
-			else if (day > 30 && month == 6)
-			{
-				int g = day - 30;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '7';
-
-			}
-			else if (day > 31 && month == 7)
-			{
-				int g = day - 31;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '8';
-
-			}
-
-			else if (day > 31 && month == 8)
-			{
-				int g = day - 31;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '9';
-
-			}
-
-			else if (day > 30 && month == 9)
-			{
-				int g = day - 30;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '1';
-				z[i].expectPayDate[4] = '0';
-
-			}
-
-			else if (day > 31 && month == 10)
-			{
-				int g = day - 31;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '1';
-				z[i].expectPayDate[4] = '1';
-
-			}
-
-			else if (day > 30 && month == 11)
-			{
-				int g = day - 30;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '1';
-				z[i].expectPayDate[4] = '2';
-
-			}
-			else if (day > 31 && month == 12)
-			{
-				int g = day - 31;
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((g % 10) + 48);
-					g /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
-				z[i].expectPayDate[3] = '0';
-				z[i].expectPayDate[4] = '1';
-
-			}
-			else
-			{
-				for (int h = 1; h >= 0; h--)
-				{
-					num3 = static_cast<string>((day % 10) + 48);
-					day /= 10;
-					z[i].expectPayDate[h] = num3;
-				}
+		// 	}
+		// 	else if (day > 31 && month == 3)
+		// 	{
+		// 		int g = day - 31;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '4';
 
 
-			}
+		// 	}
+		// 	else if (day > 30 && month == 4)
+		// 	{
+		// 		int g = day - 30;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '5';
 
-			//fprintf(phieu, "%s,", z[i].expectPayDate);
+		// 	}
+		// 	else if (day > 31 && month == 5)
+		// 	{
+		// 		int g = day - 31;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '6';
 
-			strcpy_s(z[i].actualPayDate, " ");
+		// 	}
+		// 	else if (day > 30 && month == 6)
+		// 	{
+		// 		int g = day - 30;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '7';
 
-		}
+		// 	}
+		// 	else if (day > 31 && month == 7)
+		// 	{
+		// 		int g = day - 31;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '8';
+
+		// 	}
+
+		// 	else if (day > 31 && month == 8)
+		// 	{
+		// 		int g = day - 31;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '9';
+
+		// 	}
+
+		// 	else if (day > 30 && month == 9)
+		// 	{
+		// 		int g = day - 30;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '1';
+		// 		z[i].expectPayDate[4] = '0';
+
+		// 	}
+
+		// 	else if (day > 31 && month == 10)
+		// 	{
+		// 		int g = day - 31;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '1';
+		// 		z[i].expectPayDate[4] = '1';
+
+		// 	}
+
+		// 	else if (day > 30 && month == 11)
+		// 	{
+		// 		int g = day - 30;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '1';
+		// 		z[i].expectPayDate[4] = '2';
+
+		// 	}
+		// 	else if (day > 31 && month == 12)
+		// 	{
+		// 		int g = day - 31;
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((g % 10) + 48);
+		// 			g /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+		// 		z[i].expectPayDate[3] = '0';
+		// 		z[i].expectPayDate[4] = '1';
+
+		// 	}
+		// 	else
+		// 	{
+		// 		for (int h = 1; h >= 0; h--)
+		// 		{
+		// 			num3 = static_cast<string>((day % 10) + 48);
+		// 			day /= 10;
+		// 			z[i].expectPayDate[h] = num3;
+		// 		}
+
+
+		// 	}
+
+		// 	//fprintf(phieu, "%s,", z[i].expectPayDate);
+
+		// 	z[i].actualPayDate = " ";
+
+		// }
 
 
 		system("cls");
@@ -322,82 +322,111 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 
 		z[n - 1].TongTienPhat = 0;
 
-		
+	phieu.open("phieu.txt", ios::in | ios::out);
 
-	errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "r+");
-	if (phieu != NULL)
+	if(phieu.is_open())
 	{
-		fprintf(phieu, "%d", n);
-		fclose(phieu);
+		phieu << n;
+		phieu.close();
 	}
 
-	errno_t phieu3 = fopen_s(&phieu, "phieu.txt", "a");
-	if (phieu != NULL)
+	phieu.open("phieu.txt", ios::app);
+
+	if(phieu.is_open())
 	{
-		fprintf(phieu, "%d,", z[n - 1].MaPhieu);
-
-		fprintf(phieu, "%d,", z[n - 1].codeDGMuon);
-
-		fprintf(phieu, "%s,", z[n - 1].borrowDate);
-
-		fprintf(phieu, "%s,", z[n - 1].expectPayDate);
-
-		fprintf(phieu, "%s,", z[n - 1].actualPayDate);
-
-		fprintf(phieu, "%d,", z[n - 1].SLmuon);
+		
+		phieu << z[n - 1].MaPhieu << "," << z[n - 1].codeDGMuon << "," << z[n - 1].borrowDate << "," << z[n - 1].expectPayDate << "," << z[n - 1].actualPayDate << "," << z[n - 1].SLmuon << ",";
 
 		for (int i = 0; i < z[n - 1].SLmuon; i++)
 		{
-			fprintf(phieu, "%d,", z[j].codeSachMuon[i]);
+			phieu << z[n - 1].codeSachMuon[i] << ",";
 		}
 
-		fprintf(phieu, "%d,", z[n - 1].SLmat);
+		phieu << z[n - 1].SLmat << "," << z[n - 1].codeSachMat[5 * (n - 1)] << "," << z[n - 1].TongTienPhat << endl;
 
-		fprintf(phieu, "%d,", z[n - 1].codeSachMat[5 * (n - 1)]);
-
-		fprintf(phieu, "%d\n", z[n - 1].TongTienPhat);
-
-		fclose(phieu);
+		phieu.close();
 		cout << "\nCap nhat du lieu phieu muon thanh cong...!" << endl;
-	}
-
-	errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
-
-	if (sach != NULL)
-	{
-		fprintf(sach, "%d\n", quantity);
-		for (int i = 0; i < quantity; i++)
-		{
-			fprintf(sach, "%d,", y[i].ISBN);
-
-			fprintf(sach, "%s,", y[i].ten_sach);
-
-			fprintf(sach, "%s,", y[i].tac_gia);
-
-			fprintf(sach, "%s,", y[i].nha_xuat_ban);
-
-			fprintf(sach, "%d,", y[i].nam_xuat_ban);
-
-			fprintf(sach, "%s,", y[i].the_loai);
-
-			fprintf(sach, "%d,", y[i].gia_tien);
-
-			fprintf(sach, "%d,", y[i].so_luong);
-
-			fprintf(sach, "%d\n", y[i].BookIsBorrowing);
-
-		}
-		fclose(sach);
-		cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
 	}
 	else {
 		cout << "Khong the mo tep tin." << endl;
 	}
 
+	// errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "r+");
+	// if (phieu != NULL)
+	// {
+	// 	fprintf(phieu, "%d", n);
+	// 	fclose(phieu);
+	// }
+
+	// errno_t phieu3 = fopen_s(&phieu, "phieu.txt", "a");
+	// if (phieu != NULL)
+	// {
+	// 	fprintf(phieu, "%d,", z[n - 1].MaPhieu);
+
+	// 	fprintf(phieu, "%d,", z[n - 1].codeDGMuon);
+
+	// 	fprintf(phieu, "%s,", z[n - 1].borrowDate);
+
+	// 	fprintf(phieu, "%s,", z[n - 1].expectPayDate);
+
+	// 	fprintf(phieu, "%s,", z[n - 1].actualPayDate);
+
+	// 	fprintf(phieu, "%d,", z[n - 1].SLmuon);
+
+	// 	for (int i = 0; i < z[n - 1].SLmuon; i++)
+	// 	{
+	// 		fprintf(phieu, "%d,", z[j].codeSachMuon[i]);
+	// 	}
+
+	// 	fprintf(phieu, "%d,", z[n - 1].SLmat);
+
+	// 	fprintf(phieu, "%d,", z[n - 1].codeSachMat[5 * (n - 1)]);
+
+	// 	fprintf(phieu, "%d\n", z[n - 1].TongTienPhat);
+
+	// 	fclose(phieu);
+	// 	cout << "\nCap nhat du lieu phieu muon thanh cong...!" << endl;
+	// }
+
+	updateFileSach(y, quantity, sach);
+
+	// errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
+
+	// if (sach != NULL)
+	// {
+	// 	fprintf(sach, "%d\n", quantity);
+	// 	for (int i = 0; i < quantity; i++)
+	// 	{
+	// 		fprintf(sach, "%d,", y[i].ISBN);
+
+	// 		fprintf(sach, "%s,", y[i].ten_sach);
+
+	// 		fprintf(sach, "%s,", y[i].tac_gia);
+
+	// 		fprintf(sach, "%s,", y[i].nha_xuat_ban);
+
+	// 		fprintf(sach, "%d,", y[i].nam_xuat_ban);
+
+	// 		fprintf(sach, "%s,", y[i].the_loai);
+
+	// 		fprintf(sach, "%d,", y[i].gia_tien);
+
+	// 		fprintf(sach, "%d,", y[i].so_luong);
+
+	// 		fprintf(sach, "%d\n", y[i].BookIsBorrowing);
+
+	// 	}
+	// 	fclose(sach);
+	// 	cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
+	// }
+	// else {
+	// 	cout << "Khong the mo tep tin." << endl;
+	// }
+
 	cout << "\nLap phieu muon thanh cong!" << endl;
 }
 
-void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow[20], fstream phieu, fstream sach)
+void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow, fstream phieu, fstream sach)
 {
 	system("cls");
 	int ma;
@@ -530,7 +559,7 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow[20], fstr
 					}
 				}
 
-				strcpy_s(z[i].actualPayDate, daynow);
+				z[i].actualPayDate = daynow;
 				
 
 				if (Distance2Date(z[i].expectPayDate, z[i].actualPayDate) > 7)
@@ -606,78 +635,78 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow[20], fstr
 		
 		}
 
-		errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "w");
+		// errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "w");
 
-		if (phieu != NULL)
-		{
-			fprintf(phieu, "%d\n", n);
-			for (int i = 0; i < n; i++)
-			{
-				fprintf(phieu, "%d,", z[i].MaPhieu);
+		// if (phieu != NULL)
+		// {
+		// 	fprintf(phieu, "%d\n", n);
+		// 	for (int i = 0; i < n; i++)
+		// 	{
+		// 		fprintf(phieu, "%d,", z[i].MaPhieu);
 
-				fprintf(phieu, "%d,", z[i].codeDGMuon);
+		// 		fprintf(phieu, "%d,", z[i].codeDGMuon);
 
-				fprintf(phieu, "%s,", z[i].borrowDate);
+		// 		fprintf(phieu, "%s,", z[i].borrowDate);
 
-				fprintf(phieu, "%s,", z[i].expectPayDate);
+		// 		fprintf(phieu, "%s,", z[i].expectPayDate);
 
-				fprintf(phieu, "%s,", z[i].actualPayDate);
+		// 		fprintf(phieu, "%s,", z[i].actualPayDate);
 
-				fprintf(phieu, "%d,", z[i].SLmuon);
+		// 		fprintf(phieu, "%d,", z[i].SLmuon);
 
-				for (int j = 0; j < z[i].SLmuon; j++)
-				{
-					fprintf(phieu, "%d,", z[i].codeSachMuon[j]);
-				}
+		// 		for (int j = 0; j < z[i].SLmuon; j++)
+		// 		{
+		// 			fprintf(phieu, "%d,", z[i].codeSachMuon[j]);
+		// 		}
 
-				fprintf(phieu, "%d,", z[i].SLmat);
+		// 		fprintf(phieu, "%d,", z[i].SLmat);
 
-				for (int j = 0; j < z[i].SLmat; j++)
-				{
-					fprintf(phieu, "%d,", z[i].codeSachMat[j]);
-				}
+		// 		for (int j = 0; j < z[i].SLmat; j++)
+		// 		{
+		// 			fprintf(phieu, "%d,", z[i].codeSachMat[j]);
+		// 		}
 
-				fprintf(phieu, "%d\n", z[i].TongTienPhat);
-			}
-			fclose(phieu);
-			cout << "\nCap nhat du lieu phieu tra thanh cong...!" << endl;
-		}
-		else {
-			cout << "Khong the mo tep tin." << endl;
-		}
+		// 		fprintf(phieu, "%d\n", z[i].TongTienPhat);
+		// 	}
+		// 	fclose(phieu);
+		// 	cout << "\nCap nhat du lieu phieu tra thanh cong...!" << endl;
+		// }
+		// else {
+		// 	cout << "Khong the mo tep tin." << endl;
+		// }
 
-		errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
+		// errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
 
-		if (sach != NULL)
-		{
-			fprintf(sach, "%d\n", j);
-			for (int i = 0; i < j; i++)
-			{
-				fprintf(sach, "%d,", y[i].ISBN);
+		// if (sach != NULL)
+		// {
+		// 	fprintf(sach, "%d\n", j);
+		// 	for (int i = 0; i < j; i++)
+		// 	{
+		// 		fprintf(sach, "%d,", y[i].ISBN);
 
-				fprintf(sach, "%s,", y[i].ten_sach);
+		// 		fprintf(sach, "%s,", y[i].ten_sach);
 
-				fprintf(sach, "%s,", y[i].tac_gia);
+		// 		fprintf(sach, "%s,", y[i].tac_gia);
 
-				fprintf(sach, "%s,", y[i].nha_xuat_ban);
+		// 		fprintf(sach, "%s,", y[i].nha_xuat_ban);
 
-				fprintf(sach, "%d,", y[i].nam_xuat_ban);
+		// 		fprintf(sach, "%d,", y[i].nam_xuat_ban);
 
-				fprintf(sach, "%s,", y[i].the_loai);
+		// 		fprintf(sach, "%s,", y[i].the_loai);
 
-				fprintf(sach, "%d,", y[i].gia_tien);
+		// 		fprintf(sach, "%d,", y[i].gia_tien);
 
-				fprintf(sach, "%d,", y[i].so_luong);
+		// 		fprintf(sach, "%d,", y[i].so_luong);
 
-				fprintf(sach, "%d\n", y[i].BookIsBorrowing);
+		// 		fprintf(sach, "%d\n", y[i].BookIsBorrowing);
 
-			}
-			fclose(sach);
-			cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
-		}
-		else {
-			cout << "Khong the mo tep tin." << endl;
-		}
+		// 	}
+		// 	fclose(sach);
+		// 	cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
+		// }
+		// else {
+		// 	cout << "Khong the mo tep tin." << endl;
+		// }
 
 		cout << "\nLap phieu tra thanh cong!" << endl;
 }

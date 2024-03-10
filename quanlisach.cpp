@@ -13,8 +13,9 @@ void addSach(Book y[20], int &quantity, fstream sach)
 	y[quantity - 1].ISBN = MaISBN();
 		cout << "Ten sach (toi da 39 ki tu): ";
 		cin.ignore();
-		fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
-		y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
+		getline(cin, y[quantity - 1].ten_sach);
+		// fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
+		// y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
 		
 		upperName(y[quantity - 1].ten_sach);
 
@@ -33,8 +34,9 @@ void addSach(Book y[20], int &quantity, fstream sach)
 			case 1:
 				cout << "Ban vui long nhap ten sach (toi da 39 ki tu): ";
 				cin.ignore();
-				fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
-				y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
+				getline(cin, y[quantity - 1].ten_sach);
+				// fgets(y[quantity - 1].ten_sach, sizeof(y[quantity - 1].ten_sach), stdin);
+				// y[quantity - 1].ten_sach[strlen(y[quantity - 1].ten_sach) - 1] = '\0';
 				break;
 
 			case 2:
@@ -47,14 +49,16 @@ void addSach(Book y[20], int &quantity, fstream sach)
 		upperName(y[quantity - 1].ten_sach);
 
 		cout << "Tac gia (toi da 27 ki tu): ";
-		fgets(y[quantity - 1].tac_gia, sizeof(y[quantity - 1].tac_gia), stdin);
-		y[quantity - 1].tac_gia[strlen(y[quantity - 1].tac_gia) - 1] = '\0';
+		getline(cin, y[quantity - 1].tac_gia);
+		// fgets(y[quantity - 1].tac_gia, sizeof(y[quantity - 1].tac_gia), stdin);
+		// y[quantity - 1].tac_gia[strlen(y[quantity - 1].tac_gia) - 1] = '\0';
 		
 		upperAllName(y[quantity - 1].tac_gia);
 
 		cout << "Nha xuat ban (toi da 27 ki tu): ";
-		fgets(y[quantity - 1].nha_xuat_ban, sizeof(y[quantity - 1].nha_xuat_ban), stdin);
-		y[quantity - 1].nha_xuat_ban[strlen(y[quantity - 1].nha_xuat_ban) - 1] = '\0';
+		getline(cin, y[quantity - 1].nha_xuat_ban);
+		// fgets(y[quantity - 1].nha_xuat_ban, sizeof(y[quantity - 1].nha_xuat_ban), stdin);
+		// y[quantity - 1].nha_xuat_ban[strlen(y[quantity - 1].nha_xuat_ban) - 1] = '\0';
 		
 		upperAllName(y[quantity - 1].nha_xuat_ban);
 
@@ -69,8 +73,9 @@ void addSach(Book y[20], int &quantity, fstream sach)
 
 		cout << "The loai (toi da 24 ki tu): ";
 		cin.ignore();
-		fgets(y[quantity - 1].the_loai, sizeof(y[quantity - 1].the_loai), stdin);
-		y[quantity - 1].the_loai[strlen(y[quantity - 1].the_loai) - 1] = '\0';
+		getline(cin, y[quantity - 1].the_loai);
+		// fgets(y[quantity - 1].the_loai, sizeof(y[quantity - 1].the_loai), stdin);
+		// y[quantity - 1].the_loai[strlen(y[quantity - 1].the_loai) - 1] = '\0';
 		
 		upperAllName(y[quantity - 1].the_loai);
 
@@ -251,22 +256,25 @@ void editSach(Book y[20], int quantity, fstream sach)
 			case 1:
 				cout << "Nhap ten sach (toi da 39 ki tu): ";
 				cin.ignore();
-				fgets(y[i].ten_sach, sizeof(y[i].ten_sach), stdin);
-				y[i].ten_sach[strlen(y[i].ten_sach) - 1] = '\0';
+				getline(cin, y[i].ten_sach);
+				// fgets(y[i].ten_sach, sizeof(y[i].ten_sach), stdin);
+				// y[i].ten_sach[strlen(y[i].ten_sach) - 1] = '\0';
 				upperName(y[i].ten_sach);
 				break;
 			case 2:
 				cout << "Nhap ten tac gia (toi da 27 ki tu): ";
 				cin.ignore();
-				fgets(y[i].tac_gia, sizeof(y[i].tac_gia), stdin);
-				y[i].tac_gia[strlen(y[i].tac_gia) - 1] = '\0';
+				getline(cin, y[i].tac_gia);
+				// fgets(y[i].tac_gia, sizeof(y[i].tac_gia), stdin);
+				// y[i].tac_gia[strlen(y[i].tac_gia) - 1] = '\0';
 				upperAllName(y[i].tac_gia);
 				break;
 			case 3:
 				cout << "Nhap ten nha xuat ban (toi da 27 ki tu): ";
 				cin.ignore();
-				fgets(y[i].nha_xuat_ban, sizeof(y[i].nha_xuat_ban), stdin);
-				y[i].nha_xuat_ban[strlen(y[i].nha_xuat_ban) - 1] = '\0';
+				getline(cin, y[i].nha_xuat_ban);
+				// fgets(y[i].nha_xuat_ban, sizeof(y[i].nha_xuat_ban), stdin);
+				// y[i].nha_xuat_ban[strlen(y[i].nha_xuat_ban) - 1] = '\0';
 				upperAllName(y[i].nha_xuat_ban);
 				break;
 			case 4:
@@ -281,8 +289,9 @@ void editSach(Book y[20], int quantity, fstream sach)
 			case 5:
 				cout << "Nhap the loai (toi da 24 ki tu): ";
 				cin.ignore();
-				fgets(y[i].the_loai, sizeof(y[i].the_loai), stdin);
-				y[i].the_loai[strlen(y[i].the_loai) - 1] = '\0';
+				getline(cin, y[i].the_loai);
+				// fgets(y[i].the_loai, sizeof(y[i].the_loai), stdin);
+				// y[i].the_loai[strlen(y[i].the_loai) - 1] = '\0';
 				upperAllName(y[i].the_loai);
 				break;
 			case 6:
@@ -342,11 +351,12 @@ void editSach(Book y[20], int quantity, fstream sach)
 
 void searchTenSach(Book y[20], int quantity)
 {
-	string name[100];
+	string name;
 	cout << "\nNhap ten sach ma ban muon tim kiem: ";
 	cin.ignore();
-	fgets(name, sizeof(name), stdin);
-	name[strlen(name) - 1] = '\0';
+	getline(cin, name);
+	// fgets(name, sizeof(name), stdin);
+	// name[strlen(name) - 1] = '\0';
 	while (nameInListBook(name, quantity, y) == false)
 	{
 		cout << "Ten sach khong the duoc tim thay. Vui long nhap lai!" << endl;
@@ -360,8 +370,9 @@ void searchTenSach(Book y[20], int quantity)
 		case 1:
 			cin.ignore();
 			cout << "\nNhap ten sach ma ban muon tim kiem: ";
-			fgets(name, sizeof(name), stdin);
-			name[strlen(name) - 1] = '\0';
+			getline(cin, name);
+			// fgets(name, sizeof(name), stdin);
+			// name[strlen(name) - 1] = '\0';
 			break;
 
 		case 2:
@@ -371,7 +382,7 @@ void searchTenSach(Book y[20], int quantity)
 
 	for (int i = 0; i < quantity; i++)
 	{
-		if (strcmp(name, y[i].ten_sach) == 0)
+		if (name.compare(y[i].ten_sach) == 0)
 		{
 			system("cls");
 			cout << "========================================================================================================================================================================\n";
@@ -438,11 +449,11 @@ void deleteSach(Book y[20], int& quantity, fstream sach)
 					for (int a = i; a < j; a++)
 					{
 						y[a].ISBN = y[a + 1].ISBN;
-						strcpy_s(y[a].ten_sach, y[a + 1].ten_sach);
-						strcpy_s(y[a].tac_gia, y[a + 1].tac_gia);
-						strcpy_s(y[a].nha_xuat_ban, y[a + 1].nha_xuat_ban);
+						y[a].ten_sach = y[a + 1].ten_sach;
+						y[a].tac_gia = y[a + 1].tac_gia;
+						y[a].nha_xuat_ban = y[a + 1].nha_xuat_ban;
 						y[a].nam_xuat_ban = y[a + 1].nam_xuat_ban;
-						strcpy_s(y[a].the_loai, y[a + 1].the_loai);
+						y[a].the_loai = y[a + 1].the_loai;
 						y[a].gia_tien = y[a + 1].gia_tien;
 						y[a].so_luong = y[a + 1].so_luong;
 					}
