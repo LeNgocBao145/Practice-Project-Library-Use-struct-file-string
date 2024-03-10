@@ -3,7 +3,7 @@
 #include "Struct.h"
 
 
-void ReadFileDocGia(fstream docgia, Reader x[20], int &total)
+void ReadFileDocGia(fstream& docgia, Reader x[20], int &total)
 {
 	string line;
 	string tmp;
@@ -12,8 +12,8 @@ void ReadFileDocGia(fstream docgia, Reader x[20], int &total)
 
 	if(docgia.is_open())
 	{
-		getline(docgia, line);
-		total = stoi(line);
+		// getline(docgia, line);
+		// total = stoi(line);
 		while(!docgia.eof())
 		{
 			for(int i = 0; i < total; i++)
@@ -102,7 +102,7 @@ void ReadFileDocGia(fstream docgia, Reader x[20], int &total)
 	// }
 }
 
-void ReadFileSach(fstream sach, Book y[20], int &quantity)
+void ReadFileSach(fstream& sach, Book y[20], int &quantity)
 {
 	string line;
 	string tmp;
@@ -111,8 +111,8 @@ void ReadFileSach(fstream sach, Book y[20], int &quantity)
 
 	if(sach.is_open())
 	{
-		getline(sach, line);
-		quantity = stoi(line);
+		// getline(sach, line);
+		// quantity = stoi(line);
 		while(!sach.eof())
 		{
 			for(int i = 0; i < quantity; i++)
@@ -200,7 +200,7 @@ void ReadFileSach(fstream sach, Book y[20], int &quantity)
 	// }
 }
 
-void ReadFilePhieu(fstream phieu, Ticket z[20], int &so_Phieu)
+void ReadFilePhieu(fstream& phieu, Ticket z[20], int &so_Phieu)
 {
 	string line;
 	string tmp;
@@ -209,8 +209,8 @@ void ReadFilePhieu(fstream phieu, Ticket z[20], int &so_Phieu)
 
 	if(phieu.is_open())
 	{
-		getline(phieu, line);
-		so_Phieu = stoi(line);
+		// getline(phieu, line);
+		// so_Phieu = stoi(line);
 		while(!phieu.eof())
 		{
 			for(int i = 0; i < so_Phieu; i++)
@@ -360,16 +360,16 @@ void InputDayNow(string daynow)
 {
 	system("cls");
 	cout << "Truoc khi bat dau chuong trinh. Xin ban vui long nhap ngay thang nam hien tai (dd/mm/yyyy): ";
-	cin >> daynow;
+	getline(cin, daynow);
 	while (checkFormatDate(daynow) == false)
 	{
 		cout << "Ngay thang nam (dd/mm/yyyy) khong hop le. Xin ban vui long nhap lai!!: ";
-		cin >> daynow;
+		getline(cin, daynow);
 	}
 }
 
 //Ham dung de nhap lua chon a, b, c, d, e, f trong cac muc 1->6
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, fstream sach, fstream docgia)
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, fstream& sach, fstream& docgia)
 {
 	if (n == 1)
 	{
@@ -1012,7 +1012,7 @@ void upperAllName(string s)
 	}
 }
 
-bool Login(string tendangnhap, string matkhau, fstream Account) {
+bool Login(string tendangnhap, string matkhau, fstream& Account) {
 	bool check = true;
 	
 	string line;
@@ -1079,7 +1079,7 @@ bool Login(string tendangnhap, string matkhau, fstream Account) {
 	return check;
 }
 
-void updateFileSach(Book y[20], int quantity, fstream sach)
+void updateFileSach(Book y[20], int quantity, fstream& sach)
 {
 	sach.open("sach.txt", ios::out);
 
@@ -1098,7 +1098,7 @@ void updateFileSach(Book y[20], int quantity, fstream sach)
 	}
 }
 
-void updateFileDocGia(Reader x[20], int total, fstream docgia)
+void updateFileDocGia(Reader x[20], int total, fstream& docgia)
 {
 	docgia.open("docgia.txt", ios::out);
 
@@ -1117,7 +1117,7 @@ void updateFileDocGia(Reader x[20], int total, fstream docgia)
 	}
 }
 
-void updateFilePhieu(Ticket z[20], int n, fstream phieu)
+void updateFilePhieu(Ticket z[20], int n, fstream& phieu)
 {
 	phieu.open("phieu.txt", ios::out);
 

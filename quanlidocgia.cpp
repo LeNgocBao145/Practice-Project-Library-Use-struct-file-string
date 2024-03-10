@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void addDocgia(Reader x[20], int &j, fstream docgia)
+void addDocgia(Reader x[20], int &j, fstream& docgia)
 {
 	cout << "<<==============================THEM THONG TIN DOC GIA==============================>>"<<endl;
 
@@ -14,7 +14,7 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 		x[j - 1].code = MaDocGia();
 
 		cout << "\nHo va ten (toi da 24 ki tu): ";
-		scanf_s("\n");
+		cin.ignore();
 		// fgets(x[j - 1].ho_ten, sizeof(x[j - 1].ho_ten), stdin);
 		// x[j - 1].ho_ten[strlen(x[j - 1].ho_ten) - 1] = '\0';
 
@@ -31,7 +31,7 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 		while (checkCCCD(x[j - 1].cccd) == false)
 		{
 			cout << "CMND/CCCD (12 so): ";
-			scanf_s("\n");
+			cin.ignore();
 			getline(cin, x[j - 1].cccd);
 			// fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
 			// x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
@@ -58,7 +58,7 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 				while (checkCCCD(x[j - 1].cccd) == false)
 				{
 					cout << "CMND/CCCD (12 so): ";
-					scanf_s("\n");
+					cin.ignore();
 					getline(cin, x[j - 1].cccd);
 					// fgets(x[j - 1].cccd, sizeof(x[j - 1].cccd), stdin);
 					// x[j - 1].cccd[strlen(x[j - 1].cccd) - 1] = '\0';
@@ -97,7 +97,7 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 		while (checkGender(x[j - 1].gioi_tinh) == false)		//Kiem tra xem gioi tinh co phai Nam hay nu neu khac th� nhap lai
 		{
 			cout << "Gioi tinh (Nam/Nu): ";
-			scanf_s("\n");
+			cin.ignore();
 			getline(cin, x[j - 1].gioi_tinh);
 			// fgets(x[j - 1].gioi_tinh, sizeof(x[j - 1].gioi_tinh), stdin);
 			// x[j - 1].gioi_tinh[strlen(x[j - 1].gioi_tinh) - 1] = '\0';
@@ -113,7 +113,7 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 		while (checkEmail(x[j - 1].email) == false)
 		{
 			cout << "Email (toi da 26 ki tu): ";
-			scanf_s("\n");
+			cin.ignore();
 			getline(cin, x[j - 1].email);
 			// fgets(x[j - 1].email, sizeof(x[j - 1].email), stdin);
 			// x[j - 1].email[strlen(x[j - 1].email) - 1] = '\0';
@@ -122,7 +122,7 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 		
 
 		cout << "Dia chi (toi da 44 ki tu): ";
-		scanf_s("\n");
+		cin.ignore();
 		getline(cin, x[j - 1].dia_chi);
 		// fgets(x[j - 1].dia_chi, sizeof(x[j - 1].dia_chi), stdin);
 		// x[j - 1].dia_chi[strlen(x[j - 1].dia_chi) - 1] = '\0';
@@ -136,7 +136,7 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 		while (checkFormatDate(x[j - 1].ngay_lap_the) == false)
 		{
 			cout << "Ngay lap the (dd/mm/yyyy): ";
-			scanf_s("\n");
+			cin.ignore();
 			getline(cin, x[j - 1].ngay_lap_the);
 			// fgets(x[j - 1].ngay_lap_the, sizeof(x[j - 1].ngay_lap_the), stdin);
 			// x[j - 1].ngay_lap_the[strlen(x[j - 1].ngay_lap_the) - 1] = '\0';
@@ -164,7 +164,7 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 		// 	x[j - 1].ngay_het_han[i] = num2;
 		// }
 
-		
+
 
 		
 		cout << "Ngay het han cua the: " << x[j - 1].ngay_het_han << endl;
@@ -240,7 +240,7 @@ void searchDocgia(Reader x[20], int j)
 {
 	string cmnd;
 	cout << "\nNhap CCCD/CMND doc gia ma ban muon tim kiem: ";
-	scanf_s("\n");
+	cin.ignore();
 	getline(cin, cmnd);
 	// fgets(cmnd, sizeof(cmnd), stdin);
 	// cmnd[strlen(cmnd) - 1] = '\0';
@@ -257,7 +257,8 @@ void searchDocgia(Reader x[20], int j)
 		{
 		case 1:
 			cout << "Nhap CCCD/CMND doc gia ma ban muon tim kiem: ";
-			scanf_s("\n");
+			//cin.ignore();
+			cin.ignore();
 			getline(cin, cmnd);
 			// fgets(cmnd, sizeof(cmnd), stdin);
 			// cmnd[strlen(cmnd) - 1] = '\0';
@@ -284,11 +285,11 @@ void searchDocgia(Reader x[20], int j)
 
 }
 
-void editDocgia(Reader x[20], int j, fstream docgia)
+void editDocgia(Reader x[20], int j, fstream& docgia)
 {
 	string cmnd;
 	cout << "\nNhap CCCD/CMND cua doc gia ma ban muon chinh sua ";
-	scanf_s("\n");
+	cin.ignore();
 	getline(cin, cmnd);
 	// fgets(cmnd, sizeof(cmnd), stdin);
 	// cmnd[strlen(cmnd) - 1] = '\0';
@@ -306,7 +307,8 @@ void editDocgia(Reader x[20], int j, fstream docgia)
 		{
 		case 1:
 			cout << "Nhap CCCD/CMND doc gia ma ban muon chinh sua: ";
-			scanf_s("\n");
+			//cin.ignore();
+			cin.ignore();
 			getline(cin, cmnd);
 			// fgets(cmnd, sizeof(cmnd), stdin);
 			// cmnd[strlen(cmnd) - 1] = '\0';
@@ -366,7 +368,8 @@ void editDocgia(Reader x[20], int j, fstream docgia)
 				// x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
 				while (checkCCCD(x[i].cccd) == false) {
 					cout << "CMND/CCCD (12 so): ";
-					scanf_s("\n");
+					//cin.ignore();
+					cin.ignore();
 					getline(cin, x[i].cccd);
 					// fgets(x[i].cccd, sizeof(x[i].cccd), stdin);
 					// x[i].cccd[strlen(x[i].cccd) - 1] = '\0';
@@ -395,7 +398,8 @@ void editDocgia(Reader x[20], int j, fstream docgia)
 				while (checkGender(x[i].gioi_tinh)==false) 		//Kiem tra xem gioi tinh co phai Nam hay nu neu khac th� nhap lai
 				{
 					cout << "Gioi tinh (Nam/Nu): ";
-					scanf_s("\n");
+					//cin.ignore();
+					cin.ignore();
 					getline(cin, x[i].gioi_tinh);
 					// fgets(x[i].gioi_tinh, sizeof(x[i].gioi_tinh), stdin);
 					// x[i].gioi_tinh[strlen(x[i].gioi_tinh) - 1] = '\0';
@@ -410,7 +414,8 @@ void editDocgia(Reader x[20], int j, fstream docgia)
 				while (checkEmail(x[i].email) == false)
 				{
 					cout << "Email (toi da 26 ki tu): ";
-					scanf_s("\n");
+					//cin.ignore();
+					cin.ignore();
 					getline(cin, x[i].email);
 					// fgets(x[i].email, sizeof(x[i].email), stdin);
 					// x[i].email[strlen(x[i].email) - 1] = '\0';
@@ -487,7 +492,8 @@ void searchTenDocGia(Reader x[20], int j)
 {
 	string name;
 	cout << "\nNhap ho va ten doc gia ma ban muon tim kiem: ";
-	scanf_s("\n");
+	//cin.ignore();
+	cin.ignore();
 	getline(cin, name);
 	// fgets(name, sizeof(name), stdin);
 	// name[strlen(name) - 1] = '\0';
@@ -506,7 +512,8 @@ void searchTenDocGia(Reader x[20], int j)
 		{
 		case 1:
 			cout << "Nhap ho va ten doc gia ma ban muon tim kiem: ";
-			scanf_s("\n");
+			//cin.ignore();
+			cin.ignore();
 			getline(cin, name);
 			// fgets(name, sizeof(name), stdin);
 			// name[strlen(name) - 1] = '\0';
@@ -544,7 +551,7 @@ int MaDocGia()
 	return random;
 }
 
-void deleteDocgia(Reader x[20], int& total, fstream docgia)
+void deleteDocgia(Reader x[20], int& total, fstream& docgia)
 {
 	int choose;
 	cout << "0. Thoat " << endl;
@@ -569,7 +576,8 @@ void deleteDocgia(Reader x[20], int& total, fstream docgia)
 	case 2:
 		string cmnd;
 		cout << "\nNhap CCCD/CMND cua doc gia ma ban muon xoa ";
-		scanf_s("\n");
+		//cin.ignore();
+		cin.ignore();
 		getline(cin, cmnd);
 		// fgets(cmnd, sizeof(cmnd), stdin);
 		// cmnd[strlen(cmnd) - 1] = '\0';
@@ -585,7 +593,8 @@ void deleteDocgia(Reader x[20], int& total, fstream docgia)
 			{
 			case 1:
 				cout << "Nhap CCCD/CMND doc gia ma ban muon xoa: ";
-				scanf_s("\n");
+				//cin.ignore();
+				cin.ignore();
 				getline(cin, cmnd);
 				// fgets(cmnd, sizeof(cmnd), stdin);
 				// cmnd[strlen(cmnd) - 1] = '\0';

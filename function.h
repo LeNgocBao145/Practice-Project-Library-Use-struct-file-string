@@ -1,21 +1,21 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "string.h"
 #include <stdio.h>
 #include "Struct.h"
 #include <fstream>
+#include <sstream>
 #include <cctype>
 using namespace std;
 
 //Doc du lieu tu file docgia.txt va luu vao bien chua cac thong tin cua doc gia 
-void ReadFileDocGia(fstream docgia, Reader x[20], int &total);
+void ReadFileDocGia(fstream& docgia, Reader x[20], int &total);
 
 //Doc du lieu tu file sach.txt va luu vao bien chua cac thong tin cua sach trong thu vien 
-void ReadFileSach(fstream sach, Book y[20], int& quantity);
+void ReadFileSach(fstream& sach, Book y[20], int& quantity);
 
 //Doc du lieu tu file phieu.txt va luu vao bien chua cac thong tin cua phieu muon tra 
-void ReadFilePhieu(fstream phieu, Ticket z[20], int& so_Phieu);
+void ReadFilePhieu(fstream& phieu, Ticket z[20], int& so_Phieu);
 
 //Ham de nhap ngay thang nam hien tai luc chay chuong trinh
 void InputDayNow(string daynow);
@@ -24,7 +24,7 @@ void InputDayNow(string daynow);
 int show_menu();
 
 //Them thong tin doc gia moi
-void addDocgia(Reader x[20], int& j, fstream docgia);
+void addDocgia(Reader x[20], int& j, fstream& docgia);
 
 //Xuat ra man hinh console danh sach doc gia
 void printDocgia(Reader x[20], int j);
@@ -33,19 +33,19 @@ void printDocgia(Reader x[20], int j);
 void searchDocgia(Reader x[20], int j);
 
 //Chinh sua thong tin doc gia
-void editDocgia(Reader x[20], int j, fstream docgia);
+void editDocgia(Reader x[20], int j, fstream& docgia);
 
 //Tim kiem thong tin doc gia bang ho va ten
 void searchTenDocGia(Reader x[20], int j);
 
 //Xoa thong tin doc gia thong qua cccd
-void deleteDocgia(Reader x[20], int& j, fstream docgia);
+void deleteDocgia(Reader x[20], int& j, fstream& docgia);
 
 //Random ma so doc gia
 int MaDocGia();
 
 //Them thong tin sach moi
-void addSach(Book y[20], int& quantity, fstream sach);
+void addSach(Book y[20], int& quantity, fstream& sach);
 
 //Xuat ra man hinh console danh sach cua cac sach trong thu vien
 void printSach(Book y[20], int quantity);
@@ -54,22 +54,22 @@ void printSach(Book y[20], int quantity);
 void searchISBNSach(Book y[20], int quantity);
 
 //Chinh sua thong tin sach qua ma ISBN
-void editSach(Book y[20], int quantity, fstream sach);
+void editSach(Book y[20], int quantity, fstream& sach);
 
 //Tim kiem thong tin sach thong qua ten sach
 void searchTenSach(Book y[20], int quantity);
 
 //Xoa thong tin sach thong qua ma ISBN
-void deleteSach(Book y[20], int& quantity, fstream sach);
+void deleteSach(Book y[20], int& quantity, fstream& sach);
 
 //Random ma sach ISBN
 int MaISBN();
 
 //Lap phieu muon sach
-void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, string daynow, fstream phieu, fstream sach);
+void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, string daynow, fstream& phieu, fstream& sach);
 
 //Lap phieu tra sach
-void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow[20], fstream phieu, fstream sach);
+void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow, fstream& phieu, fstream& sach);
 
 //In ra man hinh console phieu muon gom co thoi gian muon va tra
 void InPhieuMuonTra(Ticket z[20], int n);
@@ -105,7 +105,7 @@ void statistic_quantity_borrow(Book y[20], int quantity);
 void statistic_listReaders_late(Ticket z[20], Reader x[20], int n, int total);
 
 //Nhap lua chon sau khi xuat ra man hinh console menu
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, fstream sach, fstream docgia);
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, fstream& sach, fstream& docgia);
 
 //Kiem tra dinh dang cua ngay thang nam theo (dd/mm/yyyy)
 bool checkFormatDate(string date);
@@ -162,10 +162,10 @@ void upperName(string s);
 void upperAllName(string s);
 
 //Ham kiem tra xem thong tin ten dang nhap va mat khau co khop voi tai khoan Admin quan li thu vien hay khong
-bool Login(string tendangnhap, string matkhau, fstream Account);
+bool Login(string tendangnhap, string matkhau, fstream& Account);
 
-void updateFileSach(Book y[20], int quantity, fstream sach);
+void updateFileSach(Book y[20], int quantity, fstream& sach);
 
-void updateFileDocGia(Reader x[20], int total, fstream docgia);
+void updateFileDocGia(Reader x[20], int total, fstream& docgia);
 
-void updateFilePhieu(Ticket z[20], int n, fstream phieu);
+void updateFilePhieu(Ticket z[20], int n, fstream& phieu);

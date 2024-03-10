@@ -1,5 +1,5 @@
-﻿
-#include <iostream>
+﻿#include <iostream>
+#include <fstream>
 #include "function.h"
 #include "Struct.h"
 using namespace std;
@@ -33,10 +33,10 @@ int main()
 
 	fstream phieu;
 
-	while (Login(tendangnhap, matkhau, Account) == false)
-	{
-		Login(tendangnhap, matkhau, Account);
-	}
+	// while (Login(tendangnhap, matkhau, Account) == false)
+	// {
+	// 	Login(tendangnhap, matkhau, Account);
+	// }
 
 	
 	system("cls");

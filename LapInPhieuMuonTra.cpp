@@ -6,7 +6,7 @@
 using namespace std;
 
 
-void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int quantity, string daynow, fstream phieu, fstream sach)
+void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int quantity, string daynow, fstream& phieu, fstream& sach)
 {
 	n++;
 	int S = 0;
@@ -426,7 +426,7 @@ void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int &n, int j, int qua
 	cout << "\nLap phieu muon thanh cong!" << endl;
 }
 
-void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow, fstream phieu, fstream sach)
+void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow, fstream& phieu, fstream& sach)
 {
 	system("cls");
 	int ma;
@@ -635,6 +635,8 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow, fstream 
 		
 		}
 
+		updateFilePhieu(z, n, phieu);
+
 		// errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "w");
 
 		// if (phieu != NULL)
@@ -675,6 +677,7 @@ void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow, fstream 
 		// 	cout << "Khong the mo tep tin." << endl;
 		// }
 
+		updateFileSach(y, j, sach);
 		// errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
 
 		// if (sach != NULL)
