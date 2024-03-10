@@ -129,62 +129,49 @@ void ReadFileSach(fstream sach, Book y[20], int &quantity)
 
 void ReadFilePhieu(fstream phieu, Ticket z[20], int &so_Phieu)
 {
+	string line;
+	string tmp;
+	istringstream ss(line);
+	phieu.open("phieu.txt");
 
-	string buffer[2000];
-	string* data;
-	string* temp;
-
-	errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "r");
-
-	if (phieu != NULL) {
-		fscanf_s(phieu, "%d\n", &so_Phieu);
-		for (int i = 0; i < so_Phieu; i++) {
-
-			fgets(buffer, sizeof(buffer), phieu);
-
-			data = strtok_s(buffer, ",", &temp);
-
-
-			z[i].MaPhieu = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-			z[i].codeDGMuon = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-			strcpy_s(z[i].borrowDate, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(z[i].expectPayDate, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(z[i].actualPayDate, data);
-			data = strtok_s(NULL, ",", &temp);
-
-			z[i].SLmuon = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-			for (int h = 0; h < z[i].SLmuon; h++)
+	if(phieu.is_open())
+	{
+		getline(phieu, line);
+		so_Phieu = stoi(line);
+		while(!phieu.eof())
+		{
+			for(int i = 0; i < so_Phieu; i++)
 			{
-				z[i].codeSachMuon[h] = atoi(data);
-				data = strtok_s(NULL, ",", &temp);
+				getline(phieu, line);
+				getline(ss, tmp, ',');
+				z[i].MaPhieu = stoi(tmp);
+				getline(ss, tmp, ',');
+				z[i].codeDGMuon = stoi(tmp);
+				getline(ss, z[i].borrowDate, ',');
+				getline(ss, z[i].expectPayDate, ',');
+				getline(ss, z[i].actualPayDate, ',');
+				getline(ss, tmp, ',');
+				z[i].SLMuon = stoi(tmp);
+
+				for (int h = 0; h < z[i].SLmuon; h++)
+				{
+					getline(ss, tmp, ',');
+					z[i].codeSachMuon[h] = stoi(tmp);
+				}
+
+
+				getline(ss, tmp, ',');
+				z[i].SLmat = stoi(tmp);
+
+				for (int h = 0; h < z[i].SLmat; h++)
+				{
+					getline(ss, tmp, ',');
+					z[i].codeSachMat[h] = stoi(tmp);
+				}
+
+				getline(ss, tmp, ',');
+				z[i].TongTienPhat = stoi(tmp);
 			}
-
-
-			z[i].SLmat = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-			for (int h = 0; h < z[i].SLmat; h++)
-			{
-				z[i].codeSachMat[h] = atoi(data);
-				data = strtok_s(NULL, ",", &temp);
-			}
-
-
-			z[i].TongTienPhat = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
 		}
 		fclose(phieu);
 		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
@@ -194,6 +181,68 @@ void ReadFilePhieu(fstream phieu, Ticket z[20], int &so_Phieu)
 		cout << "Khong mo duoc file" << endl;
 		return;
 	}
+
+
+	// errno_t phieu2 = fopen_s(&phieu, "phieu.txt", "r");
+
+	// if (phieu != NULL) {
+	// 	fscanf_s(phieu, "%d\n", &so_Phieu);
+	// 	for (int i = 0; i < so_Phieu; i++) {
+
+	// 		fgets(buffer, sizeof(buffer), phieu);
+
+	// 		data = strtok_s(buffer, ",", &temp);
+
+
+	// 		z[i].MaPhieu = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		z[i].codeDGMuon = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		strcpy_s(z[i].borrowDate, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(z[i].expectPayDate, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(z[i].actualPayDate, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		z[i].SLmuon = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		for (int h = 0; h < z[i].SLmuon; h++)
+	// 		{
+	// 			z[i].codeSachMuon[h] = atoi(data);
+	// 			data = strtok_s(NULL, ",", &temp);
+	// 		}
+
+
+	// 		z[i].SLmat = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		for (int h = 0; h < z[i].SLmat; h++)
+	// 		{
+	// 			z[i].codeSachMat[h] = atoi(data);
+	// 			data = strtok_s(NULL, ",", &temp);
+	// 		}
+
+
+	// 		z[i].TongTienPhat = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 	}
+	// 	fclose(phieu);
+	// 	cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
+	// }
+	// else
+	// {
+	// 	cout << "Khong mo duoc file" << endl;
+	// 	return;
+	// }
 }
 
 
