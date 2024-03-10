@@ -25,13 +25,13 @@ int main()
 	Book y[20];
 	Ticket z[20];
 
-	FILE* Account{};
+	 Account{};
 
-	FILE* docgia{};
+	fstream docgia{};
 
-	FILE* sach{};
+	fstream sach{};
 
-	FILE* phieu{};
+	fstream phieu{};
 
 	while (Login(tendangnhap, matkhau, Account) == false)
 	{

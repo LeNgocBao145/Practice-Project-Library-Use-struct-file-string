@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void addDocgia(Reader x[20], int &j, FILE* docgia)
+void addDocgia(Reader x[20], int &j, fstream docgia)
 {
 	cout << "<<==============================THEM THONG TIN DOC GIA==============================>>"<<endl;
 
@@ -255,7 +255,7 @@ void searchDocgia(Reader x[20], int j)
 
 }
 
-void editDocgia(Reader x[20], int j, FILE* docgia)
+void editDocgia(Reader x[20], int j, fstream docgia)
 {
 	string cmnd[14];
 	cout << "\nNhap CCCD/CMND cua doc gia ma ban muon chinh sua ";
@@ -485,7 +485,7 @@ int MaDocGia()
 	return random;
 }
 
-void deleteDocgia(Reader x[20], int& total, FILE* docgia)
+void deleteDocgia(Reader x[20], int& total, fstream docgia)
 {
 	int choose;
 	cout << "0. Thoat " << endl;

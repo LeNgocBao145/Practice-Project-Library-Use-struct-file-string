@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void addSach(Book y[20], int &quantity, FILE* sach)
+void addSach(Book y[20], int &quantity, fstream sach)
 {
 	quantity++;
 
@@ -185,7 +185,7 @@ void searchISBNSach(Book y[20], int quantity)
 }
 
 
-void editSach(Book y[20], int quantity, FILE* sach)
+void editSach(Book y[20], int quantity, fstream sach)
 {
 
 	int code;
@@ -385,7 +385,7 @@ void searchTenSach(Book y[20], int quantity)
 }
 
 
-void deleteSach(Book y[20], int& quantity, FILE* sach)
+void deleteSach(Book y[20], int& quantity, fstream sach)
 {
 	int choose;
 	cout << "0. Thoat " << endl;

@@ -3,7 +3,7 @@
 #include "Struct.h"
 
 
-void ReadFileDocGia(FILE* docgia, Reader x[20], int &total)
+void ReadFileDocGia(fstream docgia, Reader x[20], int &total)
 {
 	string buffer[2000];
 	string* data;
@@ -69,7 +69,7 @@ void ReadFileDocGia(FILE* docgia, Reader x[20], int &total)
 	}
 }
 
-void ReadFileSach(FILE* sach, Book y[20], int &quantity)
+void ReadFileSach(fstream sach, Book y[20], int &quantity)
 {
 	string buffer[2000];
 	string* data;
@@ -127,7 +127,7 @@ void ReadFileSach(FILE* sach, Book y[20], int &quantity)
 	}
 }
 
-void ReadFilePhieu(FILE* phieu, Ticket z[20], int &so_Phieu)
+void ReadFilePhieu(fstream phieu, Ticket z[20], int &so_Phieu)
 {
 
 	string buffer[2000];
@@ -247,7 +247,7 @@ void InputDayNow(string daynow[20])
 }
 
 //Ham dung de nhap lua chon a, b, c, d, e, f trong cac muc 1->6
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, string choose, int& total, int& quantity, FILE* sach, FILE* docgia)
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, string choose, int& total, int& quantity, fstream sach, fstream docgia)
 {
 	if (n == 1)
 	{
@@ -879,7 +879,7 @@ void upperAllName(string s[50])
 	}
 }
 
-bool Login(string tendangnhap[100], string matkhau[100], FILE* Account) {
+bool Login(string tendangnhap[100], string matkhau[100], fstream Account) {
 	bool check = true;
 
 	string buffer[100]{};
