@@ -12,23 +12,23 @@ using namespace std;
 
 struct Reader {
 	int code;
-	string ho_ten[50];
-	string cccd[50];
-	string ngay_sinh[13];
-	string gioi_tinh[10];
-	string email[50];
-	string dia_chi[50];
-	string ngay_lap_the[20];
-	string ngay_het_han[20];
+	string ho_ten;
+	string cccd;
+	string ngay_sinh;
+	string gioi_tinh;
+	string email;
+	string dia_chi;
+	string ngay_lap_the;
+	string ngay_het_han;
 };
 
 struct Book {
 	int ISBN;
-	string ten_sach[50];
-	string tac_gia[50];
-	string nha_xuat_ban[50];
+	string ten_sach;
+	string tac_gia;
+	string nha_xuat_ban;
 	int nam_xuat_ban;
-	string the_loai[50];
+	string the_loai;
 	int gia_tien;
 	int so_luong;
 	int BookIsBorrowing;
@@ -37,9 +37,9 @@ struct Book {
 
 struct Ticket {
 	int MaPhieu;
-	string borrowDate[20];
-	string expectPayDate[20];
-	string actualPayDate[20];
+	string borrowDate;
+	string expectPayDate;
+	string actualPayDate;
 	int codeDGMuon;
 	int codeSachMuon[10];
 	int SLmuon;

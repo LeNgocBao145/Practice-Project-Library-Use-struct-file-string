@@ -53,7 +53,7 @@ void ReadFileDocGia(fstream docgia, Reader x[20], int &total)
 			data = strtok_s(NULL, ",", &temp);
 
 
-			strcpy_s(x[i].ngay_het_han, data);
+			x[i].ngay_het_han = data;
 			x[i].ngay_het_han[strlen(x[i].ngay_het_han) - 1] = '\0';
 			data = strtok_s(NULL, ",", &temp);
 
@@ -247,7 +247,7 @@ void InputDayNow(string daynow[20])
 }
 
 //Ham dung de nhap lua chon a, b, c, d, e, f trong cac muc 1->6
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, string choose, int& total, int& quantity, fstream sach, fstream docgia)
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, fstream sach, fstream docgia)
 {
 	if (n == 1)
 	{
@@ -501,12 +501,12 @@ bool codeInListBook(int code, int j, Book y[20])
 //	return check;
 //}
 
-bool cccdInListReader(string n[100], int j, Reader x[20])
+bool cccdInListReader(string n, int j, Reader x[20])
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
 	{
-		if (strcmp(n, x[i].cccd) == 0)
+		if (n.compare(x[i].cccd) == 0)
 		{
 			check = true;
 			break;
@@ -516,12 +516,12 @@ bool cccdInListReader(string n[100], int j, Reader x[20])
 	return check;
 }
 
-bool nameInListReader(string n[100], int j, Reader x[20])
+bool nameInListReader(string n, int j, Reader x[20])
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
 	{
-		if (strcmp(n, x[i].ho_ten) == 0)
+		if (n.compare(x[i].ho_ten) == 0)
 		{
 			check = true;
 			break;
@@ -533,17 +533,17 @@ bool nameInListReader(string n[100], int j, Reader x[20])
 
 
 
-bool checkCCCD(string cccd[50])
+bool checkCCCD(string cccd)
 {
 	bool check = true;
-	if (strlen(cccd) != 12)
+	if (cccd.length() != 12)
 	{
 		check = false;
 	}
 	return check;
 }
 
-bool checkEmail(string email[50]) //Kiem tra email co ki tu @ hay khong neu khong thi nhap lai
+bool checkEmail(string email) //Kiem tra email co ki tu @ hay khong neu khong thi nhap lai
 {
 	bool check = false;
 
@@ -559,10 +559,10 @@ bool checkEmail(string email[50]) //Kiem tra email co ki tu @ hay khong neu khon
 	return check;
 }
 
-bool checkGender(string gender[10])
+bool checkGender(string gender)
 {
 	bool check = true;
-	if (strcmp(gender, "Nam") != 0 && strcmp(gender, "Nu") != 0)
+	if (gender.compare("Nam") != 0 && gender.compare("Nu") != 0)
 	{
 		check = false;
 	}
@@ -570,7 +570,7 @@ bool checkGender(string gender[10])
 }
 
 
-int Distance2Date(string expectPayDate[20], string actualPayDate[20])
+int Distance2Date(string expectPayDate, string actualPayDate)
 {
 	int length = 0;
 
@@ -814,7 +814,7 @@ bool checkIsExistTicket(int ma, int n, Ticket z[20])
 	{
 		if (ma == z[i].MaPhieu)
 		{
-			if (strlen(z[i].actualPayDate) != 0 && checkFormatDate(z[i].actualPayDate) == true)
+			if (z[i].actualPayDate.length() != 0 && checkFormatDate(z[i].actualPayDate) == true)
 			{
 				check = true;
 				break;
@@ -824,12 +824,12 @@ bool checkIsExistTicket(int ma, int n, Ticket z[20])
 	return check;
 }
 
-bool checkIsExistCCCD(string cmnd[50], int n, Reader x[20])
+bool checkIsExistCCCD(string cmnd, int n, Reader x[20])
 {
 	bool check = true;
 	for (int i = 0; i < n - 1; i++)
 	{
-		if (strcmp(cmnd, x[i].cccd) == 0)
+		if (cmnd.compare(x[i].cccd) == 0)
 		{
 			check = false;
 			break;
@@ -838,12 +838,12 @@ bool checkIsExistCCCD(string cmnd[50], int n, Reader x[20])
 	return check;
 }
 
-bool checkIsExistBook(string book[50], int n, Book y[20])
+bool checkIsExistBook(string book, int n, Book y[20])
 {
 	bool check = true;
 	for (int i = 0; i < n - 1; i++)
 	{
-		if (strcmp(book, y[i].ten_sach) == 0)
+		if (book.compare(y[i].ten_sach) == 0)
 		{
 			check = false;
 			break;
@@ -852,7 +852,7 @@ bool checkIsExistBook(string book[50], int n, Book y[20])
 	return check;
 }
 
-void upperName(string s[50])
+void upperName(string s)
 {
 	if (s[0] > 'Z')
 	{
@@ -860,7 +860,7 @@ void upperName(string s[50])
 	}
 
 
-	for (int i = 0; i < strlen(s); i++)
+	for (int i = 0; i < s.length(); i++)
 	{
 		if (s[i] == ' ' && s[i + 1] != ' ')
 		{
@@ -869,25 +869,25 @@ void upperName(string s[50])
 	}
 }
 
-void upperAllName(string s[50])
+void upperAllName(string s)
 {
 	
-	for (int i = 0; i < strlen(s); i++)
+	for (int i = 0; i < s.length(); i++)
 	{
 		
 			s[i] = toupper(s[i]);
 	}
 }
 
-bool Login(string tendangnhap[100], string matkhau[100], fstream Account) {
+bool Login(string tendangnhap, string matkhau, fstream Account) {
 	bool check = true;
 
 	string buffer[100]{};
 	string* data{};
 	string* temp{};
 
-	string Username[100]{};
-	string Password[100]{};
+	string Username;
+	string Password;
 
 	errno_t account = fopen_s(&Account, "Account.txt", "r");
 	if (Account != NULL)
@@ -906,27 +906,31 @@ bool Login(string tendangnhap[100], string matkhau[100], fstream Account) {
 
 	cout << "<<==========DANG NHAP=========>>" << endl;
 	cout << "\nTen Dang Nhap: ";
-	fgets(tendangnhap, sizeof(tendangnhap), stdin);
-	tendangnhap[strlen(tendangnhap) - 1] = '\0';
+	getline(cin, tendangnhap);
+	// fgets(tendangnhap, sizeof(tendangnhap), stdin);
+	// tendangnhap[strlen(tendangnhap) - 1] = '\0';
 	cout << "Mat Khau: ";
-	fgets(matkhau, sizeof(matkhau), stdin);
-	matkhau[strlen(matkhau) - 1] = '\0';
+	getline(cin, matkhau);
+	// fgets(matkhau, sizeof(matkhau), stdin);
+	// matkhau[strlen(matkhau) - 1] = '\0';
 
-	while (strcmp(tendangnhap, Username) != 0 || strcmp(matkhau, Password) != 0)
+	while (tendangnhap.compare(Username) != 0 || matkhau.compare(Password) != 0)
 	{
 		system("cls");
 		cout << "Ten dang nhap hay mat khau khong hop le" << endl;
 		cout << "Vui long dang nhap lai!" << endl;
 		cout << "<<==========DANG NHAP=========>>" << endl;
 		cout << "\nTen Dang Nhap: ";
-		fgets(tendangnhap, sizeof(tendangnhap), stdin);
-		tendangnhap[strlen(tendangnhap) - 1] = '\0';
+		getline(cin, tendangnhap);
+		// fgets(tendangnhap, sizeof(tendangnhap), stdin);
+		// tendangnhap[strlen(tendangnhap) - 1] = '\0';
 		cout << "Mat Khau: ";
-		fgets(matkhau, sizeof(matkhau), stdin);
-		matkhau[strlen(matkhau) - 1] = '\0';
+		getline(cin, matkhau);
+		// fgets(matkhau, sizeof(matkhau), stdin);
+		// matkhau[strlen(matkhau) - 1] = '\0';
 	}
 
-	if (strcmp(tendangnhap, Username) != 0 || strcmp(matkhau, Password) != 0)
+	if (tendangnhap.compare(Username) != 0 || matkhau.compare(Password) != 0)
 	{
 		check = false;
 	}
