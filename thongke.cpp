@@ -38,7 +38,7 @@ void statsitic_quantity_category(Book y[20], int quantity)
 		for (int j = 0; j < i; j++)
 		{
 
-			if (strcmp(y[i].the_loai, y[j].the_loai) == 0)
+			if (y[i].the_loai.compare(y[j].the_loai) == 0)
 			{
 				chuaXuatHien = false;
 				break;
@@ -53,7 +53,7 @@ void statsitic_quantity_category(Book y[20], int quantity)
 			for (int k = i + 1; k < quantity; k++)
 			{
 
-				if (strcmp(y[k].the_loai, y[i].the_loai) == 0)
+				if (y[k].the_loai.compare(y[i].the_loai) == 0)
 				{
 					S += y[k].so_luong;
 
@@ -92,7 +92,7 @@ void statistic_quantity_gender(Reader x[20], int total)
 	int nam = 0;
 	int nu = 0;
 	for (int i = 0; i < total; i++)
-		if (strcmp(x[i].gioi_tinh, "Nam")==0)
+		if (x[i].gioi_tinh.compare("Nam")==0)
 		{
 			nam++;
 		}
@@ -135,7 +135,7 @@ void statistic_listReaders_late(Ticket z[20], Reader x[20], int n, int total)
 	cout << "|" << setw(7) << "_______" << "|" << setw(29) << "_____________________________" << "|" << setw(15) << "_______________" << "|" << endl;
 	for (int i = 0; i < n; i++)
 	{
-		if (strlen(z[i].actualPayDate) != 0 && checkFormatDate(z[i].actualPayDate) == true)
+		if (z[i].actualPayDate.length() != 0 && checkFormatDate(z[i].actualPayDate) == true)
 		{
 
 			if (Distance2Date(z[i].expectPayDate, z[i].actualPayDate) > 7)

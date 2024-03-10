@@ -147,60 +147,75 @@ void addDocgia(Reader x[20], int &j, fstream docgia)
 
 		x[j - 1].ngay_het_han = x[j - 1].ngay_lap_the;
 
-
-		int year = 0;
-		string num;
-		string num2;
-		for (int i = 6; i < 10; i++)
-		{
-			num = x[j - 1].ngay_het_han[i];
-			year = year * 10 + (static_cast<int>(num) - 48);
-		}
+		string tmp;
+		tmp = x[j - 1].ngay_het_han.substr(6, 4);
+		int year = stoi(tmp);
+		
+		// for (int i = 6; i < 10; i++)
+		// {
+		// 	num = x[j - 1].ngay_het_han[i];
+		// 	year = year * 10 + (static_cast<int>(num) - 48);
+		// }
 		year += 4;
-		for (int i = 9; i > 5; i--)
-		{
-			num2 = static_cast<string>((year % 10) + 48);
-			year /= 10;
-			x[j - 1].ngay_het_han[i] = num2;
-		}
+		// for (int i = 9; i > 5; i--)
+		// {
+		// 	num2 = static_cast<string>((year % 10) + 48);
+		// 	year /= 10;
+		// 	x[j - 1].ngay_het_han[i] = num2;
+		// }
+
+		
 
 		
 		cout << "Ngay het han cua the: " << x[j - 1].ngay_het_han << endl;
 
+
+	docgia.open("docgia.txt", ios::app);
+
+	if(docgia.is_open())
+	{
 		
-
-	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r+");
-	if (docgia != NULL)
-	{
-		fprintf(docgia, "%d\n", j);
-		fclose(docgia);
-	}
-
-	errno_t docgia3 = fopen_s(&docgia, "docgia.txt", "a");
-	if (docgia != NULL)
-	{
-		fprintf(docgia, "%d,", x[j - 1].code);
-
-		fprintf(docgia, "%s,", x[j - 1].ho_ten);
-
-		fprintf(docgia, "%s,", x[j - 1].cccd);
-
-		fprintf(docgia, "%s,", x[j - 1].ngay_sinh);
-
-		fprintf(docgia, "%s,", x[j - 1].gioi_tinh);
-
-		fprintf(docgia, "%s,", x[j - 1].email);
-
-		fprintf(docgia, "%s,", x[j - 1].dia_chi);
-
-		fprintf(docgia, "%s,", x[j - 1].ngay_lap_the);
-
-		fprintf(docgia, "%s\n", x[j - 1].ngay_het_han);
-
-		fclose(docgia);
-
+		docgia << x[j - 1].code << "," << x[j - 1].ho_ten << "," << x[j - 1].cccd << "," << x[j - 1].ngay_sinh << "," << x[j - 1].gioi_tinh << "," << x[j - 1].email << "," << x[j - 1].dia_chi << "," << x[j - 1].ngay_lap_the << "," << x[j - 1].ngay_het_han << endl;
+		
+		docgia.close();
 		cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
 	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
+	}
+
+	// errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r+");
+	// if (docgia != NULL)
+	// {
+	// 	fprintf(docgia, "%d\n", j);
+	// 	fclose(docgia);
+	// }
+
+	// errno_t docgia3 = fopen_s(&docgia, "docgia.txt", "a");
+	// if (docgia != NULL)
+	// {
+	// 	fprintf(docgia, "%d,", x[j - 1].code);
+
+	// 	fprintf(docgia, "%s,", x[j - 1].ho_ten);
+
+	// 	fprintf(docgia, "%s,", x[j - 1].cccd);
+
+	// 	fprintf(docgia, "%s,", x[j - 1].ngay_sinh);
+
+	// 	fprintf(docgia, "%s,", x[j - 1].gioi_tinh);
+
+	// 	fprintf(docgia, "%s,", x[j - 1].email);
+
+	// 	fprintf(docgia, "%s,", x[j - 1].dia_chi);
+
+	// 	fprintf(docgia, "%s,", x[j - 1].ngay_lap_the);
+
+	// 	fprintf(docgia, "%s\n", x[j - 1].ngay_het_han);
+
+	// 	fclose(docgia);
+
+	// 	cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
+	// }
 
 	cout << "\nThong tin doc gia da duoc them!" << endl;
 }
@@ -416,38 +431,54 @@ void editDocgia(Reader x[20], int j, fstream docgia)
 
 	}
 
-	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "w");
+	docgia.open("docgia.txt");
 
-	if (docgia != NULL)
+	if(docgia.is_open())
 	{
-		fprintf(docgia, "%d\n", j);
+		docgia << j << endl;
 		for (int i = 0; i < j; i++)
 		{
-			fprintf(docgia, "%d,", x[i].code);
-
-			fprintf(docgia, "%s,", x[i].ho_ten);
-
-			fprintf(docgia, "%s,", x[i].cccd);
-
-			fprintf(docgia, "%s,", x[i].ngay_sinh);
-
-			fprintf(docgia, "%s,", x[i].gioi_tinh);
-
-			fprintf(docgia, "%s,", x[i].email);
-
-			fprintf(docgia, "%s,", x[i].dia_chi);
-
-			fprintf(docgia, "%s,", x[i].ngay_lap_the);
-
-			fprintf(docgia, "%s\n", x[i].ngay_het_han);
-
+			docgia << x[i].code << "," << x[i].ho_ten << "," << x[i].cccd << "," << x[i].ngay_sinh << "," << x[i].gioi_tinh << "," << x[i].email << "," << x[i].dia_chi << "," << x[i].ngay_lap_the << "," << x[i].ngay_het_han << endl;
 		}
-		fclose(docgia);
+		docgia.close();
 		cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
 	}
 	else {
 		cout << "Khong the mo tep tin." << endl;
 	}
+
+	// errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "w");
+
+	// if (docgia != NULL)
+	// {
+	// 	fprintf(docgia, "%d\n", j);
+	// 	for (int i = 0; i < j; i++)
+	// 	{
+	// 		fprintf(docgia, "%d,", x[i].code);
+
+	// 		fprintf(docgia, "%s,", x[i].ho_ten);
+
+	// 		fprintf(docgia, "%s,", x[i].cccd);
+
+	// 		fprintf(docgia, "%s,", x[i].ngay_sinh);
+
+	// 		fprintf(docgia, "%s,", x[i].gioi_tinh);
+
+	// 		fprintf(docgia, "%s,", x[i].email);
+
+	// 		fprintf(docgia, "%s,", x[i].dia_chi);
+
+	// 		fprintf(docgia, "%s,", x[i].ngay_lap_the);
+
+	// 		fprintf(docgia, "%s\n", x[i].ngay_het_han);
+
+	// 	}
+	// 	fclose(docgia);
+	// 	cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
+	// }
+	// else {
+	// 	cout << "Khong the mo tep tin." << endl;
+	// }
 
 	cout << "\nThong tin da duoc chinh sua!" << endl;
 }
@@ -587,39 +618,55 @@ void deleteDocgia(Reader x[20], int& total, fstream docgia)
 		break;
 
 	}
+	
+	docgia.open("docgia.txt");
 
-	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "w");
-
-	if (docgia != NULL)
+	if(docgia.is_open())
 	{
-		fprintf(docgia, "%d\n", total);
+		docgia << total << endl;
 		for (int i = 0; i < total; i++)
 		{
-			fprintf(docgia, "%d,", x[i].code);
-
-			fprintf(docgia, "%s,", x[i].ho_ten);
-
-			fprintf(docgia, "%s,", x[i].cccd);
-
-			fprintf(docgia, "%s,", x[i].ngay_sinh);
-
-			fprintf(docgia, "%s,", x[i].gioi_tinh);
-
-			fprintf(docgia, "%s,", x[i].email);
-
-			fprintf(docgia, "%s,", x[i].dia_chi);
-
-			fprintf(docgia, "%s,", x[i].ngay_lap_the);
-
-			fprintf(docgia, "%s\n", x[i].ngay_het_han);
-
+			docgia << x[i].code << "," << x[i].ho_ten << "," << x[i].cccd << "," << x[i].ngay_sinh << "," << x[i].gioi_tinh << "," << x[i].email << "," << x[i].dia_chi << "," << x[i].ngay_lap_the << "," << x[i].ngay_het_han << endl;
 		}
-		fclose(docgia);
+		docgia.close();
 		cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
 	}
 	else {
 		cout << "Khong the mo tep tin." << endl;
 	}
+
+	// errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "w");
+
+	// if (docgia != NULL)
+	// {
+	// 	fprintf(docgia, "%d\n", total);
+	// 	for (int i = 0; i < total; i++)
+	// 	{
+	// 		fprintf(docgia, "%d,", x[i].code);
+
+	// 		fprintf(docgia, "%s,", x[i].ho_ten);
+
+	// 		fprintf(docgia, "%s,", x[i].cccd);
+
+	// 		fprintf(docgia, "%s,", x[i].ngay_sinh);
+
+	// 		fprintf(docgia, "%s,", x[i].gioi_tinh);
+
+	// 		fprintf(docgia, "%s,", x[i].email);
+
+	// 		fprintf(docgia, "%s,", x[i].dia_chi);
+
+	// 		fprintf(docgia, "%s,", x[i].ngay_lap_the);
+
+	// 		fprintf(docgia, "%s\n", x[i].ngay_het_han);
+
+	// 	}
+	// 	fclose(docgia);
+	// 	cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
+	// }
+	// else {
+	// 	cout << "Khong the mo tep tin." << endl;
+	// }
 
 	cout << "\nThong tin doc gia da bi xoa" << endl;
 }

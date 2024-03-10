@@ -18,7 +18,7 @@ void ReadFileSach(fstream sach, Book y[20], int& quantity);
 void ReadFilePhieu(fstream phieu, Ticket z[20], int& so_Phieu);
 
 //Ham de nhap ngay thang nam hien tai luc chay chuong trinh
-void InputDayNow(string daynow[20]);
+void InputDayNow(string daynow);
 
 //Xuat ra man hinh console giao dien menu
 int show_menu();
@@ -66,7 +66,7 @@ void deleteSach(Book y[20], int& quantity, fstream sach);
 int MaISBN();
 
 //Lap phieu muon sach
-void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, string daynow[20], fstream phieu, fstream sach);
+void LapPhieuMuon(Reader x[20], Book y[20], Ticket z[20], int& n, int j, int quantity, string daynow, fstream phieu, fstream sach);
 
 //Lap phieu tra sach
 void LapPhieuTra(Book y[20], Ticket z[20], int n, int j, string daynow[20], fstream phieu, fstream sach);
@@ -105,28 +105,28 @@ void statistic_quantity_borrow(Book y[20], int quantity);
 void statistic_listReaders_late(Ticket z[20], Reader x[20], int n, int total);
 
 //Nhap lua chon sau khi xuat ra man hinh console menu
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, string choose, int& total, int& quantity, fstream sach, fstream docgia);
+void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, fstream sach, fstream docgia);
 
 //Kiem tra dinh dang cua ngay thang nam theo (dd/mm/yyyy)
-bool checkFormatDate(string date[20]);
+bool checkFormatDate(string date);
 
 //Kiem tra so cccd/cmnd co du 12 so hay khong
-bool checkCCCD(string cccd[50]);
+bool checkCCCD(string cccd);
 
 //Kiem tra xem email co ki tu @ hay khong
-bool checkEmail(string email[50]);
+bool checkEmail(string email);
 
 //Kiem tra xem gioi tinh co khac tu Nam va Nu hay khong
-bool checkGender(string gender[10]);
+bool checkGender(string gender);
 
 //Kiem tra CCCD/CMND cua doc gia hay ten sach cua sach co trong danh sach doc gia hay trong danh sach cua sach trong thu vien khong
-bool cccdInListReader(string n[100], int j, Reader x[20]);
+bool cccdInListReader(string n, int j, Reader x[20]);
 
 //Ham kiem tra xem du lieu ten doc gia nhap vao co ton tai hay nam trong danh sach doc gia trong thu vien hay khong
-bool nameInListReader(string n[100], int j, Reader x[20]);
+bool nameInListReader(string n, int j, Reader x[20]);
 
 //Ham kiem tra xem du lieu ten sach nhap vao co ton tai hay nam trong danh sach cac sach trong thu vien hay khong
-bool nameInListBook(string n[100], int j, Book y[20]);
+bool nameInListBook(string n, int j, Book y[20]);
 
 //Ham kiem tra xem du lieu ma sach ISBN nhap vao co ton tai hay nam trong danh sach cac sach trong thu vien hay khong
 bool codeInListBook(int code, int j, Book y[20]);
@@ -141,7 +141,7 @@ void BookManager();
 void BasicStatistic();
 
 //Tinh khoang cach giua ngay tra thuc te va ngay tra du kien de tinh tien phat
-int Distance2Date(string expectPayDate2[20], string actualPayDate2[20]);
+int Distance2Date(string expectPayDate, string actualPayDate);
 
 //Kiem tra xem khi nhap vao sach mat thi ma ISBN sach mat co nam trong danh sach muon ko
 bool checkDsMuon(int n, int code[20]);
@@ -150,16 +150,22 @@ bool checkDsMuon(int n, int code[20]);
 bool checkIsExistTicket(int ma, int n, Ticket z[20]);
 
 //Kiem tra xem CCCD/CMND cua doc gia da ton tai hay chua
-bool checkIsExistCCCD(string cmnd[50], int n, Reader x[20]);
+bool checkIsExistCCCD(string cmnd, int n, Reader x[20]);
 
 //Kiem tra xem ten sach da ton tai hay chua
-bool checkIsExistBook(string book[50], int n, Book y[20]);
+bool checkIsExistBook(string book, int n, Book y[20]);
 
 //Ham in hoa cac chu cai dau cua ho ten doc gia hay ten sach
-void upperName(string s[50]);
+void upperName(string s);
 
 //Ham in hoa tat ca cac chu cai cua ten tac gia, ten nha xuat ban, ten the loai
-void upperAllName(string s[50]);
+void upperAllName(string s);
 
 //Ham kiem tra xem thong tin ten dang nhap va mat khau co khop voi tai khoan Admin quan li thu vien hay khong
-bool Login(string tendangnhap[100], string matkhau[100], fstream Account);
+bool Login(string tendangnhap, string matkhau, fstream Account);
+
+void updateFileSach(Book y[20], int quantity, fstream sach);
+
+void updateFileDocGia(Reader x[20], int total, fstream docgia);
+
+void updateFilePhieu(Ticket z[20], int n, fstream phieu);

@@ -5,126 +5,199 @@
 
 void ReadFileDocGia(fstream docgia, Reader x[20], int &total)
 {
-	string buffer[2000];
-	string* data;
-	string* temp;
+	string line;
+	string tmp;
+	istringstream ss(line);
+	docgia.open("docgia.txt");
 
-	errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r");
-
-	if (docgia != NULL) {
-		fscanf_s(docgia, "%d\n", &total);
-
-		for (int i = 0; i < total; i++) {
-
-			fgets(buffer, sizeof(buffer), docgia);
-
-			data = strtok_s(buffer, ",", &temp);
-
-
-			x[i].code = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(x[i].ho_ten, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(x[i].cccd, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(x[i].ngay_sinh, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(x[i].gioi_tinh, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(x[i].email, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(x[i].dia_chi, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(x[i].ngay_lap_the, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			x[i].ngay_het_han = data;
-			x[i].ngay_het_han[strlen(x[i].ngay_het_han) - 1] = '\0';
-			data = strtok_s(NULL, ",", &temp);
-
+	if(docgia.is_open())
+	{
+		getline(docgia, line);
+		total = stoi(line);
+		while(!docgia.eof())
+		{
+			for(int i = 0; i < total; i++)
+			{
+				getline(docgia, line);
+				getline(ss, tmp, ',');
+				x[i].code = stoi(tmp);
+				
+				getline(ss, x[i].ho_ten, ',');
+				getline(ss, x[i].cccd, ',');
+				getline(ss, x[i].ngay_sinh, ',');
+				getline(ss, x[i].gioi_tinh, ',');
+				getline(ss, x[i].email, ',');
+				getline(ss, x[i].dia_chi, ',');
+				getline(ss, x[i].ngay_lap_the, ',');
+				getline(ss, x[i].ngay_het_han, ',');
+				
+			}
 		}
-		fclose(docgia);
-
-		cout << "\nDU LIEU DOC GIA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
+		docgia.close();
+		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
 	else
 	{
 		cout << "Khong mo duoc file" << endl;
 		return;
 	}
+
+	// errno_t docgia2 = fopen_s(&docgia, "docgia.txt", "r");
+
+	// if (docgia != NULL) {
+	// 	fscanf_s(docgia, "%d\n", &total);
+
+	// 	for (int i = 0; i < total; i++) {
+
+	// 		fgets(buffer, sizeof(buffer), docgia);
+
+	// 		data = strtok_s(buffer, ",", &temp);
+
+
+	// 		x[i].code = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(x[i].ho_ten, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(x[i].cccd, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(x[i].ngay_sinh, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(x[i].gioi_tinh, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(x[i].email, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(x[i].dia_chi, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(x[i].ngay_lap_the, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		x[i].ngay_het_han = data;
+	// 		x[i].ngay_het_han[strlen(x[i].ngay_het_han) - 1] = '\0';
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 	}
+	// 	fclose(docgia);
+
+	// 	cout << "\nDU LIEU DOC GIA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
+	// }
+	// else
+	// {
+	// 	cout << "Khong mo duoc file" << endl;
+	// 	return;
+	// }
 }
 
 void ReadFileSach(fstream sach, Book y[20], int &quantity)
 {
-	string buffer[2000];
-	string* data;
-	string* temp;
+	string line;
+	string tmp;
+	istringstream ss(line);
+	sach.open("sach.txt");
 
-	errno_t sach2 = fopen_s(&sach, "sach.txt", "r");
+	if(sach.is_open())
+	{
+		getline(sach, line);
+		quantity = stoi(line);
+		while(!sach.eof())
+		{
+			for(int i = 0; i < quantity; i++)
+			{
+				getline(sach, line);
+				getline(ss, tmp, ',');
+				y[i].ISBN = stoi(tmp);
+				
+				getline(ss, y[i].ten_sach, ',');
+				getline(ss, y[i].tac_gia, ',');
+				getline(ss, y[i].nha_xuat_ban, ',');
+				getline(ss, tmp, ',');
+				y[i].nam_xuat_ban = stoi(tmp);
 
-	if (sach != NULL) {
-		fscanf_s(sach, "%d\n", &quantity);
-		for (int i = 0; i < quantity; i++) {
+				getline(ss, y[i].the_loai, ',');
 
-			fgets(buffer, sizeof(buffer), sach);
+				getline(ss, tmp, ',');
+				y[i].gia_tien = stoi(tmp);
 
-			data = strtok_s(buffer, ",", &temp);
+				getline(ss, tmp, ',');
+				y[i].so_luong = stoi(tmp);
 
-
-			y[i].ISBN = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(y[i].ten_sach, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(y[i].tac_gia, data);
-			data = strtok_s(NULL, ",", &temp);
-
-
-			strcpy_s(y[i].nha_xuat_ban, data);
-			data = strtok_s(NULL, ",", &temp);
-
-			y[i].nam_xuat_ban = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-			strcpy_s(y[i].the_loai, data);
-			data = strtok_s(NULL, ",", &temp);
-
-			y[i].gia_tien = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-			y[i].so_luong = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
-			y[i].BookIsBorrowing = atoi(data);
-			data = strtok_s(NULL, ",", &temp);
-
+				getline(ss, tmp, ',');
+				y[i].BookIsBorrowing = stoi(tmp);
+			}
 		}
-		fclose(sach);
-		cout << "\nDU LIEU SACH DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
+		sach.close();
+		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
 	else
 	{
 		cout << "Khong mo duoc file" << endl;
 		return;
 	}
+
+	// errno_t sach2 = fopen_s(&sach, "sach.txt", "r");
+
+	// if (sach != NULL) {
+	// 	fscanf_s(sach, "%d\n", &quantity);
+	// 	for (int i = 0; i < quantity; i++) {
+
+	// 		fgets(buffer, sizeof(buffer), sach);
+
+	// 		data = strtok_s(buffer, ",", &temp);
+
+
+	// 		y[i].ISBN = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(y[i].ten_sach, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(y[i].tac_gia, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+
+	// 		strcpy_s(y[i].nha_xuat_ban, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		y[i].nam_xuat_ban = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		strcpy_s(y[i].the_loai, data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		y[i].gia_tien = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		y[i].so_luong = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 		y[i].BookIsBorrowing = atoi(data);
+	// 		data = strtok_s(NULL, ",", &temp);
+
+	// 	}
+	// 	fclose(sach);
+	// 	cout << "\nDU LIEU SACH DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
+	// }
+	// else
+	// {
+	// 	cout << "Khong mo duoc file" << endl;
+	// 	return;
+	// }
 }
 
 void ReadFilePhieu(fstream phieu, Ticket z[20], int &so_Phieu)
@@ -151,7 +224,7 @@ void ReadFilePhieu(fstream phieu, Ticket z[20], int &so_Phieu)
 				getline(ss, z[i].expectPayDate, ',');
 				getline(ss, z[i].actualPayDate, ',');
 				getline(ss, tmp, ',');
-				z[i].SLMuon = stoi(tmp);
+				z[i].SLmuon = stoi(tmp);
 
 				for (int h = 0; h < z[i].SLmuon; h++)
 				{
@@ -173,7 +246,7 @@ void ReadFilePhieu(fstream phieu, Ticket z[20], int &so_Phieu)
 				z[i].TongTienPhat = stoi(tmp);
 			}
 		}
-		fclose(phieu);
+		phieu.close();
 		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
 	else
@@ -283,7 +356,7 @@ void BasicStatistic()
 }
 
 
-void InputDayNow(string daynow[20])
+void InputDayNow(string daynow)
 {
 	system("cls");
 	cout << "Truoc khi bat dau chuong trinh. Xin ban vui long nhap ngay thang nam hien tai (dd/mm/yyyy): ";
@@ -449,10 +522,10 @@ void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& to
 }
 
 
-bool checkFormatDate(string date[20])
+bool checkFormatDate(string date)
 {
 	bool check = true;
-	if (strlen(date) != 10 || date[2] != '/' || date[5] != '/')
+	if (date.length() != 10 || date[2] != '/' || date[5] != '/')
 	{
 		check = false;
 	}
@@ -505,12 +578,12 @@ bool codeInListSachMuon(int n, int j, Book y[20])
 }
 
 
-bool nameInListBook(string n[100], int j, Book y[20])
+bool nameInListBook(string n, int j, Book y[20])
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
 	{
-		if (strcmp(n, y[i].ten_sach) == 0)
+		if (n.compare(y[i].ten_sach) == 0)
 		{
 			check = true;
 			break;
@@ -622,53 +695,64 @@ bool checkGender(string gender)
 int Distance2Date(string expectPayDate, string actualPayDate)
 {
 	int length = 0;
+	string tmp;
+	
+	tmp = expectPayDate.substr(0, 2);
+	int date = stoi(tmp);
 
-	
-	int date = 0;
-	int month = 0;
-	int year = 0;
-	int date2 = 0;
-	int month2 = 0;
-	int year2 = 0;
+	tmp = expectPayDate.substr(3, 2);
+	int month = stoi(tmp);
+
+	tmp = expectPayDate.substr(6, 4);
+	int year = stoi(tmp);
+
+	tmp = actualPayDate.substr(0, 2);
+	int date2 = stoi(tmp);
+
+	tmp = actualPayDate.substr(3, 2);
+	int month2 = stoi(tmp);
+
+	tmp = actualPayDate.substr(6, 4);
+	int year2 = stoi(tmp);
 	
 
-	string num;
+	// string num;
 
-	for (int j = 0; j < 2; j++)
-	{
-		num = expectPayDate[j];
-		date = date * 10 + (static_cast<int>(num) - 48);
-	}
+	// for (int j = 0; j < 2; j++)
+	// {
+	// 	num = expectPayDate[j];
+	// 	date = date * 10 + (static_cast<int>(num) - 48);
+	// }
 	
-	for (int j = 3; j < 5; j++)
-	{
-		num = expectPayDate[j];
-		month = month * 10 + (static_cast<int>(num) - 48);
-	}
+	// for (int j = 3; j < 5; j++)
+	// {
+	// 	num = expectPayDate[j];
+	// 	month = month * 10 + (static_cast<int>(num) - 48);
+	// }
 	
-	for (int j = 6; j < 10; j++)
-	{
-		num = expectPayDate[j];
-		year = year * 10 + (static_cast<int>(num) - 48);
-	}
+	// for (int j = 6; j < 10; j++)
+	// {
+	// 	num = expectPayDate[j];
+	// 	year = year * 10 + (static_cast<int>(num) - 48);
+	// }
 	
-	for (int j = 0; j < 2; j++)
-	{
-		num = actualPayDate[j];
-		date2 = date2 * 10 + (static_cast<int>(num) - 48);
-	}
+	// for (int j = 0; j < 2; j++)
+	// {
+	// 	num = actualPayDate[j];
+	// 	date2 = date2 * 10 + (static_cast<int>(num) - 48);
+	// }
 	
-	for (int j = 3; j < 5; j++)
-	{
-		num = actualPayDate[j];
-		month2 = month2 * 10 + (static_cast<int>(num) - 48);
-	}
+	// for (int j = 3; j < 5; j++)
+	// {
+	// 	num = actualPayDate[j];
+	// 	month2 = month2 * 10 + (static_cast<int>(num) - 48);
+	// }
 	
-	for (int j = 6; j < 10; j++)
-	{
-		num = actualPayDate[j];
-		year2 = year2 * 10 + (static_cast<int>(num) - 48);
-	}
+	// for (int j = 6; j < 10; j++)
+	// {
+	// 	num = actualPayDate[j];
+	// 	year2 = year2 * 10 + (static_cast<int>(num) - 48);
+	// }
 
 
 	if (month2 - month != 0 && year == year2)
@@ -930,27 +1014,35 @@ void upperAllName(string s)
 
 bool Login(string tendangnhap, string matkhau, fstream Account) {
 	bool check = true;
-
-	string buffer[100]{};
-	string* data{};
-	string* temp{};
+	
+	string line;
+	istringstream ss(line);
 
 	string Username;
 	string Password;
-
-	errno_t account = fopen_s(&Account, "Account.txt", "r");
-	if (Account != NULL)
+	
+	Account.open("Account.txt");
+	if(Account.is_open())
 	{
-		fgets(buffer, sizeof(buffer), Account);
-
-		data = strtok_s(buffer, ",", &temp);
-
-		strcpy_s(Username, data);
-		data = strtok_s(NULL, " ", &temp);
-		strcpy_s(Password, data);
-
-		fclose(Account);
+		getline(Account, line);
+		getline(ss, Username, ',');
+		getline(ss, Password, ',');
+		Account.close();
 	}
+
+	// errno_t account = fopen_s(&Account, "Account.txt", "r");
+	// if (Account != NULL)
+	// {
+	// 	fgets(buffer, sizeof(buffer), Account);
+
+	// 	data = strtok_s(buffer, ",", &temp);
+
+	// 	strcpy_s(Username, data);
+	// 	data = strtok_s(NULL, " ", &temp);
+	// 	strcpy_s(Password, data);
+
+	// 	fclose(Account);
+	// }
 
 
 	cout << "<<==========DANG NHAP=========>>" << endl;
@@ -985,4 +1077,67 @@ bool Login(string tendangnhap, string matkhau, fstream Account) {
 	}
 
 	return check;
+}
+
+void updateFileSach(Book y[20], int quantity, fstream sach)
+{
+	sach.open("sach.txt", ios::out);
+
+	if(sach.is_open())
+	{
+		sach << quantity << endl;
+		for (int i = 0; i < quantity; i++)
+		{
+			sach << y[i].ISBN << "," << y[i].ISBN << "," << y[i].ten_sach << "," << y[i].tac_gia << "," << y[i].nha_xuat_ban << "," << y[i].nam_xuat_ban << "," << y[i].the_loai << "," << y[i].gia_tien << "," << y[i].so_luong << "," << y[i].BookIsBorrowing << endl;
+		}
+		sach.close();
+		cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
+	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
+	}
+}
+
+void updateFileDocGia(Reader x[20], int total, fstream docgia)
+{
+	docgia.open("docgia.txt", ios::out);
+
+	if(docgia.is_open())
+	{
+		docgia << total << endl;
+		for (int i = 0; i < total; i++)
+		{
+			docgia << x[i].code << "," << x[i].ho_ten << "," << x[i].cccd << "," << x[i].ngay_sinh << "," << x[i].gioi_tinh << "," << x[i].email << "," << x[i].dia_chi << "," << x[i].ngay_lap_the << "," << x[i].ngay_het_han << endl;
+		}
+		docgia.close();
+		cout << "\nCap nhat du lieu doc gia thanh cong...!" << endl;
+	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
+	}
+}
+
+void updateFilePhieu(Ticket z[20], int n, fstream phieu)
+{
+	phieu.open("phieu.txt", ios::out);
+
+	if(phieu.is_open())
+	{
+		phieu << n << endl;
+		for (int i = 0; i < n; i++)
+		{
+			phieu << z[i].MaPhieu << "," << z[i].codeDGMuon << "," << z[i].borrowDate << "," << z[i].expectPayDate << "," << z[i].actualPayDate << "," << z[i].SLmuon << ",";
+
+			for (int i = 0; i < z[i].SLmuon; i++)
+			{
+				phieu << z[i].codeSachMuon[i] << ",";
+			}
+
+			phieu << z[i].SLmat << "," << z[i].codeSachMat << "," << z[i].TongTienPhat << endl;
+		}
+		phieu.close();
+	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
+	}
 }

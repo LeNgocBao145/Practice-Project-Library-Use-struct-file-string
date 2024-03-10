@@ -25,13 +25,13 @@ int main()
 	Book y[20];
 	Ticket z[20];
 
-	 Account{};
+	fstream Account;
 
-	fstream docgia{};
+	fstream docgia;
 
-	fstream sach{};
+	fstream sach;
 
-	fstream phieu{};
+	fstream phieu;
 
 	while (Login(tendangnhap, matkhau, Account) == false)
 	{
@@ -121,7 +121,7 @@ int main()
 		Luachon(x, y, z, n, choose, total, quantity, sach, docgia);
 
 
-		string is_continue;
+		char is_continue;
 		cout << "\nBan co muon lua chon tiep khong (y/n)" << endl;
 		cin >> is_continue;
 		while (is_continue != 'y' && is_continue != 'n')

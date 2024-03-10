@@ -89,41 +89,51 @@ void addSach(Book y[20], int &quantity, fstream sach)
 
 		y[quantity - 1].BookIsBorrowing = 0;
 		
+	sach.open("sach.txt", ios::app);
 
-
-	errno_t sach2 = fopen_s(&sach, "sach.txt", "r+");
-	if (sach != NULL)
+	if(sach.is_open())
 	{
-		fprintf(sach, "%d", quantity);
-		fclose(sach);
-	}
-
-	errno_t sach3 = fopen_s(&sach, "sach.txt", "a");
-
-	if (sach != NULL)
-	{
-		fprintf(sach, "%d,", y[quantity - 1].ISBN);
-
-		fprintf(sach, "%s,", y[quantity - 1].ten_sach);
-
-		fprintf(sach, "%s,", y[quantity - 1].tac_gia);
-
-		fprintf(sach, "%s,", y[quantity - 1].nha_xuat_ban);
-
-		fprintf(sach, "%d,", y[quantity - 1].nam_xuat_ban);
-
-		fprintf(sach, "%s,", y[quantity - 1].the_loai);
-
-		fprintf(sach, "%d,", y[quantity - 1].gia_tien);
-
-		fprintf(sach, "%d,", y[quantity - 1].so_luong);
-
-		fprintf(sach, "%d\n", y[quantity - 1].BookIsBorrowing);
-
-		fclose(sach);
-
+		sach << y[quantity - 1].ISBN << "," << y[quantity - 1].ISBN << "," << y[quantity - 1].ten_sach << "," << y[quantity - 1].tac_gia << "," << y[quantity - 1].nha_xuat_ban << "," << y[quantity - 1].nam_xuat_ban << "," << y[quantity - 1].the_loai << "," << y[quantity - 1].gia_tien << "," << y[quantity - 1].so_luong << "," << y[quantity - 1].BookIsBorrowing << endl;
+		sach.close();
 		cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
 	}
+	else {
+		cout << "Khong the mo tep tin." << endl;
+	}
+
+	// errno_t sach2 = fopen_s(&sach, "sach.txt", "r+");
+	// if (sach != NULL)
+	// {
+	// 	fprintf(sach, "%d", quantity);
+	// 	fclose(sach);
+	// }
+
+	// errno_t sach3 = fopen_s(&sach, "sach.txt", "a");
+
+	// if (sach != NULL)
+	// {
+	// 	fprintf(sach, "%d,", y[quantity - 1].ISBN);
+
+	// 	fprintf(sach, "%s,", y[quantity - 1].ten_sach);
+
+	// 	fprintf(sach, "%s,", y[quantity - 1].tac_gia);
+
+	// 	fprintf(sach, "%s,", y[quantity - 1].nha_xuat_ban);
+
+	// 	fprintf(sach, "%d,", y[quantity - 1].nam_xuat_ban);
+
+	// 	fprintf(sach, "%s,", y[quantity - 1].the_loai);
+
+	// 	fprintf(sach, "%d,", y[quantity - 1].gia_tien);
+
+	// 	fprintf(sach, "%d,", y[quantity - 1].so_luong);
+
+	// 	fprintf(sach, "%d\n", y[quantity - 1].BookIsBorrowing);
+
+	// 	fclose(sach);
+
+	// 	cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
+	// }
 
 	cout << "\nThong tin sach da duoc them!" << endl;
 }
@@ -312,40 +322,56 @@ void editSach(Book y[20], int quantity, fstream sach)
 			cout << "\nThong tin da duoc chinh sua!" << endl;
 		}
 	}
+	
+	sach.open("sach.txt");
 
-	errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
-
-	if (sach != NULL)
+	if(sach.is_open())
 	{
-		fprintf(sach, "%d\n", quantity);
+		sach << quantity << endl;
 		for (int i = 0; i < quantity; i++)
 		{
-			fprintf(sach, "%d,", y[i].ISBN);
-
-			fprintf(sach, "%s,", y[i].ten_sach);
-
-			fprintf(sach, "%s,", y[i].tac_gia);
-
-			fprintf(sach, "%s,", y[i].nha_xuat_ban);
-
-			fprintf(sach, "%d,", y[i].nam_xuat_ban);
-
-			fprintf(sach, "%s,", y[i].the_loai);
-
-			fprintf(sach, "%d,", y[i].gia_tien);
-
-			fprintf(sach, "%d,", y[i].so_luong);
-
-			fprintf(sach, "%d\n", y[i].BookIsBorrowing);
-
+			sach << y[i].ISBN << "," << y[i].ISBN << "," << y[i].ten_sach << "," << y[i].tac_gia << "," << y[i].nha_xuat_ban << "," << y[i].nam_xuat_ban << "," << y[i].the_loai << "," << y[i].gia_tien << "," << y[i].so_luong << "," << y[i].BookIsBorrowing << endl;
 		}
-		fclose(sach);
-
+		sach.close();
 		cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
 	}
 	else {
 		cout << "Khong the mo tep tin." << endl;
 	}
+
+	// errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
+
+	// if (sach != NULL)
+	// {
+	// 	fprintf(sach, "%d\n", quantity);
+	// 	for (int i = 0; i < quantity; i++)
+	// 	{
+	// 		fprintf(sach, "%d,", y[i].ISBN);
+
+	// 		fprintf(sach, "%s,", y[i].ten_sach);
+
+	// 		fprintf(sach, "%s,", y[i].tac_gia);
+
+	// 		fprintf(sach, "%s,", y[i].nha_xuat_ban);
+
+	// 		fprintf(sach, "%d,", y[i].nam_xuat_ban);
+
+	// 		fprintf(sach, "%s,", y[i].the_loai);
+
+	// 		fprintf(sach, "%d,", y[i].gia_tien);
+
+	// 		fprintf(sach, "%d,", y[i].so_luong);
+
+	// 		fprintf(sach, "%d\n", y[i].BookIsBorrowing);
+
+	// 	}
+	// 	fclose(sach);
+
+	// 	cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
+	// }
+	// else {
+	// 	cout << "Khong the mo tep tin." << endl;
+	// }
 }
 
 
@@ -465,33 +491,16 @@ void deleteSach(Book y[20], int& quantity, fstream sach)
 
 	}
 
-	errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
+	sach.open("sach.txt");
 
-	if (sach != NULL)
+	if(sach.is_open())
 	{
-		fprintf(sach, "%d\n", quantity);
+		sach << quantity << endl;
 		for (int i = 0; i < quantity; i++)
 		{
-			fprintf(sach, "%d,", y[i].ISBN);
-
-			fprintf(sach, "%s,", y[i].ten_sach);
-
-			fprintf(sach, "%s,", y[i].tac_gia);
-
-			fprintf(sach, "%s,", y[i].nha_xuat_ban);
-
-			fprintf(sach, "%d,", y[i].nam_xuat_ban);
-
-			fprintf(sach, "%s,", y[i].the_loai);
-
-			fprintf(sach, "%d,", y[i].gia_tien);
-
-			fprintf(sach, "%d,", y[i].so_luong);
-
-			fprintf(sach, "%d\n", y[i].BookIsBorrowing);
-
+			sach << y[i].ISBN << "," << y[i].ISBN << "," << y[i].ten_sach << "," << y[i].tac_gia << "," << y[i].nha_xuat_ban << "," << y[i].nam_xuat_ban << "," << y[i].the_loai << "," << y[i].gia_tien << "," << y[i].so_luong << "," << y[i].BookIsBorrowing << endl;
 		}
-		fclose(sach);
+		sach.close();
 		cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
 	}
 	else {
@@ -499,6 +508,41 @@ void deleteSach(Book y[20], int& quantity, fstream sach)
 	}
 
 	cout << "\nThong tin sach da bi xoa" << endl;
+
+	// errno_t sach2 = fopen_s(&sach, "sach.txt", "w");
+
+	// if (sach != NULL)
+	// {
+	// 	fprintf(sach, "%d\n", quantity);
+	// 	for (int i = 0; i < quantity; i++)
+	// 	{
+	// 		fprintf(sach, "%d,", y[i].ISBN);
+
+	// 		fprintf(sach, "%s,", y[i].ten_sach);
+
+	// 		fprintf(sach, "%s,", y[i].tac_gia);
+
+	// 		fprintf(sach, "%s,", y[i].nha_xuat_ban);
+
+	// 		fprintf(sach, "%d,", y[i].nam_xuat_ban);
+
+	// 		fprintf(sach, "%s,", y[i].the_loai);
+
+	// 		fprintf(sach, "%d,", y[i].gia_tien);
+
+	// 		fprintf(sach, "%d,", y[i].so_luong);
+
+	// 		fprintf(sach, "%d\n", y[i].BookIsBorrowing);
+
+	// 	}
+	// 	fclose(sach);
+	// 	cout << "\nCap nhat du lieu sach thanh cong...!" << endl;
+	// }
+	// else {
+	// 	cout << "Khong the mo tep tin." << endl;
+	// }
+
+	// cout << "\nThong tin sach da bi xoa" << endl;
 }
 
 int MaISBN()
