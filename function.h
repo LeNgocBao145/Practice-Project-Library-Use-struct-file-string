@@ -169,3 +169,5 @@ void updateFileSach(Book y[20], int quantity, fstream& sach);
 void updateFileDocGia(Reader x[20], int total, fstream& docgia);
 
 void updateFilePhieu(Ticket z[20], int n, fstream& phieu);
+
+int sTOI(string s);

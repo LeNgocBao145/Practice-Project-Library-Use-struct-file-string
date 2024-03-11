@@ -7,32 +7,33 @@ void ReadFileDocGia(fstream& docgia, Reader x[20], int &total)
 {
 	string line;
 	string tmp;
-	istringstream ss(line);
-	docgia.open("docgia.txt");
+	
+	docgia.open("docgia.txt", ios::in);
 
 	if(docgia.is_open())
 	{
-		// getline(docgia, line);
-		// total = stoi(line);
-		while(!docgia.eof())
+		getline(docgia, line);
+		istringstream ss(line);
+		getline(ss, tmp, ',');
+		total = stoi(tmp);
+		
+		for(int i = 0; i < total; i++)
 		{
-			for(int i = 0; i < total; i++)
-			{
-				getline(docgia, line);
-				getline(ss, tmp, ',');
-				x[i].code = stoi(tmp);
+			getline(docgia, line);
+			istringstream ss(line);
+			getline(ss, tmp, ',');
+			x[i].code = stoi(tmp);
+			getline(ss, x[i].ho_ten, ',');
+			getline(ss, x[i].cccd, ',');
+			getline(ss, x[i].ngay_sinh, ',');
+			getline(ss, x[i].gioi_tinh, ',');
+			getline(ss, x[i].email, ',');
+			getline(ss, x[i].dia_chi, ',');
+			getline(ss, x[i].ngay_lap_the, ',');
+			getline(ss, x[i].ngay_het_han, ',');
 				
-				getline(ss, x[i].ho_ten, ',');
-				getline(ss, x[i].cccd, ',');
-				getline(ss, x[i].ngay_sinh, ',');
-				getline(ss, x[i].gioi_tinh, ',');
-				getline(ss, x[i].email, ',');
-				getline(ss, x[i].dia_chi, ',');
-				getline(ss, x[i].ngay_lap_the, ',');
-				getline(ss, x[i].ngay_het_han, ',');
-				
-			}
 		}
+		
 		docgia.close();
 		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
@@ -106,18 +107,20 @@ void ReadFileSach(fstream& sach, Book y[20], int &quantity)
 {
 	string line;
 	string tmp;
-	istringstream ss(line);
+	
 	sach.open("sach.txt");
 
 	if(sach.is_open())
 	{
-		// getline(sach, line);
-		// quantity = stoi(line);
-		while(!sach.eof())
-		{
+		getline(sach, line);
+		istringstream ss(line);
+		getline(ss, tmp, ',');
+		quantity = stoi(tmp);
+		
 			for(int i = 0; i < quantity; i++)
 			{
 				getline(sach, line);
+				istringstream ss(line);
 				getline(ss, tmp, ',');
 				y[i].ISBN = stoi(tmp);
 				
@@ -138,7 +141,7 @@ void ReadFileSach(fstream& sach, Book y[20], int &quantity)
 				getline(ss, tmp, ',');
 				y[i].BookIsBorrowing = stoi(tmp);
 			}
-		}
+		
 		sach.close();
 		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
@@ -204,18 +207,20 @@ void ReadFilePhieu(fstream& phieu, Ticket z[20], int &so_Phieu)
 {
 	string line;
 	string tmp;
-	istringstream ss(line);
+	
 	phieu.open("phieu.txt");
 
 	if(phieu.is_open())
 	{
-		// getline(phieu, line);
-		// so_Phieu = stoi(line);
-		while(!phieu.eof())
-		{
+		getline(phieu, line);
+		istringstream ss(line);
+		getline(ss, tmp, ',');
+		so_Phieu = stoi(tmp);
+		
 			for(int i = 0; i < so_Phieu; i++)
 			{
 				getline(phieu, line);
+				istringstream ss(line);
 				getline(ss, tmp, ',');
 				z[i].MaPhieu = stoi(tmp);
 				getline(ss, tmp, ',');
@@ -245,7 +250,7 @@ void ReadFilePhieu(fstream& phieu, Ticket z[20], int &so_Phieu)
 				getline(ss, tmp, ',');
 				z[i].TongTienPhat = stoi(tmp);
 			}
-		}
+		
 		phieu.close();
 		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
@@ -360,6 +365,7 @@ void InputDayNow(string daynow)
 {
 	system("cls");
 	cout << "Truoc khi bat dau chuong trinh. Xin ban vui long nhap ngay thang nam hien tai (dd/mm/yyyy): ";
+	cin.ignore();
 	getline(cin, daynow);
 	while (checkFormatDate(daynow) == false)
 	{
@@ -1016,7 +1022,7 @@ bool Login(string tendangnhap, string matkhau, fstream& Account) {
 	bool check = true;
 	
 	string line;
-	istringstream ss(line);
+	
 
 	string Username;
 	string Password;
@@ -1025,6 +1031,7 @@ bool Login(string tendangnhap, string matkhau, fstream& Account) {
 	if(Account.is_open())
 	{
 		getline(Account, line);
+		istringstream ss(line);
 		getline(ss, Username, ',');
 		getline(ss, Password, ',');
 		Account.close();
@@ -1140,4 +1147,57 @@ void updateFilePhieu(Ticket z[20], int n, fstream& phieu)
 	else {
 		cout << "Khong the mo tep tin." << endl;
 	}
+}
+
+int sTOI(string s)
+{
+	int n = s.length();
+	cout << n << endl;
+	int ans = 0;
+	int index;
+	for(int i = 0; i < n; i++)
+	{
+		if(s[i] == '0')
+		{
+			index = 0;
+			ans = ans*10 + index;
+		}else if(s[i] == '1')
+		{
+			index = 1;
+			ans = ans*10 + index;
+		}else if(s[i] == '2')
+		{
+			index = 2;
+			ans = ans*10 + index;
+		}else if(s[i] == '3')
+		{
+			index = 3;
+			ans = ans*10 + index;
+		}else if(s[i] == '4')
+		{
+			index = 4;
+			ans = ans*10 + index;
+		}else if(s[i] == '5')
+		{
+			index = 5;
+			ans = ans*10 + index;
+		}else if(s[i] == '6')
+		{
+			index = 6;
+			ans = ans*10 + index;
+		}else if(s[i] == '7')
+		{
+			index = 7;
+			ans = ans*10 + index;
+		}else if(s[i] == '8')
+		{
+			index = 8;
+			ans = ans*10 + index;
+		}else
+		{
+			index = 9;
+			ans = ans*10 + index;
+		}
+	}
+	return ans;
 }

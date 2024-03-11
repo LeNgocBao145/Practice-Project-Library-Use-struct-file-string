@@ -33,10 +33,10 @@ int main()
 
 	fstream phieu;
 
-	// while (Login(tendangnhap, matkhau, Account) == false)
-	// {
-	// 	Login(tendangnhap, matkhau, Account);
-	// }
+	while (Login(tendangnhap, matkhau, Account) == false)
+	{
+		Login(tendangnhap, matkhau, Account);
+	}
 
 	
 	system("cls");
