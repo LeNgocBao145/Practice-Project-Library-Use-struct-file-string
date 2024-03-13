@@ -5,7 +5,7 @@
 using namespace std;
 
 
-void statistic_quantity_book(Book y[20], int quantity)
+void statistic_quantity_book(Book* y, int quantity)
 {
 	int S = 0;
 	cout << "<<========THONG KE SO LUONG SACH TRONG THU VIEN========>>" << endl;
@@ -24,7 +24,7 @@ void statistic_quantity_book(Book y[20], int quantity)
 }
 
 
-void statsitic_quantity_category(Book y[20], int quantity)
+void statsitic_quantity_category(Book* y, int quantity)
 {
 	int S;
 	cout << "<<===THONG KE SACH THEO THE LOAI==>>" << endl;
@@ -69,7 +69,7 @@ void statsitic_quantity_category(Book y[20], int quantity)
 
 }
 
-void statistic_quantity_reader(Reader x[20], int total)
+void statistic_quantity_reader(Reader* x, int total)
 {
 	cout << "<<THONG KE SO LUONG DOC GIA>>" << endl;
 
@@ -87,7 +87,7 @@ void statistic_quantity_reader(Reader x[20], int total)
 	cout << "\nTong so luong doc gia la " << total << endl;
 }
 
-void statistic_quantity_gender(Reader x[20], int total)
+void statistic_quantity_gender(Reader* x, int total)
 {
 	int nam = 0;
 	int nu = 0;
@@ -108,7 +108,7 @@ void statistic_quantity_gender(Reader x[20], int total)
 	cout << "============================================" << endl;
 }
 
-void statistic_quantity_borrow(Book y[20], int quantity)
+void statistic_quantity_borrow(Book* y, int quantity)
 {
 	cout << "<<================THONG KE SO LUONG SACH DANG DUOC MUON================>>" << endl;
 
@@ -126,7 +126,7 @@ void statistic_quantity_borrow(Book y[20], int quantity)
 	cout << "========================================================================" << endl;
 }
 
-void statistic_listReaders_late(Ticket z[20], Reader x[20], int n, int total)
+void statistic_listReaders_late(Ticket* z, Reader* x, int n, int total)
 {
 	cout << "<<THONG KE DANH SACH DOC GIA DANG BI TRE HAN>>" << endl;
 

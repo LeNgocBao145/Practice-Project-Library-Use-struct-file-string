@@ -21,9 +21,9 @@ int main()
 	int quantity;
 	int so_Phieu;
 
-	Reader x[20];
-	Book y[20];
-	Ticket z[20];
+	Reader* x;
+	Book* y;
+	Ticket* z;
 
 	fstream Account;
 
@@ -137,6 +137,16 @@ int main()
 		}
 	}
 
+	delete[] x;
+	delete[] y;
+
+	for(int i = 0; i < so_Phieu; i++)
+	{
+		delete[] z[i].codeSachMuon;
+		delete[] z[i].codeSachMat;
+	}
+
+	delete[] z;
 
 	return 0;
 }

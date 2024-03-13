@@ -3,7 +3,7 @@
 #include "Struct.h"
 
 
-void ReadFileDocGia(fstream& docgia, Reader x[20], int &total)
+void ReadFileDocGia(fstream& docgia, Reader* &x, int &total)
 {
 	string line;
 	string tmp;
@@ -16,6 +16,8 @@ void ReadFileDocGia(fstream& docgia, Reader x[20], int &total)
 		istringstream ss(line);
 		getline(ss, tmp, ',');
 		total = stoi(tmp);
+
+		x = new Reader[total];
 		
 		for(int i = 0; i < total; i++)
 		{
@@ -35,7 +37,7 @@ void ReadFileDocGia(fstream& docgia, Reader x[20], int &total)
 		}
 		
 		docgia.close();
-		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
+		cout << "\nDU LIEU DOC GIA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
 	else
 	{
@@ -103,7 +105,7 @@ void ReadFileDocGia(fstream& docgia, Reader x[20], int &total)
 	// }
 }
 
-void ReadFileSach(fstream& sach, Book y[20], int &quantity)
+void ReadFileSach(fstream& sach, Book* &y, int &quantity)
 {
 	string line;
 	string tmp;
@@ -117,6 +119,10 @@ void ReadFileSach(fstream& sach, Book y[20], int &quantity)
 		getline(ss, tmp, ',');
 		quantity = stoi(tmp);
 		
+		
+		y = new Book[quantity];
+	
+
 			for(int i = 0; i < quantity; i++)
 			{
 				getline(sach, line);
@@ -143,7 +149,7 @@ void ReadFileSach(fstream& sach, Book y[20], int &quantity)
 			}
 		
 		sach.close();
-		cout << "\nDU LIEU PHIEU MUON TRA DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
+		cout << "\nDU LIEU SACH DA DUOC TAI LEN CHUONG TRINH THANH CONG...!" << endl;
 	}
 	else
 	{
@@ -203,7 +209,7 @@ void ReadFileSach(fstream& sach, Book y[20], int &quantity)
 	// }
 }
 
-void ReadFilePhieu(fstream& phieu, Ticket z[20], int &so_Phieu)
+void ReadFilePhieu(fstream& phieu, Ticket* &z, int &so_Phieu)
 {
 	string line;
 	string tmp;
@@ -217,6 +223,9 @@ void ReadFilePhieu(fstream& phieu, Ticket z[20], int &so_Phieu)
 		getline(ss, tmp, ',');
 		so_Phieu = stoi(tmp);
 		
+		
+		z = new Ticket[so_Phieu];
+
 			for(int i = 0; i < so_Phieu; i++)
 			{
 				getline(phieu, line);
@@ -231,6 +240,8 @@ void ReadFilePhieu(fstream& phieu, Ticket z[20], int &so_Phieu)
 				getline(ss, tmp, ',');
 				z[i].SLmuon = stoi(tmp);
 
+				z[i].codeSachMuon = new int[z[i].SLmuon];
+
 				for (int h = 0; h < z[i].SLmuon; h++)
 				{
 					getline(ss, tmp, ',');
@@ -240,6 +251,8 @@ void ReadFilePhieu(fstream& phieu, Ticket z[20], int &so_Phieu)
 
 				getline(ss, tmp, ',');
 				z[i].SLmat = stoi(tmp);
+
+				z[i].codeSachMat = new int[z[i].SLmat];
 
 				for (int h = 0; h < z[i].SLmat; h++)
 				{
@@ -375,7 +388,7 @@ void InputDayNow(string daynow)
 }
 
 //Ham dung de nhap lua chon a, b, c, d, e, f trong cac muc 1->6
-void Luachon(Reader x[20], Book y[20], Ticket z[20], int n, char choose, int& total, int& quantity, fstream& sach, fstream& docgia)
+void Luachon(Reader* x, Book* y, Ticket* z, int n, char choose, int& total, int& quantity, fstream& sach, fstream& docgia)
 {
 	if (n == 1)
 	{
@@ -538,7 +551,7 @@ bool checkFormatDate(string date)
 	return check;
 }
 
-bool codeInListMaPhieu(int n, int j, Ticket z[20])
+bool codeInListMaPhieu(int n, int j, Ticket* z)
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -553,7 +566,7 @@ bool codeInListMaPhieu(int n, int j, Ticket z[20])
 	return check;
 }
 
-bool codeInListDGMuon(int n, int j, Reader x[20])
+bool codeInListDGMuon(int n, int j, Reader* x)
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -568,7 +581,7 @@ bool codeInListDGMuon(int n, int j, Reader x[20])
 	return check;
 }
 
-bool codeInListSachMuon(int n, int j, Book y[20])
+bool codeInListSachMuon(int n, int j, Book* y)
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -584,7 +597,7 @@ bool codeInListSachMuon(int n, int j, Book y[20])
 }
 
 
-bool nameInListBook(string n, int j, Book y[20])
+bool nameInListBook(string n, int j, Book* y)
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -599,7 +612,7 @@ bool nameInListBook(string n, int j, Book y[20])
 	return check;
 }
 
-bool codeInListBook(int code, int j, Book y[20])
+bool codeInListBook(int code, int j, Book* y)
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -629,7 +642,7 @@ bool codeInListBook(int code, int j, Book y[20])
 //	return check;
 //}
 
-bool cccdInListReader(string n, int j, Reader x[20])
+bool cccdInListReader(string n, int j, Reader* x)
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -644,7 +657,7 @@ bool cccdInListReader(string n, int j, Reader x[20])
 	return check;
 }
 
-bool nameInListReader(string n, int j, Reader x[20])
+bool nameInListReader(string n, int j, Reader* x)
 {
 	bool check = false;
 	for (int i = 0; i < j; i++)
@@ -946,7 +959,7 @@ bool checkDsMuon(int n, int code[20])
 	return check;
 }
 
-bool checkIsExistTicket(int ma, int n, Ticket z[20])
+bool checkIsExistTicket(int ma, int n, Ticket* z)
 {
 	bool check = false;
 	for (int i = 0; i < n; i++)
@@ -963,7 +976,7 @@ bool checkIsExistTicket(int ma, int n, Ticket z[20])
 	return check;
 }
 
-bool checkIsExistCCCD(string cmnd, int n, Reader x[20])
+bool checkIsExistCCCD(string cmnd, int n, Reader* x)
 {
 	bool check = true;
 	for (int i = 0; i < n - 1; i++)
@@ -977,7 +990,7 @@ bool checkIsExistCCCD(string cmnd, int n, Reader x[20])
 	return check;
 }
 
-bool checkIsExistBook(string book, int n, Book y[20])
+bool checkIsExistBook(string book, int n, Book* y)
 {
 	bool check = true;
 	for (int i = 0; i < n - 1; i++)
@@ -1086,7 +1099,7 @@ bool Login(string tendangnhap, string matkhau, fstream& Account) {
 	return check;
 }
 
-void updateFileSach(Book y[20], int quantity, fstream& sach)
+void updateFileSach(Book* y, int quantity, fstream& sach)
 {
 	sach.open("sach.txt", ios::out);
 
@@ -1105,7 +1118,7 @@ void updateFileSach(Book y[20], int quantity, fstream& sach)
 	}
 }
 
-void updateFileDocGia(Reader x[20], int total, fstream& docgia)
+void updateFileDocGia(Reader* x, int total, fstream& docgia)
 {
 	docgia.open("docgia.txt", ios::out);
 
@@ -1124,7 +1137,7 @@ void updateFileDocGia(Reader x[20], int total, fstream& docgia)
 	}
 }
 
-void updateFilePhieu(Ticket z[20], int n, fstream& phieu)
+void updateFilePhieu(Ticket* z, int n, fstream& phieu)
 {
 	phieu.open("phieu.txt", ios::out);
 

@@ -41,9 +41,9 @@ struct Ticket {
 	string expectPayDate;
 	string actualPayDate;
 	int codeDGMuon;
-	int codeSachMuon[10];
+	int* codeSachMuon;
 	int SLmuon;
 	int SLmat;
-	int codeSachMat[10];
+	int* codeSachMat;
 	int TongTienPhat;
 };

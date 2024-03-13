@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void addSach(Book y[20], int &quantity, fstream& sach)
+void addSach(Book* y, int &quantity, fstream& sach)
 {
 	quantity++;
 
@@ -139,7 +139,7 @@ void addSach(Book y[20], int &quantity, fstream& sach)
 }
 
 
-void printSach(Book y[20], int quantity)
+void printSach(Book* y, int quantity)
 {
 	cout << "<<==========================================================DANH SACH THONG TIN CUA SACH TRONG THU VIEN===============================================================>>" << endl;
 
@@ -154,7 +154,7 @@ void printSach(Book y[20], int quantity)
 }
 
 
-void searchISBNSach(Book y[20], int quantity)
+void searchISBNSach(Book* y, int quantity)
 {
 	int code;
 	cout << "\nNhap ISBN cua sach ma ban muon tim kiem: ";
@@ -200,7 +200,7 @@ void searchISBNSach(Book y[20], int quantity)
 }
 
 
-void editSach(Book y[20], int quantity, fstream& sach)
+void editSach(Book* y, int quantity, fstream& sach)
 {
 
 	int code;
@@ -375,7 +375,7 @@ void editSach(Book y[20], int quantity, fstream& sach)
 }
 
 
-void searchTenSach(Book y[20], int quantity)
+void searchTenSach(Book* y, int quantity)
 {
 	string name;
 	cout << "\nNhap ten sach ma ban muon tim kiem: ";
@@ -422,7 +422,7 @@ void searchTenSach(Book y[20], int quantity)
 }
 
 
-void deleteSach(Book y[20], int& quantity, fstream& sach)
+void deleteSach(Book* y, int& quantity, fstream& sach)
 {
 	int choose;
 	cout << "0. Thoat " << endl;

@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void addDocgia(Reader x[20], int &j, fstream& docgia)
+void addDocgia(Reader* x, int &j, fstream& docgia)
 {
 	cout << "<<==============================THEM THONG TIN DOC GIA==============================>>"<<endl;
 
@@ -220,7 +220,7 @@ void addDocgia(Reader x[20], int &j, fstream& docgia)
 	cout << "\nThong tin doc gia da duoc them!" << endl;
 }
 
-void printDocgia(Reader x[20], int j)
+void printDocgia(Reader* x, int j)
 {
 	cout << "<<==================================================================DANH SACH THONG TIN DOC GIA=======================================================================>>" << endl;
 
@@ -236,7 +236,7 @@ void printDocgia(Reader x[20], int j)
 	cout << "========================================================================================================================================================================\n";
 }
 
-void searchDocgia(Reader x[20], int j)
+void searchDocgia(Reader* x, int j)
 {
 	string cmnd;
 	cout << "\nNhap CCCD/CMND doc gia ma ban muon tim kiem: ";
@@ -285,7 +285,7 @@ void searchDocgia(Reader x[20], int j)
 
 }
 
-void editDocgia(Reader x[20], int j, fstream& docgia)
+void editDocgia(Reader* x, int j, fstream& docgia)
 {
 	string cmnd;
 	cout << "\nNhap CCCD/CMND cua doc gia ma ban muon chinh sua ";
@@ -488,7 +488,7 @@ void editDocgia(Reader x[20], int j, fstream& docgia)
 	cout << "\nThong tin da duoc chinh sua!" << endl;
 }
 
-void searchTenDocGia(Reader x[20], int j)
+void searchTenDocGia(Reader* x, int j)
 {
 	string name;
 	cout << "\nNhap ho va ten doc gia ma ban muon tim kiem: ";
@@ -551,7 +551,7 @@ int MaDocGia()
 	return random;
 }
 
-void deleteDocgia(Reader x[20], int& total, fstream& docgia)
+void deleteDocgia(Reader* x, int& total, fstream& docgia)
 {
 	int choose;
 	cout << "0. Thoat " << endl;
